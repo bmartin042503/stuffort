@@ -14,7 +14,6 @@ namespace Stuffort.View
         public HomePage()
         {
             InitializeComponent();
-
         }
         protected override bool OnBackButtonPressed()
         {
