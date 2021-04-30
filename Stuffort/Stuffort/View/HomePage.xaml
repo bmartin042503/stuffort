@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:Stuffort.Resources"
+             xmlns:views="clr-namespace:Stuffort.View"
              x:Class="Stuffort.View.HomePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{x:Static resx:AppResources.WelcomeText}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    <FlyoutItem Title="{x:Static resx:AppResources.Subjects}">
+        <Tab>
+            <ShellContent Route="SubjectsPage" ContentTemplate="{DataTemplate views:SubjectsPage}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="{x:Static resx:AppResources.Tasks}">
+        <Tab>
+            <ShellContent Route="TasksPage" ContentTemplate="{DataTemplate views:TasksPage}"/>
+        </Tab>
+    </FlyoutItem>
+</Shell>

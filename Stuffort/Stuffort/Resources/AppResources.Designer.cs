@@ -61,11 +61,29 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome! Please choose a language!.
+        ///   Looks up a localized string similar to Subjects.
         /// </summary>
-        internal static string WelcomeText {
+        internal static string Subjects {
             get {
-                return ResourceManager.GetString("WelcomeText", resourceCulture);
+                return ResourceManager.GetString("Subjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feladatok.
+        /// </summary>
+        internal static string Tasks {
+            get {
+                return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose a language!.
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

@@ -6,12 +6,12 @@
 
     <StackLayout x:Name="languageSelectionStackLayout" HorizontalOptions="FillAndExpand"
                  VerticalOptions="Center" Margin="50">
-        <Label Text="{x:Static resx:AppResources.WelcomeText}" 
+        <Label Text="{x:Static resx:AppResources.Welcome}" 
                HorizontalTextAlignment="Center"
                Margin="0,0,0,25"
                FontSize="Large"/>
         <Picker x:Name="languagePicker" ItemsSource="{Binding Languages}"
                 SelectedIndexChanged="languagePicker_SelectedIndexChanged"
-                HeightRequest="50" SelectedIndex="0"/>
+                HeightRequest="50"/>
     </StackLayout>
 </ContentPage>

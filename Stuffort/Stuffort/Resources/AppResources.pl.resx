@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Subjects" xml:space="preserve">
-    <value>Tantárgyak</value>
+    <value>Subjects</value>
   </data>
   <data name="Tasks" xml:space="preserve">
-    <value>Feladatok</value>
+    <value>Tasks</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Kérlek válaszd ki a megfelelő nyelvet!</value>
+    <value>Wybierz język!</value>
   </data>
 </root>

@@ -23,13 +23,14 @@ namespace Stuffort
         public MainPage()
         {
             InitializeComponent();
+            File.Delete(ConfigurationServices.FilePath);
             cType = ConfigurationServices.GetConfigurationData();
             MainViewModel = new MainViewModel(cType);
             languageSelectionStackLayout.BindingContext = MainViewModel;
             if (cType.Language == "undefined")
             {
                 string language = Thread.CurrentThread.CurrentUICulture.Name;
-                languagePicker.SelectedIndex = language == "pl" ? 3 : language == "hu" ? 2 : 1;
+                languagePicker.SelectedIndex = language == "pl" ? 2 : language == "hu" ? 1 : 0;
             }
             else
             {
@@ -37,11 +38,6 @@ namespace Stuffort
                 Thread.CurrentThread.CurrentUICulture = language;
                 Navigation.PushModalAsync(new HomePage());
             }
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            languagePicker.SelectedIndex = 0;
         }
 
         private void languagePicker_SelectedIndexChanged(object sender, EventArgs e)

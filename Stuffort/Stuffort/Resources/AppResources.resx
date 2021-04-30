@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="WelcomeText" xml:space="preserve">
-    <value>Welcome! Please choose a language!</value>
+  <data name="Subjects" xml:space="preserve">
+    <value>Subjects</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Feladatok</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Please choose a language!</value>
   </data>
 </root>

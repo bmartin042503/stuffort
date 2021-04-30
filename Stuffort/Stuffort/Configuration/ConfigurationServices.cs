@@ -11,13 +11,13 @@ namespace Stuffort.Configuration
 {
     static public class ConfigurationServices
     {
-        private static string fileName = "config.xml";
-        private static string filePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData),fileName);
+        public static string FileName = "config.xml";
+        public static string FilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData),FileName);
         static public void SaveConfigurationFile(ConfigurationType ct)
         {
-            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            using (FileStream fs = new FileStream(FilePath, FileMode.Create))
             {
-                if(!File.Exists(filePath))
+                if(!File.Exists(FilePath))
                 {
                     ct = new ConfigurationType("undefined", false);
                 }
@@ -29,9 +29,9 @@ namespace Stuffort.Configuration
         static public ConfigurationType GetConfigurationData()
         {
             ConfigurationType ct = new ConfigurationType();
-            if (File.Exists(filePath))
+            if (File.Exists(FilePath))
             {
-                using (FileStream fs = new FileStream(filePath, FileMode.Open))
+                using (FileStream fs = new FileStream(FilePath, FileMode.Open))
                 {
                     XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
                     ct = (ConfigurationType)ser.Deserialize(fs);
