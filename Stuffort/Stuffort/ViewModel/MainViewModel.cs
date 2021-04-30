@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Stuffort.Configuration;
 using Stuffort.View;
 using Stuffort.ViewModel.Commands;
 
@@ -10,12 +11,12 @@ namespace Stuffort.ViewModel
     {
         public List<string> Languages { get; set; }
         public MainPageCommand MainPageCommand { get; set; }
-        public MainViewModel()
+        public MainViewModel(ConfigurationType ct)
         {
-            this.MainPageCommand = new MainPageCommand(this);
+            this.MainPageCommand = new MainPageCommand(this, ct);
             Languages = new List<string>()
             {
-                "English", "Magyar", "Polski"
+                "-","English", "Magyar", "Polski"
             };
         }
 

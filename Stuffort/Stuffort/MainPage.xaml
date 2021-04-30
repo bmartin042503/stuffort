@@ -12,6 +12,6 @@
                FontSize="Large"/>
         <Picker x:Name="languagePicker" ItemsSource="{Binding Languages}"
                 SelectedIndexChanged="languagePicker_SelectedIndexChanged"
-                HeightRequest="50"/>
+                HeightRequest="50" SelectedIndex="0"/>
     </StackLayout>
 </ContentPage>
