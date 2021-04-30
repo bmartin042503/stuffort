@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Configuration;
 using Xamarin.Forms;
+//using PCLAppConfig;
 
 namespace Stuffort
 {
@@ -16,6 +18,8 @@ namespace Stuffort
         public MainPage()
         {
             InitializeComponent();
+            //string read = ConfigurationManager.AppSettings["1"];
+            //DisplayAlert("Debug", read, "Ok");
             string language = Thread.CurrentThread.CurrentUICulture.Name;
             languagePicker.SelectedIndex = language == "pl" ? 2 : language == "hu" ? 1 : 0;
             MainViewModel = new MainViewModel();
