@@ -23,19 +23,22 @@ namespace Stuffort.Model
         {
             await Init();
             await db.InsertAsync(s);
+            await db.CloseAsync();
         }
 
         static public async void RemoveTask(Task s)
         {
             await Init();
             await db.DeleteAsync(s);
+            await db.CloseAsync();
         }
 
         static public async Task<IEnumerable<STask>> GetTasks()
         {
             await Init();
-            var taskList = db.Table<STask>().ToListAsync();
-            return (IEnumerable<STask>)taskList;
+            var taskList = await db.Table<STask>().ToListAsync();
+            await db.CloseAsync();
+            return taskList;
         }
     }
 }

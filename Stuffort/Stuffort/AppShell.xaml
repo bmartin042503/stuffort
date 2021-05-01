@@ -15,4 +15,16 @@
     <FlyoutItem Title="{x:Static resx:AppResources.Tasks}" Route="TasksPage">
         <ShellContent ContentTemplate="{DataTemplate local:TasksPage}"/>
     </FlyoutItem>
+
+    <FlyoutItem Title="{x:Static resx:AppResources.Stats}" Route="StatsPage">
+        <ShellContent ContentTemplate="{DataTemplate local:StatsPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{x:Static resx:AppResources.Contact}" Route="ContactPage">
+        <ShellContent ContentTemplate="{DataTemplate local:ContactPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{x:Static resx:AppResources.Settings}" Route="SettingsPage">
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
+    </FlyoutItem>
 </Shell>
