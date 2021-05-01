@@ -8,10 +8,24 @@
                  VerticalOptions="Center" Margin="50">
         <Label Text="{x:Static resx:AppResources.Welcome}" 
                HorizontalTextAlignment="Center"
-               Margin="0,0,0,25"
+               Margin="0,0,0,20"
                FontSize="Large"/>
         <Picker x:Name="languagePicker" ItemsSource="{Binding Languages}"
-                SelectedIndexChanged="languagePicker_SelectedIndexChanged"
                 HeightRequest="50"/>
+        <Grid Margin="0,45,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" x:Name="submitBtn" Text="{x:Static resx:AppResources.Next}"
+                BorderRadius="20"
+                MinimumWidthRequest="10"
+                HeightRequest="40"
+                BorderColor="DodgerBlue"                 
+                BackgroundColor="White"
+                BorderWidth="3"
+                Command="{Binding MainPageCommand}"
+                CommandParameter="{Binding LanguagePicker}"/>
+        </Grid>
     </StackLayout>
 </ContentPage>

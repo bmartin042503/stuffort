@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stuffort.View.HomeShell"
+             xmlns:resx="clr-namespace:Stuffort.Resources"
+             xmlns:pages="clr-namespace:Stuffort.View">
+    <FlyoutItem Title="Stuffort" Shell.TabBarIsVisible="False"
+                FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="{x:Static resx:AppResources.Subjects}"
+                      IsTabStop="True" ContentTemplate="{DataTemplate pages:SubjectsPage}"/>
+        <ShellContent Title="{x:Static resx:AppResources.Tasks}"
+                      IsTabStop="True" ContentTemplate="{DataTemplate pages:TasksPage}"/>
+    </FlyoutItem>
+</Shell>

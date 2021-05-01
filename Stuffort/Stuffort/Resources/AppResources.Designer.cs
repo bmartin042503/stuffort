@@ -61,6 +61,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subjects.
         /// </summary>
         internal static string Subjects {
@@ -70,7 +79,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Feladatok.
+        ///   Looks up a localized string similar to Tasks.
         /// </summary>
         internal static string Tasks {
             get {

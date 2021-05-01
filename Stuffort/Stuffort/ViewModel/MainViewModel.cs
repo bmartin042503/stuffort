@@ -4,25 +4,28 @@ using System.Text;
 using Stuffort.Configuration;
 using Stuffort.View;
 using Stuffort.ViewModel.Commands;
+using Xamarin.Forms;
 
 namespace Stuffort.ViewModel
 {
     public class MainViewModel
     {
+        public Picker LanguagePicker { get; set; }
         public List<string> Languages { get; set; }
         public MainPageCommand MainPageCommand { get; set; }
-        public MainViewModel(ConfigurationType ct)
+        public MainViewModel(ConfigurationType ct, Picker picker)
         {
             this.MainPageCommand = new MainPageCommand(this, ct);
             Languages = new List<string>()
             {
                 "English", "Magyar", "Polski"
             };
+            LanguagePicker = picker;
         }
 
-        public async void NavigateToHomepage()
+        public void NavigateToHomepage()
         {
-            await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
+            App.Current.MainPage = new HomeShell();
         }
     }
 }

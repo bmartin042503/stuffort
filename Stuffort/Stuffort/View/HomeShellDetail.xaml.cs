@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Stuffort.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : Shell
+    public partial class HomeShellDetail : ContentPage
     {
-        public HomePage()
+        public HomeShellDetail()
         {
             InitializeComponent();
-        }
-        protected override bool OnBackButtonPressed()
-        {
-            return true;
         }
     }
 }

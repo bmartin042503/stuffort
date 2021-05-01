@@ -19,30 +19,25 @@ namespace Stuffort
     public partial class MainPage : ContentPage
     {
         private MainViewModel MainViewModel;
-        private ConfigurationType cType;
+        private ConfigurationType ConfType;
         public MainPage()
         {
             InitializeComponent();
-            File.Delete(ConfigurationServices.FilePath);
-            cType = ConfigurationServices.GetConfigurationData();
-            MainViewModel = new MainViewModel(cType);
+            File.Delete(ConfigurationServices.FilePath); //TÖRLENDŐ
+            ConfType = ConfigurationServices.GetConfigurationData();
+            MainViewModel = new MainViewModel(ConfType, languagePicker);
             languageSelectionStackLayout.BindingContext = MainViewModel;
-            if (cType.Language == "undefined")
+            if (ConfType.Language == "undefined")
             {
                 string language = Thread.CurrentThread.CurrentUICulture.Name;
-                languagePicker.SelectedIndex = language == "pl" ? 2 : language == "hu" ? 1 : 0;
+                languagePicker.SelectedIndex = language == "pl-PL" ? 2 : language == "hu-HU" ? 1 : 0;
             }
             else
             {
-                CultureInfo language = new CultureInfo(cType.Language);
+                CultureInfo language = new CultureInfo(ConfType.Language);
                 Thread.CurrentThread.CurrentUICulture = language;
-                Navigation.PushModalAsync(new HomePage());
+                App.Current.MainPage = new HomeShell();
             }
-        }
-
-        private void languagePicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MainViewModel.MainPageCommand.Execute(sender as Picker);
         }
     }
 }
