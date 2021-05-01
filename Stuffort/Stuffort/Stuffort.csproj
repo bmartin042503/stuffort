@@ -41,10 +41,10 @@
     <EmbeddedResource Update="View\HomeShellFlyout.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\SubjectsPage.xaml">
+    <EmbeddedResource Update="View\ShellPages\SubjectsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\TasksPage.xaml">
+    <EmbeddedResource Update="View\ShellPages\TasksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

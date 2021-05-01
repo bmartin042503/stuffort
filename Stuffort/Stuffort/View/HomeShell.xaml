@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Stuffort.View.HomeShell"
              xmlns:resx="clr-namespace:Stuffort.Resources"
-             xmlns:pages="clr-namespace:Stuffort.View">
+             xmlns:pages="clr-namespace:Stuffort.View.ShellPages">
     <FlyoutItem Title="Stuffort" Shell.TabBarIsVisible="False"
                 FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="{x:Static resx:AppResources.Subjects}"
