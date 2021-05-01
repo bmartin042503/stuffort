@@ -5,10 +5,10 @@
              Shell.FlyoutBehavior="Disabled">
     <StackLayout x:Name="newTaskStackLayout">
         <Label FontSize="Large" Text="Új feladat hozzáadása"/>
-        <Entry Placeholder="Név" Text="{Binding Name}"/>
-        <Picker SelectedIndex="{Binding Index}"/>
-        <RadioButton Content="Határidő" IsChecked="{Binding IsDeadline}" />
-        <DatePicker Date="{Binding Date}"/>
-        <Button Text="Mentés" Command="{Binding NewTaskCommand}"/>
+        <Entry Placeholder="Név" Text="{Binding Name, Mode=TwoWay}"/>
+        <Picker ItemsSource="{Binding SubjectList}" SelectedIndex="{Binding Index, Mode=TwoWay}"/>
+        <RadioButton Content="Határidő" IsChecked="{Binding IsDeadline, Mode=TwoWay}" />
+        <DatePicker Date="{Binding Date, Mode=TwoWay}" IsEnabled="{Binding DateEnabled}"/>
+        <Button Text="Mentés" Command="{Binding NewTaskCommand}" CommandParameter="{Binding STask}"/>
     </StackLayout>
 </ContentPage>

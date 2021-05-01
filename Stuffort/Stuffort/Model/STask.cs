@@ -18,6 +18,8 @@ namespace Stuffort.Model
         public int SubjectID { get; set; }
 
         public bool IsDone { get; set; }
+
+        public bool IsDeadline { get; set; }
         public DateTime DeadLine { get; set; }
         public DateTime AddedTime { get; set; }
     }

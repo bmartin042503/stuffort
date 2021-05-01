@@ -19,11 +19,13 @@ namespace Stuffort.Model
             await db.CreateTableAsync<STask>();
         }
 
-        static public async void AddTask(STask s)
+        static public async Task<int> AddTask(STask s)
         {
+            int rows = 0;
             await Init();
-            await db.InsertAsync(s);
+            rows = await db.InsertAsync(s);
             await db.CloseAsync();
+            return rows;
         }
 
         static public async void RemoveTask(Task s)
