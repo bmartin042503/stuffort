@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Stuffort.View
+namespace Stuffort.View.ShellPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TasksPage : ContentPage

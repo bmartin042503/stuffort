@@ -1,4 +1,4 @@
-﻿using Stuffort.View;
+﻿//using Stuffort.View;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,11 +7,19 @@ namespace Stuffort
 {
     public partial class App : Application
     {
+        public static string DatabaseLocation = string.Empty;
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AppShell();
+        }
+
+        public App(string location)
+        {
+            InitializeComponent();
+            DatabaseLocation = location;
+            MainPage = new AppShell();
         }
 
         protected override void OnStart()

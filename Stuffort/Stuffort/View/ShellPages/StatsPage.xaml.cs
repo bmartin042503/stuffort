@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Stuffort.View
+namespace Stuffort.View.ShellPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomeShellDetail : ContentPage
+    public partial class StatsPage : ContentPage
     {
-        public HomeShellDetail()
+        public StatsPage()
         {
             InitializeComponent();
         }

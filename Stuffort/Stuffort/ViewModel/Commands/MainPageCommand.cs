@@ -30,8 +30,6 @@ namespace Stuffort.ViewModel.Commands
         public void Execute(object parameter)
         {
             var picker = parameter as Picker;
-            if (picker.SelectedIndex == 0)
-                return;
             CultureInfo language = new CultureInfo(picker.SelectedIndex == 0 ? "" : picker.SelectedIndex == 1 ? "hu" : "pl");
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = language;

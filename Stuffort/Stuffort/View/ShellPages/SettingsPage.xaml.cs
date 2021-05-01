@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Stuffort.View
+namespace Stuffort.View.ShellPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomeShell : Shell
+    public partial class SettingsPage : ContentPage
     {
-        public HomeShell()
+        public SettingsPage()
         {
             InitializeComponent();
-        }
-
-        protected override bool OnBackButtonPressed()
-        {
-            return true;
         }
     }
 }

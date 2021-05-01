@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Stuffort.View.ShellPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SubjectsPage : ContentPage
+    public partial class ContactPage : ContentPage
     {
-        public SubjectsPage()
+        public ContactPage()
         {
             InitializeComponent();
         }

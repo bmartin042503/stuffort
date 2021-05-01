@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Stuffort.Configuration;
 using Stuffort.View;
+using Stuffort.View.ShellPages;
 using Stuffort.ViewModel.Commands;
 using Xamarin.Forms;
 
@@ -25,7 +26,7 @@ namespace Stuffort.ViewModel
 
         public void NavigateToHomepage()
         {
-            App.Current.MainPage = new HomeShell();
+            Shell.Current.GoToAsync($"//{nameof(SubjectsPage)}");
         }
     }
 }

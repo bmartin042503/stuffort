@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Contact" xml:space="preserve">
+    <value>Kapcsolat</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Tovább</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Statisztika</value>
   </data>
   <data name="Subjects" xml:space="preserve">
     <value>Tantárgyak</value>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Stuffort.View.ShellPages"
+             xmlns:resx="clr-namespace:Stuffort.Resources"
+             x:Class="Stuffort.AppShell">
+    <ShellItem Route="LoginPage" FlyoutItemIsVisible="False">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </ShellItem>
+
+    <FlyoutItem Title="{x:Static resx:AppResources.Subjects}" Route="SubjectsPage">
+        <ShellContent ContentTemplate="{DataTemplate local:SubjectsPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{x:Static resx:AppResources.Tasks}" Route="TasksPage">
+        <ShellContent ContentTemplate="{DataTemplate local:TasksPage}"/>
+    </FlyoutItem>
+</Shell>

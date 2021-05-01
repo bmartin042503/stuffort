@@ -17,10 +17,6 @@ namespace Stuffort.Configuration
         {
             using (FileStream fs = new FileStream(FilePath, FileMode.Create))
             {
-                if(!File.Exists(FilePath))
-                {
-                    ct = new ConfigurationType("undefined", false);
-                }
                 XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
                 ser.Serialize(fs, new ConfigurationType(ct.Language, ct.DarkMode));
             }
@@ -40,7 +36,7 @@ namespace Stuffort.Configuration
             }
             else
             {
-                SaveConfigurationFile(ct);
+                SaveConfigurationFile(new ConfigurationType("undefined", false));
                 return new ConfigurationType("undefined", false);
             }
         }
