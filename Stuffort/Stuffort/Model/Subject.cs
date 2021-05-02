@@ -7,9 +7,10 @@ using SQLite;
 
 namespace Stuffort.Model
 {
+    [Table("Subject")]
     public class Subject
     {
-        [PrimaryKey, AutoIncrement]
+        [SQLite.PrimaryKey, SQLite.AutoIncrement]
         public int ID { get; set; }
 
         [MaxLength(50)]

@@ -10,11 +10,13 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
 using Xamarin.Forms;
+using Stuffort.Resources;
 
 namespace Stuffort.ViewModel
 {
     public class NewTaskViewModel : INotifyPropertyChanged
     {
+        public DateTime DateTimeNow { get; set; }
         private string name;
         public string Name
         {
@@ -71,12 +73,15 @@ namespace Stuffort.ViewModel
             }
         }
 
-        public List<Subject> SubjectList { get; set; }
-
+        public ObservableCollection<Subject> SubjectList { get; set; }
+        public AsyncCommand NewTaskCommand { get; set; }
         public NewTaskViewModel()
         {
-            SubjectList = new List<Subject>();
+            SubjectList = new ObservableCollection<Subject>();
             InitializeSubjectList();
+            DateTimeNow = DateTime.Now;
+            this.Index = 1;
+            NewTaskCommand = new AsyncCommand(SaveTask);
         }
 
 
@@ -99,8 +104,19 @@ namespace Stuffort.ViewModel
 
         public async Task SaveTask()
         {
-            if (string.IsNullOrEmpty(Name) || Name.Length > 120 || Name.Length < 5)
+            if(string.IsNullOrWhiteSpace(Name) || string.IsNullOrEmpty(Name))
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"), 
+                    AppResources.ResourceManager.GetString("NameIsEmpty"),"Ok");
                 return;
+            }
+
+            if(Name.Length > 120 || Name.Length < 5)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                return;
+            }
 
             STask Stask = new STask()
             {
@@ -109,16 +125,19 @@ namespace Stuffort.ViewModel
                 IsDone = false,
                 AddedTime = DateTime.Now,
                 DeadLine = Date,
-                SubjectID = SubjectList[Index].ID
+                SubjectID = SubjectList[Index].ID,
+                SubjectName = SubjectList[Index].Name
             };
             if (IsDeadline == false)
                 Stask.DeadLine = new DateTime(1900,1,1);
             int rows;
             rows = await STaskServices.AddTask(Stask);
             if (rows > 0)
-                await App.Current.MainPage.DisplayAlert("Debug", $"Task successfully saved!\nName: {Stask.Name}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"), 
+                    $"{AppResources.ResourceManager.GetString("TaskSuccessfullySaved")} {Stask.Name}", "Ok");
             else
-                await App.Current.MainPage.DisplayAlert("Error", "An error has occured while saving the task!", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("TaskErrorWhileSaving"), "Ok");
             await Shell.Current.GoToAsync("..");
         }
     }

@@ -120,8 +120,26 @@
   <data name="Contact" xml:space="preserve">
     <value>Kapcsolat</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Törlés</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hiba</value>
+  </data>
+  <data name="NameIsEmpty" xml:space="preserve">
+    <value>A név üres!</value>
+  </data>
+  <data name="NameLengthOverFlow" xml:space="preserve">
+    <value>A név 5-120 karakter lehet!</value>
+  </data>
+  <data name="NewSubject" xml:space="preserve">
+    <value>Új tantárgy</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Tovább</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Átnevezés</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Beállítások</value>
@@ -130,13 +148,28 @@
     <value>Statisztika</value>
   </data>
   <data name="Subjects" xml:space="preserve">
-    <value>Tantárgyak</value>
+    <value>Tanárgyak</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Siker</value>
+  </data>
+  <data name="TaskErrorWhileDeleting" xml:space="preserve">
+    <value>Hiba történt a feladat törlése során!</value>
+  </data>
+  <data name="TaskErrorWhileSaving" xml:space="preserve">
+    <value>Hiba történt a feladat mentése során!</value>
   </data>
   <data name="TaskListCountIsZero" xml:space="preserve">
-    <value>Legalább egy tantárgyadnak kell lennie mielőtt új feladatot hozzáadnál!</value>
+    <value>Legalább egy tantárgyadnak kell lennie mielőtt hozzáadnál egy új feladatot!</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>Feladatok</value>
+  </data>
+  <data name="TaskSuccessfullyDelete" xml:space="preserve">
+    <value>Feladat törölve!</value>
+  </data>
+  <data name="TaskSuccessfullySaved" xml:space="preserve">
+    <value>Sikeresen mentve! Feladat neve:</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Kérlek válaszd ki a megfelelő nyelvet!</value>

@@ -70,6 +70,42 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is empty!.
+        /// </summary>
+        internal static string NameIsEmpty {
+            get {
+                return ResourceManager.GetString("NameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name must between 5-120 characters!.
+        /// </summary>
+        internal static string NameLengthOverFlow {
+            get {
+                return ResourceManager.GetString("NameLengthOverFlow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New subject.
         /// </summary>
         internal static string NewSubject {
@@ -84,6 +120,15 @@ namespace Stuffort.Resources {
         internal static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        internal static string Rename {
+            get {
+                return ResourceManager.GetString("Rename", resourceCulture);
             }
         }
         
@@ -115,6 +160,33 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while deleting the task!.
+        /// </summary>
+        internal static string TaskErrorWhileDeleting {
+            get {
+                return ResourceManager.GetString("TaskErrorWhileDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while saving the task!.
+        /// </summary>
+        internal static string TaskErrorWhileSaving {
+            get {
+                return ResourceManager.GetString("TaskErrorWhileSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You need to have at least one subject before adding a task!.
         /// </summary>
         internal static string TaskListCountIsZero {
@@ -129,6 +201,24 @@ namespace Stuffort.Resources {
         internal static string Tasks {
             get {
                 return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task has been successfully deleted!.
+        /// </summary>
+        internal static string TaskSuccessfullyDeleted {
+            get {
+                return ResourceManager.GetString("TaskSuccessfullyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task has been successfully saved! Task name:.
+        /// </summary>
+        internal static string TaskSuccessfullySaved {
+            get {
+                return ResourceManager.GetString("TaskSuccessfullySaved", resourceCulture);
             }
         }
         

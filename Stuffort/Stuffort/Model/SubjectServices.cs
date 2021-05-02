@@ -18,6 +18,14 @@ namespace Stuffort.Model
             await db.CreateTableAsync<Subject>();
         }
 
+        static public async void DeleteAll()
+        {
+            await Init();
+            await db.DeleteAllAsync<Subject>();
+            await db.DeleteAllAsync<STask>();
+            await db.CloseAsync();
+        }
+
         static public async Task<int> AddSubject(Subject s)
         {
             int rows = 0;
@@ -27,11 +35,24 @@ namespace Stuffort.Model
             return rows;
         }
 
-        static public async void RemoveSubject(Subject s)
+        static public async Task<int> RemoveSubject(Subject s)
         {
+            int rows = 0;
             await Init();
-            await db.DeleteAsync(s);
+            int tasksToRemoveID = s.ID;
+            rows += await db.ExecuteAsync($"DELETE FROM [Subject] WHERE [ID] = {s.ID}");
+            rows += await db.ExecuteAsync($"DELETE FROM [STask] WHERE [SubjectID] = {s.ID}");
             await db.CloseAsync();
+            return rows;
+        }
+
+        static public async Task<int> RemoveSubject(int key)
+        {
+            int rows = 0;
+            await Init();
+            rows = await db.DeleteAsync(key);
+            await db.CloseAsync();
+            return rows;
         }
 
         static public async Task<IEnumerable<Subject>> GetSubjects()

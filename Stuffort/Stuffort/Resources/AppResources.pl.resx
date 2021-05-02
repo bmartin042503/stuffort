@@ -118,10 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+    <value>Kontakt</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Błąd</value>
+  </data>
+  <data name="NameIsEmpty" xml:space="preserve">
+    <value>Imię jest puste!</value>
+  </data>
+  <data name="NameLengthOverFlow" xml:space="preserve">
+    <value>Name must between 5-120 characters!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>New subject</value>
@@ -129,17 +138,23 @@
   <data name="Next" xml:space="preserve">
     <value>Kolejny</value>
   </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
   <data name="Settings" xml:space="preserve">
-    <value>Beállítások</value>
+    <value>Ustawienia</value>
   </data>
   <data name="Stats" xml:space="preserve">
-    <value>Stats</value>
+    <value>Statystyki</value>
   </data>
   <data name="Subjects" xml:space="preserve">
     <value>Subjects</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success</value>
+    <value>Sukces</value>
+  </data>
+  <data name="TaskErrorWhileDeleting" xml:space="preserve">
+    <value>An error has occured while deleting the task!</value>
   </data>
   <data name="TaskErrorWhileSaving" xml:space="preserve">
     <value>An error has occured while saving the task!</value>
@@ -148,7 +163,10 @@
     <value>You need to have at least one subject before adding a task!</value>
   </data>
   <data name="Tasks" xml:space="preserve">
-    <value>Tasks</value>
+    <value>Zadania</value>
+  </data>
+  <data name="TaskSuccessfullyDeleted" xml:space="preserve">
+    <value>Task has been successfully deleted!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
     <value>Task has been successfully saved! Task name:</value>

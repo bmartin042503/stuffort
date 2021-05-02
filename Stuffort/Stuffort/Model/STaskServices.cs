@@ -28,11 +28,13 @@ namespace Stuffort.Model
             return rows;
         }
 
-        static public async void RemoveTask(Task s)
+        static public async Task<int> RemoveTask(STask s)
         {
+            int rows = 0;
             await Init();
-            await db.DeleteAsync(s);
+            rows = await db.ExecuteAsync($"DELETE FROM [STask] WHERE [ID] = {s.ID}");
             await db.CloseAsync();
+            return rows;
         }
 
         static public async Task<IEnumerable<STask>> GetTasks()

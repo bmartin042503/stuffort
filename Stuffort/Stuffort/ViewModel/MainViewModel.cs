@@ -19,7 +19,7 @@ namespace Stuffort.ViewModel
             this.MainPageCommand = new MainPageCommand(this, ct);
             Languages = new List<string>()
             {
-                "English", "Magyar", "Polski"
+                "English", "Magyar", "Polski (beta)"
             };
             LanguagePicker = picker;
         }

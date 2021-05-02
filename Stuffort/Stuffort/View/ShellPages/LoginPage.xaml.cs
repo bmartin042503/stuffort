@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Globalization;
 using Stuffort.Resources;
+using Stuffort.Model;
 
 namespace Stuffort.View.ShellPages
 {
@@ -23,6 +24,7 @@ namespace Stuffort.View.ShellPages
         {
             InitializeComponent();
             //File.Delete(ConfigurationServices.FilePath);
+            //File.Delete(App.DatabaseLocation);
             ConfType = ConfigurationServices.GetConfigurationData();
             MainViewModel = new MainViewModel(ConfType, languagePicker);
             languageSelectionStackLayout.BindingContext = MainViewModel;

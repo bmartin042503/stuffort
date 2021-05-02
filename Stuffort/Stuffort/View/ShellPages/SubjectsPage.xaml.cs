@@ -20,7 +20,6 @@ namespace Stuffort.View.ShellPages
             InitializeComponent();
             SubjectsViewModel = new SubjectsViewModel();
             BindingContext = SubjectsViewModel;
-            DisplayAlert(AppResources.ResourceManager.GetString("Success"), AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
         }
 
         protected async override void OnAppearing()

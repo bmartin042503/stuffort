@@ -15,14 +15,46 @@ using System.ComponentModel;
 
 namespace Stuffort.ViewModel
 {
-    public class SubjectsViewModel
+    public class SubjectsViewModel : INotifyPropertyChanged
     {
         public AsyncCommand SubjectCommand { get; }
+        public AsyncCommand SubjectRefreshCommand { get; }
+        public SubjectRemoveCommand SubjectRemoveCommand { get; set; }
         public ObservableCollection<Subject> SubjectList { get; set; }
+
+        private bool isrefreshing;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+                return;
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool IsRefreshing
+        {
+            get { return isrefreshing; }
+            set
+            {
+                isrefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+
+        public async Task Refresh()
+        {
+            IsRefreshing = true;
+            await UpdateSubjects();
+            IsRefreshing = false;
+        }
         public SubjectsViewModel()
         {
             SubjectList = new ObservableCollection<Subject>();
             SubjectCommand = new AsyncCommand(NavigateToNewSubject);
+            SubjectRemoveCommand = new SubjectRemoveCommand(this);
+            SubjectRefreshCommand = new AsyncCommand(Refresh);
         }
 
 

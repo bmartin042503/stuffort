@@ -6,27 +6,60 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
 using Xamarin.Forms;
 using Stuffort.Resources;
+using System.ComponentModel;
 
 namespace Stuffort.ViewModel
 {
-    public class TasksViewModel 
+    public class TasksViewModel : INotifyPropertyChanged
     {
-        public AsyncCommand TaskCommand { get; set; }
+        private bool isrefreshing;
 
-        public int TaskListCount { get; set; }
-        public ObservableCollection<Tuple<string,DateTime,DateTime,string,int,bool>> TaskList { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+                return;
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool IsRefreshing
+        {
+            get { return isrefreshing; }
+            set
+            {
+                isrefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+        public AsyncCommand TaskCommand { get; set; }
+        public TaskRemoveCommand TaskRemoveCommand { get; set; }
+        public AsyncCommand TaskRefreshCommand { get; set; }
+
+        public int SubjectListCount { get; set; }
+        public ObservableCollection<STask> TaskList { get; set; }
 
         public TasksViewModel()
         {
-            TaskListCount = 0;
+            SubjectListCount = 0;
             TaskCommand = new AsyncCommand(NavigateToNewTask);
-            TaskList = new ObservableCollection<Tuple<string, DateTime, DateTime, string, int, bool>>();
+            TaskRemoveCommand = new TaskRemoveCommand(this);
+            TaskRefreshCommand = new AsyncCommand(Refresh); 
+            TaskList = new ObservableCollection<STask>();
+        }
+
+        public async Task Refresh()
+        {
+            IsRefreshing = true;
+            await UpdateTasks();
+            IsRefreshing = false;
         }
 
         public async Task UpdateTasks()
@@ -34,30 +67,19 @@ namespace Stuffort.ViewModel
             TaskList.Clear();
             var tasks = await STaskServices.GetTasks();
             var subjects = await SubjectServices.GetSubjects();
-            var newlist = from task in tasks
-                          join subject in subjects
-                          on task.SubjectID equals subject.ID
-                          select new
-                          {
-                              Name = task.Name,
-                              AddedTime = task.AddedTime,
-                              DeadLine = task.DeadLine,
-                              SubjectName = subject.Name,
-                              ID = task.ID,
-                              IsDone = task.IsDone
-                          };
-            foreach(var task in newlist)
+            foreach(var task in tasks)
             {
-                TaskList.Add(new Tuple<string, DateTime, DateTime, string, int, bool>(task.Name, task.AddedTime, task.DeadLine, task.SubjectName, task.ID, task.IsDone));
+                TaskList.Add(task);
             }
-            TaskListCount = (subjects as List<Subject>).Count;
+            SubjectListCount = (subjects as List<Subject>).Count;
         }
 
         public async Task NavigateToNewTask()
         {
-            if (TaskListCount == 0)
+            if (SubjectListCount == 0)
             {
-                await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"), 
+                    AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
                 return;
             }
 

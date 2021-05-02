@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:resx="clr-namespace:Stuffort.Resources"
              x:Class="Stuffort.View.ShellPages.TasksPage"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             x:Name="tasksPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Új feladat"
                      Command="{Binding TaskCommand}"
-                     CommandParameter="{Binding TaskListCount}"/>
+                     CommandParameter="{Binding SubjectListCount}"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="10">
-        <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}">
+        <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -22,10 +25,15 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Item1}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Item2}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Item4}"/>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ID}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding SubjectName}"/>
                         </Grid>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="{x:Static resx:AppResources.Delete}" IsDestructive="True" 
+                                      Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
+                                      CommandParameter="{Binding .}"/>
+                        </ViewCell.ContextActions>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

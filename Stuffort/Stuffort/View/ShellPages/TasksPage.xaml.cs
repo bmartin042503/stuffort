@@ -1,4 +1,6 @@
-﻿using Stuffort.ViewModel;
+﻿using Stuffort.Model;
+using Stuffort.Resources;
+using Stuffort.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

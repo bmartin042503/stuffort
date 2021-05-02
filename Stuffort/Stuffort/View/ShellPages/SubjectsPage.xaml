@@ -2,18 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Stuffort.View.ShellPages.SubjectsPage"
-             Shell.TabBarIsVisible="False">
+             xmlns:resx="clr-namespace:Stuffort.Resources"
+             Shell.TabBarIsVisible="False"
+             x:Name="subjectsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Új tantárgy"
                      Command="{Binding SubjectCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="0,7.5,0,0">
-            <ListView ItemsSource="{Binding SubjectList}">
+            <ListView ItemsSource="{Binding SubjectList}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding SubjectRefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}" 
-                                  Detail="{Binding AddedTime}"/>
+                                  Detail="{Binding AddedTime}">
+                            <TextCell.ContextActions>
+                                <MenuItem Text="{x:Static resx:AppResources.Delete}" IsDestructive="True" 
+                                      Command="{Binding Path=BindingContext.SubjectRemoveCommand, Source={x:Reference subjectsPage}}"
+                                      CommandParameter="{Binding .}"/>
+                            </TextCell.ContextActions>
+                        </TextCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
