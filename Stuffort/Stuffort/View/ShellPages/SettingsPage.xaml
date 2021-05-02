@@ -11,7 +11,7 @@
                 <Image HeightRequest="40" WidthRequest="40" x:Name="languageIconImage" Aspect="AspectFit" Grid.Row="0" Grid.Column="0"/>
                 <Label FontSize="20" Text="{x:Static resx:AppResources.Language}" Grid.Row="0" Grid.Column="1"/>
                 <Picker x:Name="languagePicker" ItemsSource="{Binding Languages}"
-                WidthRequest="200" SelectedIndex="1"
+                WidthRequest="200"
                 Grid.Row="1" Grid.Column="2"
                 TextColor="{x:StaticResource stuffortWhite}"
                 TitleColor="{x:StaticResource stuffortWhite}"/>

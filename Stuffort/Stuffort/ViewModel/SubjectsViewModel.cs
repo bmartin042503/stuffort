@@ -23,9 +23,14 @@ namespace Stuffort.ViewModel
         public SubjectRemoveCommand SubjectRemoveCommand { get; set; }
         public ObservableCollection<Subject> SubjectList { get; set; }
 
+        private string currenttitle;
         public string CurrentTitle
         {
-            get { return AppResources.ResourceManager.GetString("SubjectsPage"); }
+            get { return currenttitle; }
+            set { 
+                currenttitle = value;
+                OnPropertyChanged(nameof(CurrentTitle));
+            }
         }
 
         private bool isrefreshing;
