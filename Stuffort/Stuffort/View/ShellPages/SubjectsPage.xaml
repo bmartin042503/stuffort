@@ -7,13 +7,16 @@
         <ToolbarItem Text="Új tantárgy"
                      Command="{Binding SubjectCommand}"/>
     </ContentPage.ToolbarItems>
-    <StackLayout Margin="10">
-        <ListView x:Name="subjectsListView" ItemsSource="{Binding SubjectList}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding AddedTime, StringFormat='{0:d}'}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+    <ContentPage.Content>
+        <StackLayout Margin="0,7.5,0,0">
+            <ListView ItemsSource="{Binding SubjectList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" 
+                                  Detail="{Binding AddedTime}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

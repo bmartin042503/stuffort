@@ -22,7 +22,7 @@ namespace Stuffort.View.ShellPages
         public LoginPage()
         {
             InitializeComponent();
-            File.Delete(ConfigurationServices.FilePath);
+            //File.Delete(ConfigurationServices.FilePath);
             ConfType = ConfigurationServices.GetConfigurationData();
             MainViewModel = new MainViewModel(ConfType, languagePicker);
             languageSelectionStackLayout.BindingContext = MainViewModel;

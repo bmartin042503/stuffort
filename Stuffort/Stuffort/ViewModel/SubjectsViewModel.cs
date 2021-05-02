@@ -6,20 +6,27 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
+using MvvmHelpers;
+using MvvmHelpers.Commands;
+using Command = MvvmHelpers.Commands.Command;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
 
 namespace Stuffort.ViewModel
 {
-    public class SubjectsViewModel 
+    public class SubjectsViewModel
     {
-        public SubjectCommand SubjectCommand { get; set; }
+        public AsyncCommand SubjectCommand { get; }
         public ObservableCollection<Subject> SubjectList { get; set; }
         public SubjectsViewModel()
         {
             SubjectList = new ObservableCollection<Subject>();
-            SubjectCommand = new SubjectCommand(this);
+            SubjectCommand = new AsyncCommand(NavigateToNewSubject);
         }
 
-        public async Task NavigateToNewSubject()
+
+        async Task NavigateToNewSubject()
         {
             await AppShell.Current.GoToAsync($"{nameof(NewSubjectPage)}");
         }

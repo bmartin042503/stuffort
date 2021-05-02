@@ -115,6 +115,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to have at least one subject before adding a task!.
+        /// </summary>
+        internal static string TaskListCountIsZero {
+            get {
+                return ResourceManager.GetString("TaskListCountIsZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tasks.
         /// </summary>
         internal static string Tasks {

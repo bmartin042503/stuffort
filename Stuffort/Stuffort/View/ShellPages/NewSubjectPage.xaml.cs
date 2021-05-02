@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,8 +16,8 @@ namespace Stuffort.View.ShellPages
         public NewSubjectPage()
         {
             InitializeComponent();
-            NewSubjectViewModel = new NewSubjectViewModel();
-            newSubjectStackLayout.BindingContext = NewSubjectViewModel;
+            this.NewSubjectViewModel = new NewSubjectViewModel();
+            BindingContext = NewSubjectViewModel;
         }
     }
 }

@@ -7,17 +7,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MvvmHelpers;
+using MvvmHelpers.Commands;
+using Command = MvvmHelpers.Commands.Command;
+using Xamarin.Forms;
+using Stuffort.Resources;
 
 namespace Stuffort.ViewModel
 {
     public class TasksViewModel 
     {
-        public TaskCommand TaskCommand { get; set; }
+        public AsyncCommand TaskCommand { get; set; }
+
+        public int TaskListCount { get; set; }
         public ObservableCollection<Tuple<string,DateTime,DateTime,string,int,bool>> TaskList { get; set; }
 
         public TasksViewModel()
         {
-            this.TaskCommand = new TaskCommand(this);
+            TaskListCount = 0;
+            TaskCommand = new AsyncCommand(NavigateToNewTask);
             TaskList = new ObservableCollection<Tuple<string, DateTime, DateTime, string, int, bool>>();
         }
 
@@ -42,11 +50,18 @@ namespace Stuffort.ViewModel
             {
                 TaskList.Add(new Tuple<string, DateTime, DateTime, string, int, bool>(task.Name, task.AddedTime, task.DeadLine, task.SubjectName, task.ID, task.IsDone));
             }
+            TaskListCount = (subjects as List<Subject>).Count;
         }
 
         public async Task NavigateToNewTask()
         {
-            await AppShell.Current.GoToAsync($"{nameof(NewTaskPage)}");
+            if (TaskListCount == 0)
+            {
+                await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
+                return;
+            }
+
+            await Shell.Current.GoToAsync($"{nameof(NewTaskPage)}");
         }
 
     }

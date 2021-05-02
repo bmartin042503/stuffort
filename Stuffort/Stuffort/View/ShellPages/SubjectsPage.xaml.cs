@@ -1,4 +1,5 @@
-﻿using Stuffort.ViewModel;
+﻿using Stuffort.Resources;
+using Stuffort.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,9 @@ namespace Stuffort.View.ShellPages
         public SubjectsPage()
         {
             InitializeComponent();
-            this.SubjectsViewModel = new SubjectsViewModel();
+            SubjectsViewModel = new SubjectsViewModel();
             BindingContext = SubjectsViewModel;
+            DisplayAlert(AppResources.ResourceManager.GetString("Success"), AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
         }
 
         protected async override void OnAppearing()

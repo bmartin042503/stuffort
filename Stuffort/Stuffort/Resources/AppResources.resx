@@ -135,6 +135,9 @@
   <data name="Subjects" xml:space="preserve">
     <value>Subjects</value>
   </data>
+  <data name="TaskListCountIsZero" xml:space="preserve">
+    <value>You need to have at least one subject before adding a task!</value>
+  </data>
   <data name="Tasks" xml:space="preserve">
     <value>Tasks</value>
   </data>

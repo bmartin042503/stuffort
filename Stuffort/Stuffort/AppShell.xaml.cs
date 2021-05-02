@@ -4,6 +4,7 @@ using Stuffort.ViewModel;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Stuffort.View.ShellPages;
 
 namespace Stuffort
 {
@@ -13,6 +14,8 @@ namespace Stuffort
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(NewSubjectPage), typeof(NewSubjectPage));
+            Routing.RegisterRoute(nameof(NewTaskPage), typeof(NewTaskPage));
         }
     }
 }

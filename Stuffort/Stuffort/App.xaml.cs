@@ -21,8 +21,6 @@ namespace Stuffort
             InitializeComponent();
             DatabaseLocation = location;
             MainPage = new AppShell();
-            Routing.RegisterRoute(nameof(NewSubjectPage), typeof(NewSubjectPage));
-            Routing.RegisterRoute(nameof(NewTaskPage), typeof(NewTaskPage));
         }
 
         protected override void OnStart()

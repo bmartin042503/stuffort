@@ -1,14 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Stuffort.View.ShellPages.NewTaskPage"
              Shell.FlyoutBehavior="Disabled">
     <StackLayout x:Name="newTaskStackLayout">
-        <Label FontSize="Large" Text="Új feladat hozzáadása"/>
-        <Entry Placeholder="Név" Text="{Binding Name, Mode=TwoWay}"/>
-        <Picker ItemsSource="{Binding SubjectList}" SelectedIndex="{Binding Index, Mode=TwoWay}"/>
-        <RadioButton Content="Határidő" IsChecked="{Binding IsDeadline, Mode=TwoWay}" />
-        <DatePicker Date="{Binding Date, Mode=TwoWay}" IsEnabled="{Binding DateEnabled}"/>
-        <Button Text="Mentés" Command="{Binding NewTaskCommand}" CommandParameter="{Binding STask}"/>
+        <Label FontSize="Large" Text="Add a new task"/>
+        <Entry Placeholder="Name" Text="{Binding Name, Mode=TwoWay}"/>
+        <Picker ItemsSource="{Binding SubjectList}" ItemDisplayBinding="{Binding Name}"
+                SelectedIndex="{Binding Index, Mode=TwoWay}"/>
+        <Switch IsToggled="{Binding IsDeadline, Mode=TwoWay}"/>
+        <DatePicker MinimumDate="{Binding DateTimeNow}" Date="{Binding Date, Mode=TwoWay}" IsEnabled="{Binding IsDeadline}"/>
+        <Button Text="Save" Command="{Binding NewTaskCommand}"/>
     </StackLayout>
 </ContentPage>
+    
+    
+    
+    
+    
+    
+    

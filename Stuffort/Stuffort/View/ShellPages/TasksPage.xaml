@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Stuffort.View.ShellPages.TasksPage"
              Shell.TabBarIsVisible="False">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Új feladat"
-                     Command="{Binding TaskCommand}"/>
+                     Command="{Binding TaskCommand}"
+                     CommandParameter="{Binding TaskListCount}"/>
     </ContentPage.ToolbarItems>
     <StackLayout Margin="10">
         <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}">
@@ -21,9 +22,9 @@
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding AddedTime, StringFormat='{0:d}'}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding SubjectName}"/>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Item1}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Item2}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Item4}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
