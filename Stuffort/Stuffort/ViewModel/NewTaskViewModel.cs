@@ -59,8 +59,8 @@ namespace Stuffort.ViewModel
             }
         }
 
-        private DateTimeOffset date;
-        public DateTimeOffset Date
+        private DateTime date;
+        public DateTime Date
         {
             get { return date; }
             set
@@ -69,6 +69,20 @@ namespace Stuffort.ViewModel
                 {
                     date = value;
                     OnPropertyChanged(nameof(Date));
+                }
+            }
+        }
+
+        private TimeSpan datetimespan;
+        public TimeSpan DateTimeSpan
+        {
+            get { return datetimespan; }
+            set
+            {
+                if(value != datetimespan)
+                {
+                    datetimespan = value;
+                    OnPropertyChanged(nameof(DateTimeSpan));
                 }
             }
         }
@@ -126,14 +140,14 @@ namespace Stuffort.ViewModel
                         AppResources.ResourceManager.GetString("InvalidSelectedSubject"), "Ok");
                     return;
                 }
-
+                DateTime dt = new DateTime(Date.Ticks).Add(DateTimeSpan);
                 STask Stask = new STask()
                 {
                     Name = Name,
                     IsDeadline = IsDeadline,
                     IsDone = false,
                     AddedTime = DateTimeOffset.Now,
-                    DeadLine = Date,
+                    DeadLine = dt,
                     SubjectID = SubjectList[Index].ID,
                     SubjectName = SubjectList[Index].Name
                 };

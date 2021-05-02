@@ -12,6 +12,7 @@ using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using Stuffort.Resources;
 
 namespace Stuffort.ViewModel
 {
@@ -21,6 +22,11 @@ namespace Stuffort.ViewModel
         public AsyncCommand SubjectRefreshCommand { get; }
         public SubjectRemoveCommand SubjectRemoveCommand { get; set; }
         public ObservableCollection<Subject> SubjectList { get; set; }
+
+        public string CurrentTitle
+        {
+            get { return AppResources.ResourceManager.GetString("SubjectsPage"); }
+        }
 
         private bool isrefreshing;
 

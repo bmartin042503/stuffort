@@ -37,7 +37,14 @@ namespace Stuffort.ViewModel.Commands
             ConfigurationServices.SaveConfigurationFile(ConfigurationType);
             if (MainViewModel.AtSettingsPage == true)
                 App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"), 
-                    $"{AppResources.ResourceManager.GetString("LanguageSetTo")} {picker.SelectedItem as string}! {AppResources.ResourceManager.GetString("NeedReload")}", "Ok");
+                    $"{AppResources.ResourceManager.GetString("LanguageSetTo")} {picker.SelectedItem as string} \n{AppResources.ResourceManager.GetString("NeedReload")}", "Ok");
+            var items = Shell.Current.Items;
+            foreach(var item in items)
+            {
+                if (item.Route == "LoginPage")
+                    continue;
+                item.Title = AppResources.ResourceManager.GetString(item.Route);
+            }
             MainViewModel.NavigateToHomepage();
         }
     }

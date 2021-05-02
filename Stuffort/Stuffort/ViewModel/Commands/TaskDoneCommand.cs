@@ -10,7 +10,11 @@ namespace Stuffort.ViewModel.Commands
 {
     public class TaskDoneCommand : ICommand
     {
-
+        public TasksViewModel TasksViewModel;
+        public TaskDoneCommand(TasksViewModel tvm)
+        {
+            this.TasksViewModel = tvm;
+        }
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -24,17 +28,17 @@ namespace Stuffort.ViewModel.Commands
             if(selectedItem.IsDone == false)
             {
                 selectedItem.IsDone = true;
-                await STaskServices.UpdateTask(selectedItem);
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                     AppResources.ResourceManager.GetString("TaskCompleted"), "Ok");
             }
             else
             {
                 selectedItem.IsDone = false;
-                await STaskServices.UpdateTask(selectedItem);
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                     AppResources.ResourceManager.GetString("TaskUncompleted"), "Ok");
             }
+            await STaskServices.UpdateTask(selectedItem);
+            await TasksViewModel.Refresh();
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Stuffort.ViewModel
             TaskCommand = new AsyncCommand(NavigateToNewTask);
             TaskRemoveCommand = new TaskRemoveCommand(this);
             TaskRefreshCommand = new AsyncCommand(Refresh);
-            this.TaskDoneCommand = new TaskDoneCommand();
+            this.TaskDoneCommand = new TaskDoneCommand(this);
             TaskList = new ObservableCollection<STask>();
         }
 

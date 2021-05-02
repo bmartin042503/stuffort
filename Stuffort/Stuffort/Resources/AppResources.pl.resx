@@ -129,6 +129,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="ContactPage" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Ostateczny termin</value>
   </data>
@@ -201,10 +204,16 @@
   <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
+  <data name="SettingsPage" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
   <data name="Soon" xml:space="preserve">
     <value>Wkrótce</value>
   </data>
   <data name="Stats" xml:space="preserve">
+    <value>Statystyka</value>
+  </data>
+  <data name="StatsPage" xml:space="preserve">
     <value>Statystyka</value>
   </data>
   <data name="Status" xml:space="preserve">
@@ -219,11 +228,14 @@
   <data name="Subjects" xml:space="preserve">
     <value>Tematy</value>
   </data>
+  <data name="SubjectsPage" xml:space="preserve">
+    <value>Tematy</value>
+  </data>
   <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
     <value>Subject has been successfully deleted!</value>
   </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
-    <value>Subject has been successfully saved!\nSubject name:</value>
+    <value>Subject has been successfully saved! Subject name:</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Sukces</value>
@@ -243,11 +255,14 @@
   <data name="Tasks" xml:space="preserve">
     <value>Zadania</value>
   </data>
+  <data name="TasksPage" xml:space="preserve">
+    <value>Zadania</value>
+  </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">
     <value>Task has been successfully deleted!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>Task has been successfully saved!\nTask name:</value>
+    <value>Task has been successfully saved! Task name:</value>
   </data>
   <data name="TaskUncompleted" xml:space="preserve">
     <value>You've set this task as Uncompleted.</value>

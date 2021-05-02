@@ -9,23 +9,23 @@
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
     </ShellItem>
 
-    <FlyoutItem Title="Subjects" Route="SubjectsPage" Icon="ic_action_collections_bookmark.png">
+    <FlyoutItem Title="{x:Static resx:AppResources.SubjectsPage}" Route="SubjectsPage" Icon="ic_action_collections_bookmark.png">
         <ShellContent ContentTemplate="{DataTemplate local:SubjectsPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Tasks" Route="TasksPage" Icon="ic_action_book.png">
+    <FlyoutItem Title="{x:Static resx:AppResources.TasksPage}" Route="TasksPage" Icon="ic_action_book.png">
         <ShellContent ContentTemplate="{DataTemplate local:TasksPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Stats" Route="StatsPage" Icon="ic_action_assessment.png">
+    <FlyoutItem Title="{x:Static resx:AppResources.StatsPage}" Route="StatsPage" Icon="ic_action_assessment.png">
         <ShellContent ContentTemplate="{DataTemplate local:StatsPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Contact" Route="ContactPage" Icon="ic_action_info.png">
+    <FlyoutItem Title="{x:Static resx:AppResources.ContactPage}" Route="ContactPage" Icon="ic_action_info.png">
         <ShellContent ContentTemplate="{DataTemplate local:ContactPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Settings" Route="SettingsPage" Icon="ic_action_settings">
+    <FlyoutItem Title="{x:Static resx:AppResources.SettingsPage}" Route="SettingsPage" Icon="ic_action_settings">
         <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
     </FlyoutItem>
 </Shell>

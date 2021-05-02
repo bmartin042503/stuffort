@@ -97,6 +97,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        internal static string ContactPage {
+            get {
+                return ResourceManager.GetString("ContactPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deadline:.
         /// </summary>
         internal static string Deadline {
@@ -313,6 +322,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsPage {
+            get {
+                return ResourceManager.GetString("SettingsPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soon.
         /// </summary>
         internal static string Soon {
@@ -327,6 +345,15 @@ namespace Stuffort.Resources {
         internal static string Stats {
             get {
                 return ResourceManager.GetString("Stats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        internal static string StatsPage {
+            get {
+                return ResourceManager.GetString("StatsPage", resourceCulture);
             }
         }
         
@@ -367,6 +394,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subjects.
+        /// </summary>
+        internal static string SubjectsPage {
+            get {
+                return ResourceManager.GetString("SubjectsPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject has been successfully deleted!.
         /// </summary>
         internal static string SubjectSuccessfullyDeleted {
@@ -376,7 +412,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subject has been successfully saved!\nSubject name:.
+        ///   Looks up a localized string similar to Subject has been successfully saved! Subject name:.
         /// </summary>
         internal static string SubjectSuccessfullySaved {
             get {
@@ -439,6 +475,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tasks.
+        /// </summary>
+        internal static string TasksPage {
+            get {
+                return ResourceManager.GetString("TasksPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task has been successfully deleted!.
         /// </summary>
         internal static string TaskSuccessfullyDeleted {
@@ -448,7 +493,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task has been successfully saved!\nTask name:.
+        ///   Looks up a localized string similar to Task has been successfully saved! Task name:.
         /// </summary>
         internal static string TaskSuccessfullySaved {
             get {

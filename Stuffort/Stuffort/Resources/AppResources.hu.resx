@@ -129,6 +129,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Kapcsolat</value>
   </data>
+  <data name="ContactPage" xml:space="preserve">
+    <value>Kapcsolat</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Határidő:</value>
   </data>
@@ -201,10 +204,16 @@
   <data name="Settings" xml:space="preserve">
     <value>Beállítások</value>
   </data>
+  <data name="SettingsPage" xml:space="preserve">
+    <value>Beállítások</value>
+  </data>
   <data name="Soon" xml:space="preserve">
     <value>Hamarosan</value>
   </data>
   <data name="Stats" xml:space="preserve">
+    <value>Statisztika</value>
+  </data>
+  <data name="StatsPage" xml:space="preserve">
     <value>Statisztika</value>
   </data>
   <data name="Status" xml:space="preserve">
@@ -217,6 +226,9 @@
     <value>Hiba történt a tantárgy mentése során!</value>
   </data>
   <data name="Subjects" xml:space="preserve">
+    <value>Tantárgyak</value>
+  </data>
+  <data name="SubjectsPage" xml:space="preserve">
     <value>Tantárgyak</value>
   </data>
   <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
@@ -241,6 +253,9 @@
     <value>Legalább egy tantárgynak kell lennie ahhoz, hogy új feladatot hozz létre!</value>
   </data>
   <data name="Tasks" xml:space="preserve">
+    <value>Feladatok</value>
+  </data>
+  <data name="TasksPage" xml:space="preserve">
     <value>Feladatok</value>
   </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">

@@ -1,6 +1,7 @@
 ﻿using Stuffort.Resources;
 using Stuffort.View;
 using Stuffort.View.ShellPages;
+using Stuffort.Configuration;
 using System;
 using System.Globalization;
 using System.Resources;
@@ -14,15 +15,25 @@ namespace Stuffort
         public static string DatabaseLocation = string.Empty;
         public App()
         {
-            CultureInfo language = new CultureInfo("pl");
-            AppResources.Culture = language;
             InitializeComponent();
-
             MainPage = new AppShell();
         }
 
         public App(string location)
         {
+            ConfigurationType ct = ConfigurationServices.GetConfigurationData();
+            if(ct.Language != "undefined")
+            {
+                CultureInfo language = new CultureInfo(ct.Language);
+                Thread.CurrentThread.CurrentUICulture = language;
+                AppResources.Culture = language;
+            }
+            else
+            {
+                string language = Thread.CurrentThread.CurrentUICulture.Name;
+                CultureInfo lang = new CultureInfo(language.Substring(0,2));
+                AppResources.Culture = lang;
+            }
             InitializeComponent();
             DatabaseLocation = location;
             Xamarin.Essentials.VersionTracking.Track();
