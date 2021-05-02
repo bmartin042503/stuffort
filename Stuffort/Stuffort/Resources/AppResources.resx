@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChooseSubject" xml:space="preserve">
+    <value>Subject:</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Deadline:</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -143,6 +149,9 @@
   </data>
   <data name="NewSubjectPage" xml:space="preserve">
     <value>New subject</value>
+  </data>
+  <data name="NewTaskPage" xml:space="preserve">
+    <value>New task</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>

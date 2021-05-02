@@ -14,6 +14,12 @@
                 <Setter Property="TextColor" Value="{x:StaticResource stuffortBlue}"/>
                 <Setter Property="BorderWidth" Value="2.5"/>
             </Style>
+            <Style x:Key="flexLayout" TargetType="FlexLayout">
+                <Setter Property="Margin" Value="20,0"/>
+                <Setter Property="AlignItems" Value="Center"/>
+                <Setter Property="JustifyContent" Value="Center"/>
+                <Setter Property="Direction" Value="Column"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

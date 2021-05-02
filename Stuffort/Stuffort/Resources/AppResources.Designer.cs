@@ -61,11 +61,29 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subject:.
+        /// </summary>
+        internal static string ChooseSubject {
+            get {
+                return ResourceManager.GetString("ChooseSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         internal static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deadline:.
+        /// </summary>
+        internal static string Deadline {
+            get {
+                return ResourceManager.GetString("Deadline", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace Stuffort.Resources {
         internal static string NewSubjectPage {
             get {
                 return ResourceManager.GetString("NewSubjectPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New task.
+        /// </summary>
+        internal static string NewTaskPage {
+            get {
+                return ResourceManager.GetString("NewTaskPage", resourceCulture);
             }
         }
         
