@@ -166,7 +166,10 @@
     <value>Name is empty!</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
-    <value>Name must between 5-120 characters!</value>
+    <value>Name must between 3-120 characters!</value>
+  </data>
+  <data name="NeedReload" xml:space="preserve">
+    <value>You may need to reload the app!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>New subject</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="NewTaskPage" xml:space="preserve">
     <value>New task</value>
+  </data>
+  <data name="NewVersion" xml:space="preserve">
+    <value>New version</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>

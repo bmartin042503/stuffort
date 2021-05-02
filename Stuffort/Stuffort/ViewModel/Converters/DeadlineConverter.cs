@@ -16,7 +16,7 @@ namespace Stuffort.ViewModel.Converters
                 return AppResources.ResourceManager.GetString("NoDeadline");
             else
             {
-                return $"{AppResources.ResourceManager.GetString("Deadline")} {dTime:g}";
+                return $"{AppResources.ResourceManager.GetString("Deadline")} {dTime:d}";
             }
         }
 

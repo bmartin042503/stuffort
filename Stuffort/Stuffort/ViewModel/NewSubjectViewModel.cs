@@ -51,7 +51,7 @@ namespace Stuffort.ViewModel
                     return;
                 }
 
-                if (Name.Length > 120 || Name.Length < 5)
+                if (Name.Length > 120 || Name.Length < 3)
                 {
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");

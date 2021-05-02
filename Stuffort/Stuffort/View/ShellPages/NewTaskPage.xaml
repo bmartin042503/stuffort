@@ -18,7 +18,7 @@
             </Grid.ColumnDefinitions>
             <Label FontSize="17.5" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="0,10" Text="{x:Static resx:AppResources.ChooseSubject}"/>
             <Picker Grid.Row="0" HorizontalOptions="End" Grid.Column="1" ItemsSource="{Binding SubjectList}" ItemDisplayBinding="{Binding Name}"
-                SelectedIndex="{Binding Index, Mode=TwoWay}"/>
+               MinimumWidthRequest="60" SelectedIndex="{Binding Index, Mode=TwoWay}"/>
             <Label FontSize="17.5" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{x:Static resx:AppResources.Deadline}"/>
             <Switch Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" Margin="0,10" IsToggled="{Binding IsDeadline, Mode=TwoWay}"/>
         </Grid>

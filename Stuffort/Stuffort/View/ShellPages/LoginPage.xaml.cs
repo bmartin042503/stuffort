@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 using System.Globalization;
 using Stuffort.Resources;
 using Stuffort.Model;
+using Xamarin.Essentials;
 
 [assembly: ExportFont("Dosis-Book.ttf", Alias = "Dosis")]
 
@@ -25,8 +26,9 @@ namespace Stuffort.View.ShellPages
         public LoginPage()
         {
             InitializeComponent();
-            File.Delete(ConfigurationServices.FilePath);
-            //File.debugDelete(App.DatabaseLocation);
+            //File.Delete(ConfigurationServices.FilePath);
+            //File.Delete(App.DatabaseLocation);
+            loginPageVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
             ConfType = ConfigurationServices.GetConfigurationData();
             var name = this.GetType().Name;
             MainViewModel = new MainViewModel(ConfType, languagePicker, name);

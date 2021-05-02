@@ -166,7 +166,10 @@
     <value>A név üres!</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
-    <value>A név 5-120 karakter közötti hosszúságú lehet!</value>
+    <value>A név 3-120 karakter közötti hosszúságú lehet!</value>
+  </data>
+  <data name="NeedReload" xml:space="preserve">
+    <value>A változások az újraindítást követően lesznek érvényben.</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>Új tantárgy</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="NewTaskPage" xml:space="preserve">
     <value>Új feladat hozzáadása</value>
+  </data>
+  <data name="NewVersion" xml:space="preserve">
+    <value>Új verzió</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Tovább</value>

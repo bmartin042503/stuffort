@@ -205,11 +205,20 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name must between 5-120 characters!.
+        ///   Looks up a localized string similar to Name must between 3-120 characters!.
         /// </summary>
         internal static string NameLengthOverFlow {
             get {
                 return ResourceManager.GetString("NameLengthOverFlow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You may need to reload the app!.
+        /// </summary>
+        internal static string NeedReload {
+            get {
+                return ResourceManager.GetString("NeedReload", resourceCulture);
             }
         }
         
@@ -237,6 +246,15 @@ namespace Stuffort.Resources {
         internal static string NewTaskPage {
             get {
                 return ResourceManager.GetString("NewTaskPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New version.
+        /// </summary>
+        internal static string NewVersion {
+            get {
+                return ResourceManager.GetString("NewVersion", resourceCulture);
             }
         }
         

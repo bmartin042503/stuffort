@@ -166,7 +166,10 @@
     <value>Imię jest puste</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
-    <value>Nazwa musi zawierać od 5 do 120 znaków!</value>
+    <value>Nazwa musi zawierać od 3 do 120 znaków!</value>
+  </data>
+  <data name="NeedReload" xml:space="preserve">
+    <value>You may need to reload the app!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>Nowy temat</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="NewTaskPage" xml:space="preserve">
     <value>New task</value>
+  </data>
+  <data name="NewVersion" xml:space="preserve">
+    <value>Nowa wersja</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Kolejny</value>

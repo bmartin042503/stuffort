@@ -35,6 +35,6 @@
                 CommandParameter="{Binding LanguagePicker}"/>
             </Grid>
         </StackLayout>
-        <Label Text="Stuffort V1.0" TextColor="{x:StaticResource stuffortWhite}"/>
+        <Label x:Name="loginPageVersion" TextColor="{x:StaticResource stuffortWhite}"/>
     </FlexLayout>
 </ContentPage>

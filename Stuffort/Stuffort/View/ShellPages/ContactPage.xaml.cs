@@ -17,6 +17,8 @@ namespace Stuffort.View.ShellPages
         {
             InitializeComponent();
             labelVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
+            if (VersionTracking.IsFirstLaunchForCurrentBuild)
+                labelVersion.Text = $"{AppResources.ResourceManager.GetString("NewVersion")}: {labelVersion.Text}";
         }
     }
 }
