@@ -15157,7 +15157,7 @@ namespace Stuffort.Droid
 			public const int ic_action_delete = 2131165298;
 			
 			// aapt resource value: 0x7F070073
-			public const int ic_action_info_outline = 2131165299;
+			public const int ic_action_info = 2131165299;
 			
 			// aapt resource value: 0x7F070074
 			public const int ic_action_settings = 2131165300;

@@ -24,7 +24,7 @@ namespace Stuffort.Model
         public bool IsDone { get; set; }
 
         public bool IsDeadline { get; set; }
-        public DateTime DeadLine { get; set; }
-        public DateTime AddedTime { get; set; }
+        public DateTimeOffset DeadLine { get; set; }
+        public DateTimeOffset AddedTime { get; set; }
     }
 }

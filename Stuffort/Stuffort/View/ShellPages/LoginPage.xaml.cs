@@ -25,10 +25,11 @@ namespace Stuffort.View.ShellPages
         public LoginPage()
         {
             InitializeComponent();
-            //File.Delete(ConfigurationServices.FilePath);
-            //File.Delete(App.DatabaseLocation);
+            File.Delete(ConfigurationServices.FilePath);
+            //File.debugDelete(App.DatabaseLocation);
             ConfType = ConfigurationServices.GetConfigurationData();
-            MainViewModel = new MainViewModel(ConfType, languagePicker);
+            var name = this.GetType().Name;
+            MainViewModel = new MainViewModel(ConfType, languagePicker, name);
             languageSelectionStackLayout.BindingContext = MainViewModel;
             if (ConfType.Language == "undefined")
             {

@@ -16,6 +16,6 @@ namespace Stuffort.Model
         [MaxLength(50)]
         public string Name { get; set; }
 
-        public DateTime AddedTime { get; set; }
+        public DateTimeOffset AddedTime { get; set; }
     }
 }

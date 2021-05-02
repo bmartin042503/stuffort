@@ -59,8 +59,8 @@ namespace Stuffort.ViewModel
             }
         }
 
-        private DateTime date;
-        public DateTime Date
+        private DateTimeOffset date;
+        public DateTimeOffset Date
         {
             get { return date; }
             set
@@ -80,7 +80,7 @@ namespace Stuffort.ViewModel
             SubjectList = new ObservableCollection<Subject>();
             InitializeSubjectList();
             DateTimeNow = DateTime.Now;
-            this.Index = 1;
+            this.Index = 0;
             NewTaskCommand = new AsyncCommand(SaveTask);
         }
 
@@ -120,18 +120,25 @@ namespace Stuffort.ViewModel
                     return;
                 }
 
+                if(SubjectList[Index] == null)
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("InvalidSelectedSubject"), "Ok");
+                    return;
+                }
+
                 STask Stask = new STask()
                 {
                     Name = Name,
                     IsDeadline = IsDeadline,
                     IsDone = false,
-                    AddedTime = DateTime.Now,
+                    AddedTime = DateTimeOffset.Now,
                     DeadLine = Date,
                     SubjectID = SubjectList[Index].ID,
                     SubjectName = SubjectList[Index].Name
                 };
                 if (IsDeadline == false)
-                    Stask.DeadLine = new DateTime(1900, 1, 1);
+                    Stask.DeadLine = new DateTimeOffset(new DateTime(1900,1,1));
                 int rows;
                 rows = await STaskServices.AddTask(Stask);
                 if (rows > 0)

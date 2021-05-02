@@ -61,11 +61,29 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All rights reserved ©.
+        /// </summary>
+        internal static string AllRightsReserved {
+            get {
+                return ResourceManager.GetString("AllRightsReserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject:.
         /// </summary>
         internal static string ChooseSubject {
             get {
                 return ResourceManager.GetString("ChooseSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        internal static string Completed {
+            get {
+                return ResourceManager.GetString("Completed", resourceCulture);
             }
         }
         
@@ -97,6 +115,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Developer: Martin Bartos.
+        /// </summary>
+        internal static string Developer {
+            get {
+                return ResourceManager.GetString("Developer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -111,6 +138,51 @@ namespace Stuffort.Resources {
         internal static string ErrorMessage {
             get {
                 return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours ago.
+        /// </summary>
+        internal static string HoursAgo {
+            get {
+                return ResourceManager.GetString("HoursAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected subject is invalid!.
+        /// </summary>
+        internal static string InvalidSelectedSubject {
+            get {
+                return ResourceManager.GetString("InvalidSelectedSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language:.
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language has been set to: .
+        /// </summary>
+        internal static string LanguageSetTo {
+            get {
+                return ResourceManager.GetString("LanguageSetTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes ago.
+        /// </summary>
+        internal static string MinutesAgo {
+            get {
+                return ResourceManager.GetString("MinutesAgo", resourceCulture);
             }
         }
         
@@ -178,6 +250,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No deadline.
+        /// </summary>
+        internal static string NoDeadline {
+            get {
+                return ResourceManager.GetString("NoDeadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
         internal static string Rename {
@@ -196,11 +277,29 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Beállítások.
+        ///   Looks up a localized string similar to seconds ago.
+        /// </summary>
+        internal static string SecondsAgo {
+            get {
+                return ResourceManager.GetString("SecondsAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soon.
+        /// </summary>
+        internal static string Soon {
+            get {
+                return ResourceManager.GetString("Soon", resourceCulture);
             }
         }
         
@@ -210,6 +309,15 @@ namespace Stuffort.Resources {
         internal static string Stats {
             get {
                 return ResourceManager.GetString("Stats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status:.
+        /// </summary>
+        internal static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
@@ -268,6 +376,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve set this task as Completed. Congratulations!.
+        /// </summary>
+        internal static string TaskCompleted {
+            get {
+                return ResourceManager.GetString("TaskCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error has occured while deleting the task!.
         /// </summary>
         internal static string TaskErrorWhileDeleting {
@@ -322,11 +439,47 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve set this task as Uncompleted..
+        /// </summary>
+        internal static string TaskUncompleted {
+            get {
+                return ResourceManager.GetString("TaskUncompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncompleted.
+        /// </summary>
+        internal static string Uncompleted {
+            get {
+                return ResourceManager.GetString("Uncompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version:.
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please choose a language!.
         /// </summary>
         internal static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yesterday.
+        /// </summary>
+        internal static string Yesterday {
+            get {
+                return ResourceManager.GetString("Yesterday", resourceCulture);
             }
         }
     }

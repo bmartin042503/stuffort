@@ -117,20 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Minden jog fenntartva ©</value>
+  </data>
+  <data name="ChooseSubject" xml:space="preserve">
+    <value>Tantárgy:</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Teljesítve</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Kapcsolat</value>
   </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Határidő:</value>
+  </data>
   <data name="Delete" xml:space="preserve">
-    <value>Törlés</value>
+    <value>Törlés:</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Fejlesztő: Bartos Martin</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Hiba</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Hiba üzenet:</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>órája</value>
+  </data>
+  <data name="InvalidSelectedSubject" xml:space="preserve">
+    <value>A kiválasztott tantárgy nem megfelelő!</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Nyelv:</value>
+  </data>
+  <data name="LanguageSetTo" xml:space="preserve">
+    <value>A nyelv a következőre átállítva:</value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>perce</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Név</value>
   </data>
   <data name="NameIsEmpty" xml:space="preserve">
     <value>A név üres!</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
-    <value>A név 5-120 karakter lehet!</value>
+    <value>A név 5-120 karakter közötti hosszúságú lehet!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>Új tantárgy</value>
@@ -138,23 +174,56 @@
   <data name="NewSubjectPage" xml:space="preserve">
     <value>Új tantárgy hozzáadása</value>
   </data>
+  <data name="NewTaskPage" xml:space="preserve">
+    <value>Új feladat hozzáadása</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Tovább</value>
+  </data>
+  <data name="NoDeadline" xml:space="preserve">
+    <value>Nincs határidő</value>
   </data>
   <data name="Rename" xml:space="preserve">
     <value>Átnevezés</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Mentés</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>másodperce</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Beállítások</value>
+  </data>
+  <data name="Soon" xml:space="preserve">
+    <value>Hamarosan</value>
   </data>
   <data name="Stats" xml:space="preserve">
     <value>Statisztika</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>Állapot:</value>
+  </data>
+  <data name="SubjectErrorWhileDeleting" xml:space="preserve">
+    <value>Hiba történt a tantárgy törlése során!</value>
+  </data>
+  <data name="SubjectErrorWhileSaving" xml:space="preserve">
+    <value>Hiba történt a tantárgy mentése során!</value>
+  </data>
   <data name="Subjects" xml:space="preserve">
     <value>Tantárgyak</value>
   </data>
+  <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
+    <value>A tantárgy sikeresen törölve!</value>
+  </data>
+  <data name="SubjectSuccessfullySaved" xml:space="preserve">
+    <value>A tantárgy sikeresen elmentve! Tantárgy neve:</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Siker</value>
+  </data>
+  <data name="TaskCompleted" xml:space="preserve">
+    <value>A feladatot megjelölted befejezettnek. Gratulálunk!</value>
   </data>
   <data name="TaskErrorWhileDeleting" xml:space="preserve">
     <value>Hiba történt a feladat törlése során!</value>
@@ -163,18 +232,30 @@
     <value>Hiba történt a feladat mentése során!</value>
   </data>
   <data name="TaskListCountIsZero" xml:space="preserve">
-    <value>Legalább egy tantárgyadnak kell lennie mielőtt hozzáadnál egy új feladatot!</value>
+    <value>Legalább egy tantárgynak kell lennie ahhoz, hogy új feladatot hozz létre!</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>Feladatok</value>
   </data>
-  <data name="TaskSuccessfullyDelete" xml:space="preserve">
-    <value>Feladat törölve!</value>
+  <data name="TaskSuccessfullyDeleted" xml:space="preserve">
+    <value>A feladat sikeresen törölve!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>Sikeresen mentve! Feladat neve:</value>
+    <value>A feladat sikeresen mentve! Feladat neve:</value>
+  </data>
+  <data name="TaskUncompleted" xml:space="preserve">
+    <value>A feladatot befejezetlennek jelölted.</value>
+  </data>
+  <data name="Uncompleted" xml:space="preserve">
+    <value>Befejezetlen</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Verzió:</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Kérlek válaszd ki a megfelelő nyelvet!</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Tegnap</value>
   </data>
 </root>

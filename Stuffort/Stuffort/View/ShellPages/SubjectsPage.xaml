@@ -4,19 +4,27 @@
              x:Class="Stuffort.View.ShellPages.SubjectsPage"
              xmlns:resx="clr-namespace:Stuffort.Resources"
              Shell.TabBarIsVisible="False"
+             xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
              x:Name="subjectsPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding SubjectCommand}"
                      Icon="ic_action_add.png"/>
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeToStringConverter x:Key="dtConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Margin="0,7.5,0,0">
+            <Label HorizontalTextAlignment="Center" Margin="0,0,0,5" FontSize="25" Text="{x:Static resx:AppResources.Subjects}"/>
             <ListView ItemsSource="{Binding SubjectList}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding SubjectRefreshCommand}"
                       IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Name}" 
-                                  Detail="{Binding AddedTime}">
+                                  TextColor="Black"
+                                  Detail="{Binding AddedTime, Converter={StaticResource dtConverter}}">
                             <TextCell.ContextActions>
                                 <MenuItem Text="{x:Static resx:AppResources.Delete}" IconImageSource="ic_action_delete.png" IsDestructive="True" 
                                       Command="{Binding Path=BindingContext.SubjectRemoveCommand, Source={x:Reference subjectsPage}}"

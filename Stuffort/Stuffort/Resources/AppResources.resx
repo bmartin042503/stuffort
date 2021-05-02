@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved ©</value>
+  </data>
   <data name="ChooseSubject" xml:space="preserve">
     <value>Subject:</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
@@ -129,11 +135,29 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Developer: Martin Bartos</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error message:</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>hours ago</value>
+  </data>
+  <data name="InvalidSelectedSubject" xml:space="preserve">
+    <value>The selected subject is invalid!</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="LanguageSetTo" xml:space="preserve">
+    <value>Language has been set to: </value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>minutes ago</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -156,17 +180,29 @@
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="NoDeadline" xml:space="preserve">
+    <value>No deadline</value>
+  </data>
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>seconds ago</value>
+  </data>
   <data name="Settings" xml:space="preserve">
-    <value>Beállítások</value>
+    <value>Settings</value>
+  </data>
+  <data name="Soon" xml:space="preserve">
+    <value>Soon</value>
   </data>
   <data name="Stats" xml:space="preserve">
     <value>Stats</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status:</value>
   </data>
   <data name="SubjectErrorWhileDeleting" xml:space="preserve">
     <value>An error has occured while deleting the subject!</value>
@@ -186,6 +222,9 @@
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="TaskCompleted" xml:space="preserve">
+    <value>You've set this task as Completed. Congratulations!</value>
+  </data>
   <data name="TaskErrorWhileDeleting" xml:space="preserve">
     <value>An error has occured while deleting the task!</value>
   </data>
@@ -204,7 +243,19 @@
   <data name="TaskSuccessfullySaved" xml:space="preserve">
     <value>Task has been successfully saved!\nTask name:</value>
   </data>
+  <data name="TaskUncompleted" xml:space="preserve">
+    <value>You've set this task as Uncompleted.</value>
+  </data>
+  <data name="Uncompleted" xml:space="preserve">
+    <value>Uncompleted</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version:</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Please choose a language!</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
   </data>
 </root>

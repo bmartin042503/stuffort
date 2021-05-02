@@ -117,44 +117,113 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Wszelkie prawa zastrzeżone ©</value>
+  </data>
+  <data name="ChooseSubject" xml:space="preserve">
+    <value>Przedmiot</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Zakończony</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Ostateczny termin</value>
+  </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Kasować</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>Deweloper: Martin Bartos</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Błąd</value>
   </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Komunikat o błędzie:</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>godziny temu</value>
+  </data>
+  <data name="InvalidSelectedSubject" xml:space="preserve">
+    <value>The selected subject is invalid!</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Język:</value>
+  </data>
+  <data name="LanguageSetTo" xml:space="preserve">
+    <value>Language has been set to: </value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>minuty temu</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
   <data name="NameIsEmpty" xml:space="preserve">
-    <value>Imię jest puste!</value>
+    <value>Imię jest puste</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
-    <value>Name must between 5-120 characters!</value>
+    <value>Nazwa musi zawierać od 5 do 120 znaków!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
-    <value>New subject</value>
+    <value>Nowy temat</value>
   </data>
   <data name="NewSubjectPage" xml:space="preserve">
     <value>New subject</value>
   </data>
+  <data name="NewTaskPage" xml:space="preserve">
+    <value>New task</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Kolejny</value>
+  </data>
+  <data name="NoDeadline" xml:space="preserve">
+    <value>No deadline</value>
   </data>
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisać</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>sekundy temu</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
+  <data name="Soon" xml:space="preserve">
+    <value>Wkrótce</value>
+  </data>
   <data name="Stats" xml:space="preserve">
-    <value>Statystyki</value>
+    <value>Statystyka</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="SubjectErrorWhileDeleting" xml:space="preserve">
+    <value>An error has occured while deleting the subject!</value>
+  </data>
+  <data name="SubjectErrorWhileSaving" xml:space="preserve">
+    <value>An error has occured while saving the subject!</value>
   </data>
   <data name="Subjects" xml:space="preserve">
-    <value>Subjects</value>
+    <value>Tematy</value>
+  </data>
+  <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
+    <value>Subject has been successfully deleted!</value>
+  </data>
+  <data name="SubjectSuccessfullySaved" xml:space="preserve">
+    <value>Subject has been successfully saved!\nSubject name:</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Sukces</value>
+  </data>
+  <data name="TaskCompleted" xml:space="preserve">
+    <value>You've set this task as Completed. Congratulations!</value>
   </data>
   <data name="TaskErrorWhileDeleting" xml:space="preserve">
     <value>An error has occured while deleting the task!</value>
@@ -172,9 +241,21 @@
     <value>Task has been successfully deleted!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>Task has been successfully saved! Task name:</value>
+    <value>Task has been successfully saved!\nTask name:</value>
+  </data>
+  <data name="TaskUncompleted" xml:space="preserve">
+    <value>You've set this task as Uncompleted.</value>
+  </data>
+  <data name="Uncompleted" xml:space="preserve">
+    <value>Nieukończone</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Wersja:</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Wybierz język!</value>
+    <value>Please choose a language!</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>wczoraj</value>
   </data>
 </root>

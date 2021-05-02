@@ -4,13 +4,22 @@
              xmlns:resx="clr-namespace:Stuffort.Resources"
              x:Class="Stuffort.View.ShellPages.TasksPage"
              Shell.TabBarIsVisible="False"
+             xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
              x:Name="tasksPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_action_add.png"
                      Command="{Binding TaskCommand}"
                      CommandParameter="{Binding SubjectListCount}"/>
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeToStringConverter x:Key="dtConverter"/>
+            <converters:DeadlineConverter x:Key="dlConverter"/>
+            <converters:IsDoneConverter x:Key="idConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Margin="10">
+        <Label HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,5" Text="{x:Static resx:AppResources.Tasks}"/>
         <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
@@ -26,12 +35,16 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding ID}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding SubjectName}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding AddedTime, Converter={StaticResource dtConverter}}"/>
+                            <Label Grid.Row="1" Grid.Column="1" TextColor="{StaticResource stuffortGreen}" Text="{Binding IsDone, Converter={StaticResource idConverter}}"/>
+                            <Label Grid.Row="0" Grid.Column="1" TextColor="Red" Text="{Binding DeadLine, Converter={StaticResource dlConverter}}"/>
                         </Grid>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="{x:Static resx:AppResources.Delete}" IconImageSource="ic_action_delete.png" IsDestructive="True" 
+                            <MenuItem IconImageSource="ic_action_delete.png" IsDestructive="True" 
                                       Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
+                                      CommandParameter="{Binding .}"/>
+                            <MenuItem IconImageSource="ic_action_check_circle.png"
+                                      Command="{Binding Path=BindingContext.TaskDoneCommand, Source={x:Reference tasksPage}}"
                                       CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
                     </ViewCell>

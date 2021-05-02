@@ -37,6 +37,15 @@ namespace Stuffort.Model
             return rows;
         }
 
+        static public async Task<int> UpdateTask(STask s)
+        {
+            int rows = 0;
+            await Init();
+            rows = await db.UpdateAsync(s);
+            await db.CloseAsync();
+            return rows;
+        }
+
         static public async Task<IEnumerable<STask>> GetTasks()
         {
             await Init();

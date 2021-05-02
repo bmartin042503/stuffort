@@ -35,6 +35,9 @@ namespace Stuffort.ViewModel.Commands
             AppResources.Culture = language;
             ConfigurationType.Language = language.ToString();
             ConfigurationServices.SaveConfigurationFile(ConfigurationType);
+            if (MainViewModel.AtSettingsPage == true)
+                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"), 
+                    $"{AppResources.ResourceManager.GetString("LanguageSetTo")} {picker.SelectedItem as string}", "Ok");
             MainViewModel.NavigateToHomepage();
         }
     }

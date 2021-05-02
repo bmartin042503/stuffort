@@ -60,7 +60,7 @@ namespace Stuffort.ViewModel
 
                 int rows = 0;
                 Subject s = new Subject { Name = this.Name };
-                s.AddedTime = DateTime.Now;
+                s.AddedTime = DateTimeOffset.Now;
                 rows = await SubjectServices.AddSubject(s);
                 if (rows > 0)
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"), 

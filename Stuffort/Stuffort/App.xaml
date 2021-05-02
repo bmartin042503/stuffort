@@ -7,6 +7,9 @@
             <Color x:Key="stuffortBlue">#528fdb</Color>
             <Color x:Key="stuffortDarkBlue">#2e4f78</Color>
             <Color x:Key="stuffortWhite">#FFFFFF</Color>
+            <Color x:Key="stuffortLightGreen">#BBDEA5</Color>
+            <Color x:Key="stuffortGreen">#6AE020</Color>
+            <Color x:Key="stuffortGray">#CBD1D3</Color>
             <Style TargetType="Button">
                 <Setter Property="BorderRadius" Value="20"/>
                 <Setter Property="BorderColor" Value="{x:StaticResource stuffortBlue}"/>
