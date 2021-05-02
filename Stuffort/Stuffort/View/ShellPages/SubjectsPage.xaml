@@ -6,8 +6,8 @@
              Shell.TabBarIsVisible="False"
              x:Name="subjectsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Új tantárgy"
-                     Command="{Binding SubjectCommand}"/>
+        <ToolbarItem Command="{Binding SubjectCommand}"
+                     Icon="ic_action_add.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="0,7.5,0,0">
@@ -18,7 +18,7 @@
                         <TextCell Text="{Binding Name}" 
                                   Detail="{Binding AddedTime}">
                             <TextCell.ContextActions>
-                                <MenuItem Text="{x:Static resx:AppResources.Delete}" IsDestructive="True" 
+                                <MenuItem Text="{x:Static resx:AppResources.Delete}" IconImageSource="ic_action_delete.png" IsDestructive="True" 
                                       Command="{Binding Path=BindingContext.SubjectRemoveCommand, Source={x:Reference subjectsPage}}"
                                       CommandParameter="{Binding .}"/>
                             </TextCell.ContextActions>

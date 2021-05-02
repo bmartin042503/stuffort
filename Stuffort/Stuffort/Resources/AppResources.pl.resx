@@ -135,6 +135,9 @@
   <data name="NewSubject" xml:space="preserve">
     <value>New subject</value>
   </data>
+  <data name="NewSubjectPage" xml:space="preserve">
+    <value>New subject</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Kolejny</value>
   </data>

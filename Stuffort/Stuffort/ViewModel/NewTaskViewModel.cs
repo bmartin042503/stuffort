@@ -104,41 +104,49 @@ namespace Stuffort.ViewModel
 
         public async Task SaveTask()
         {
-            if(string.IsNullOrWhiteSpace(Name) || string.IsNullOrEmpty(Name))
+            try
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"), 
-                    AppResources.ResourceManager.GetString("NameIsEmpty"),"Ok");
-                return;
-            }
+                if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrEmpty(Name))
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
+                    return;
+                }
 
-            if(Name.Length > 120 || Name.Length < 5)
+                if (Name.Length > 120 || Name.Length < 5)
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                    return;
+                }
+
+                STask Stask = new STask()
+                {
+                    Name = Name,
+                    IsDeadline = IsDeadline,
+                    IsDone = false,
+                    AddedTime = DateTime.Now,
+                    DeadLine = Date,
+                    SubjectID = SubjectList[Index].ID,
+                    SubjectName = SubjectList[Index].Name
+                };
+                if (IsDeadline == false)
+                    Stask.DeadLine = new DateTime(1900, 1, 1);
+                int rows;
+                rows = await STaskServices.AddTask(Stask);
+                if (rows > 0)
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                        $"{AppResources.ResourceManager.GetString("TaskSuccessfullySaved")} {Stask.Name}", "Ok");
+                else
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("TaskErrorWhileSaving"), "Ok");
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
-                return;
+                        $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
-
-            STask Stask = new STask()
-            {
-                Name = Name,
-                IsDeadline = IsDeadline,
-                IsDone = false,
-                AddedTime = DateTime.Now,
-                DeadLine = Date,
-                SubjectID = SubjectList[Index].ID,
-                SubjectName = SubjectList[Index].Name
-            };
-            if (IsDeadline == false)
-                Stask.DeadLine = new DateTime(1900,1,1);
-            int rows;
-            rows = await STaskServices.AddTask(Stask);
-            if (rows > 0)
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"), 
-                    $"{AppResources.ResourceManager.GetString("TaskSuccessfullySaved")} {Stask.Name}", "Ok");
-            else
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("TaskErrorWhileSaving"), "Ok");
-            await Shell.Current.GoToAsync("..");
         }
     }
 }

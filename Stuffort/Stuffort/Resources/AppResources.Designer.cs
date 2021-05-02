@@ -88,6 +88,24 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error message:.
+        /// </summary>
+        internal static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name is empty!.
         /// </summary>
         internal static string NameIsEmpty {
@@ -115,6 +133,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New subject.
+        /// </summary>
+        internal static string NewSubjectPage {
+            get {
+                return ResourceManager.GetString("NewSubjectPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next.
         /// </summary>
         internal static string Next {
@@ -129,6 +156,15 @@ namespace Stuffort.Resources {
         internal static string Rename {
             get {
                 return ResourceManager.GetString("Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
@@ -151,11 +187,47 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error has occured while deleting the subject!.
+        /// </summary>
+        internal static string SubjectErrorWhileDeleting {
+            get {
+                return ResourceManager.GetString("SubjectErrorWhileDeleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occured while saving the subject!.
+        /// </summary>
+        internal static string SubjectErrorWhileSaving {
+            get {
+                return ResourceManager.GetString("SubjectErrorWhileSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subjects.
         /// </summary>
         internal static string Subjects {
             get {
                 return ResourceManager.GetString("Subjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject has been successfully deleted!.
+        /// </summary>
+        internal static string SubjectSuccessfullyDeleted {
+            get {
+                return ResourceManager.GetString("SubjectSuccessfullyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject has been successfully saved!\nSubject name:.
+        /// </summary>
+        internal static string SubjectSuccessfullySaved {
+            get {
+                return ResourceManager.GetString("SubjectSuccessfullySaved", resourceCulture);
             }
         }
         
@@ -214,7 +286,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task has been successfully saved! Task name:.
+        ///   Looks up a localized string similar to Task has been successfully saved!\nTask name:.
         /// </summary>
         internal static string TaskSuccessfullySaved {
             get {

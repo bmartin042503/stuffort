@@ -6,7 +6,7 @@
              Shell.TabBarIsVisible="False"
              x:Name="tasksPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Új feladat"
+        <ToolbarItem IconImageSource="ic_action_add.png"
                      Command="{Binding TaskCommand}"
                      CommandParameter="{Binding SubjectListCount}"/>
     </ContentPage.ToolbarItems>
@@ -30,7 +30,7 @@
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding SubjectName}"/>
                         </Grid>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="{x:Static resx:AppResources.Delete}" IsDestructive="True" 
+                            <MenuItem Text="{x:Static resx:AppResources.Delete}" IconImageSource="ic_action_delete.png" IsDestructive="True" 
                                       Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
                                       CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>

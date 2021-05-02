@@ -135,6 +135,9 @@
   <data name="NewSubject" xml:space="preserve">
     <value>Új tantárgy</value>
   </data>
+  <data name="NewSubjectPage" xml:space="preserve">
+    <value>Új tantárgy hozzáadása</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Tovább</value>
   </data>
@@ -148,7 +151,7 @@
     <value>Statisztika</value>
   </data>
   <data name="Subjects" xml:space="preserve">
-    <value>Tanárgyak</value>
+    <value>Tantárgyak</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Siker</value>

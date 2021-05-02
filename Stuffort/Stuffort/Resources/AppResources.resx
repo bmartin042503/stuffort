@@ -126,6 +126,12 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Error message:</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="NameIsEmpty" xml:space="preserve">
     <value>Name is empty!</value>
   </data>
@@ -135,11 +141,17 @@
   <data name="NewSubject" xml:space="preserve">
     <value>New subject</value>
   </data>
+  <data name="NewSubjectPage" xml:space="preserve">
+    <value>New subject</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Beállítások</value>
@@ -147,8 +159,20 @@
   <data name="Stats" xml:space="preserve">
     <value>Stats</value>
   </data>
+  <data name="SubjectErrorWhileDeleting" xml:space="preserve">
+    <value>An error has occured while deleting the subject!</value>
+  </data>
+  <data name="SubjectErrorWhileSaving" xml:space="preserve">
+    <value>An error has occured while saving the subject!</value>
+  </data>
   <data name="Subjects" xml:space="preserve">
     <value>Subjects</value>
+  </data>
+  <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
+    <value>Subject has been successfully deleted!</value>
+  </data>
+  <data name="SubjectSuccessfullySaved" xml:space="preserve">
+    <value>Subject has been successfully saved!\nSubject name:</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
@@ -169,7 +193,7 @@
     <value>Task has been successfully deleted!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>Task has been successfully saved! Task name:</value>
+    <value>Task has been successfully saved!\nTask name:</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Please choose a language!</value>

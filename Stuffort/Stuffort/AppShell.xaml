@@ -3,12 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Stuffort.View.ShellPages"
              xmlns:resx="clr-namespace:Stuffort.Resources"
-             x:Class="Stuffort.AppShell">
+             xmlns:controls="clr-namespace:Stuffort.Controls"
+             x:Class="Stuffort.AppShell"
+             FlyoutBackgroundColor="{x:StaticResource stuffortBlue}"
+             Shell.PresentationMode="Modal"
+             Shell.TabBarBackgroundColor="{x:StaticResource stuffortWhite}"
+             Shell.ForegroundColor="{x:StaticResource stuffortWhite}"
+             Shell.BackgroundColor="{x:StaticResource stuffortBlue}">
+
     <ShellItem Route="LoginPage" FlyoutItemIsVisible="False">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
     </ShellItem>
 
-    <FlyoutItem Title="{x:Static resx:AppResources.Subjects}" Route="SubjectsPage">
+    <FlyoutItem Title="{x:Static resx:AppResources.Subjects}" Route="SubjectsPage" Icon="ic_action_collections_boomark.png">
         <ShellContent ContentTemplate="{DataTemplate local:SubjectsPage}"/>
     </FlyoutItem>
 

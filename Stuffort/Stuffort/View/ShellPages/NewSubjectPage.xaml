@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Stuffort.View.ShellPages.NewSubjectPage"
-             Shell.FlyoutBehavior="Disabled">
-    <StackLayout x:Name="newSubjectStackLayout">
-        <Label Text="Új tantárgy hozzáadása"/>
-        <Entry Placeholder="Név" Text="{Binding Name, Mode=TwoWay}"/>
-        <Button Text="Mentés" Command="{Binding SubjectCommand}"
+             Shell.FlyoutBehavior="Disabled"
+             xmlns:resx="clr-namespace:Stuffort.Resources">
+    <FlexLayout Margin="20,0" AlignItems="Center" JustifyContent="Center" Direction="Column" x:Name="newSubjectStackLayout">
+        <Label Margin="0,0,0,35" Text="{x:Static resx:AppResources.NewSubjectPage}" FontSize="25"/>
+        <Entry Margin="0,0,0,15" Placeholder="{x:Static resx:AppResources.Name}" WidthRequest="200" Text="{Binding Name, Mode=TwoWay}"/>
+        <Button Text="{x:Static resx:AppResources.Save}" HeightRequest="40" WidthRequest="120" Command="{Binding SubjectCommand}"
                 CommandParameter="{Binding Name}"/>
-    </StackLayout>
+    </FlexLayout>
 </ContentPage>

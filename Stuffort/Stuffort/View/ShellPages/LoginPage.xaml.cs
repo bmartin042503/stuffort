@@ -13,6 +13,8 @@ using System.Globalization;
 using Stuffort.Resources;
 using Stuffort.Model;
 
+[assembly: ExportFont("Dosis-Book.ttf", Alias = "Dosis")]
+
 namespace Stuffort.View.ShellPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]

@@ -20,6 +20,7 @@ namespace Stuffort
         {
             InitializeComponent();
             DatabaseLocation = location;
+            Xamarin.Essentials.VersionTracking.Track();
             MainPage = new AppShell();
         }
 
