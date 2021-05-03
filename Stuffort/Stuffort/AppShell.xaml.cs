@@ -14,6 +14,7 @@ namespace Stuffort
         public AppShell()
         {
             InitializeComponent();
+            
             Routing.RegisterRoute(nameof(NewSubjectPage), typeof(NewSubjectPage));
             Routing.RegisterRoute(nameof(NewTaskPage), typeof(NewTaskPage));
         }

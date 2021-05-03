@@ -13,7 +13,7 @@
         <StackLayout>
             <Label Text="{x:Static resx:AppResources.Developer}" Margin="0,40,0,0" HorizontalOptions="Center"/>
             <Label Text="E-mail: bmartin042503@gmail.com" Margin="0,0,0,15" HorizontalOptions="Center"/>
-            <Label Text="{x:Static resx:AppResources.AllRightsReserved}" HorizontalOptions="Center"/>
+            <Label x:Name="allRightsReserved" HorizontalOptions="Center"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

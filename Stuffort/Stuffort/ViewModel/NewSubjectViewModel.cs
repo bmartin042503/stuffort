@@ -64,10 +64,10 @@ namespace Stuffort.ViewModel
                 rows = await SubjectServices.AddSubject(s);
                 if (rows > 0)
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"), 
-                        $"{AppResources.ResourceManager.GetString("SubjectSuccessfullySaved")} {s.Name}", "Ok");
+                        $"{AppResources.ResourceManager.GetString("SubjectSuccessfullySaved")}", "Ok");
                 else
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        $"{AppResources.ResourceManager.GetString("SubjectErrorWhileSaving")} {s.Name}", "Ok");
+                        $"{AppResources.ResourceManager.GetString("SubjectErrorWhileSaving")}", "Ok");
                 await Shell.Current.GoToAsync("..");
             }
             catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),

@@ -16,9 +16,15 @@ namespace Stuffort.View.ShellPages
         public ContactPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             labelVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
             if (VersionTracking.IsFirstLaunchForCurrentBuild)
                 labelVersion.Text = $"{AppResources.ResourceManager.GetString("NewVersion")}: {labelVersion.Text}";
+            allRightsReserved.Text = AppResources.ResourceManager.GetString("AllRightsReserved");
         }
     }
 }

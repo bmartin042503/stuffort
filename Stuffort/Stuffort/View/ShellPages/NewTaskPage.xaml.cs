@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
+using Stuffort.Resources;
 
 namespace Stuffort.View.ShellPages
 {
@@ -21,6 +22,15 @@ namespace Stuffort.View.ShellPages
             InitializeComponent();
             NewTaskViewModel = new NewTaskViewModel();
             BindingContext = NewTaskViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            CurrentTitle.Text = AppResources.ResourceManager.GetString("NewTaskPage");
+            chooseSubjectlbl.Text = AppResources.ResourceManager.GetString("ChooseSubject");
+            deadLinelbl.Text = AppResources.ResourceManager.GetString("Deadline");
+            subjectPicker.Title = AppResources.ResourceManager.GetString("ChooseSubjectImproved");
         }
     }
 }

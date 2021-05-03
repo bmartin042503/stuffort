@@ -123,6 +123,9 @@
   <data name="ChooseSubject" xml:space="preserve">
     <value>Tantárgy:</value>
   </data>
+  <data name="ChooseSubjectImproved" xml:space="preserve">
+    <value>Válassz egy tantárgyat</value>
+  </data>
   <data name="Completed" xml:space="preserve">
     <value>Teljesítve</value>
   </data>
@@ -150,14 +153,14 @@
   <data name="HoursAgo" xml:space="preserve">
     <value>órája</value>
   </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>A dátum nem megfelelő!</value>
+  </data>
   <data name="InvalidSelectedSubject" xml:space="preserve">
     <value>A kiválasztott tantárgy nem megfelelő!</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Nyelv:</value>
-  </data>
-  <data name="LanguageSetTo" xml:space="preserve">
-    <value>A nyelv a következőre átállítva:</value>
   </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>perce</value>
@@ -170,9 +173,6 @@
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
     <value>A név 3-120 karakter közötti hosszúságú lehet!</value>
-  </data>
-  <data name="NeedReload" xml:space="preserve">
-    <value>A változások az újraindítást követően lesznek érvényben.</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>Új tantárgy</value>
@@ -207,6 +207,9 @@
   <data name="SettingsPage" xml:space="preserve">
     <value>Beállítások</value>
   </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>Beállítások mentve!</value>
+  </data>
   <data name="Soon" xml:space="preserve">
     <value>Hamarosan</value>
   </data>
@@ -235,7 +238,7 @@
     <value>A tantárgy sikeresen törölve!</value>
   </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
-    <value>A tantárgy sikeresen elmentve! Tantárgy neve:</value>
+    <value>A tantárgy sikeresen elmentve!</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Siker</value>
@@ -262,7 +265,7 @@
     <value>A feladat sikeresen törölve!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>A feladat sikeresen mentve! Feladat neve:</value>
+    <value>A feladat sikeresen mentve!</value>
   </data>
   <data name="TaskUncompleted" xml:space="preserve">
     <value>A feladatot befejezetlennek jelölted.</value>

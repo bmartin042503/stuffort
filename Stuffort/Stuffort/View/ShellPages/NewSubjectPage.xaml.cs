@@ -1,4 +1,5 @@
-﻿using Stuffort.ViewModel;
+﻿using Stuffort.Resources;
+using Stuffort.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,14 @@ namespace Stuffort.View.ShellPages
             InitializeComponent();
             this.NewSubjectViewModel = new NewSubjectViewModel();
             BindingContext = NewSubjectViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            CurrentTitle.Text = AppResources.ResourceManager.GetString("NewSubjectPage");
+            subjectNameEntry.Placeholder = CurrentTitle.Text = AppResources.ResourceManager.GetString("Name");
+            saveBtn.Text = CurrentTitle.Text = AppResources.ResourceManager.GetString("Save");
         }
     }
 }

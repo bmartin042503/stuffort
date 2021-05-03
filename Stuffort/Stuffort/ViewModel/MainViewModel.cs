@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading;
 using Stuffort.Configuration;
@@ -10,33 +11,35 @@ using Xamarin.Forms;
 
 namespace Stuffort.ViewModel
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
-        public bool AtSettingsPage;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public Picker LanguagePicker { get; set; }
-        public List<string> Languages { get; set; }
+
         public MainPageCommand MainPageCommand { get; set; }
         public MainViewModel(ConfigurationType ct, Picker picker, string name)
         {
             this.MainPageCommand = new MainPageCommand(this, ct);
-            Languages = new List<string>()
+            List<string> Languages = new List<string>()
             {
                 "English", "Magyar", "Polski (beta)"
             };
             LanguagePicker = picker;
-            if (name == "SettingsPage")
-            {
-                AtSettingsPage = true;
-                string language = Thread.CurrentThread.CurrentUICulture.Name;
-                LanguagePicker.SelectedIndex = language == "pl-PL" ? 2 : language == "hu-HU" ? 1 : 0;
-            }
-            else
-                AtSettingsPage = false;
+            LanguagePicker.ItemsSource = Languages;
         }
 
-        public void NavigateToHomepage()
+        public async void NavigateToHomepage()
         {
-            Shell.Current.GoToAsync($"//{nameof(SubjectsPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(SubjectsPage)}");
         }
     }
 }

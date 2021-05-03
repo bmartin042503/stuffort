@@ -19,7 +19,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="10">
-        <Label HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,5" Text="{Binding CurrentTitle}"/>
+        <Label x:Name="CurrentTitle" HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,5"/>
         <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>

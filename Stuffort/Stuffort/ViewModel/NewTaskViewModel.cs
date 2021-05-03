@@ -94,6 +94,8 @@ namespace Stuffort.ViewModel
             SubjectList = new ObservableCollection<Subject>();
             InitializeSubjectList();
             DateTimeNow = DateTime.Now;
+            DateTimeSpan = DateTimeNow.TimeOfDay;
+            Date = DateTimeNow;
             this.Index = 0;
             NewTaskCommand = new AsyncCommand(SaveTask);
         }
@@ -140,14 +142,21 @@ namespace Stuffort.ViewModel
                         AppResources.ResourceManager.GetString("InvalidSelectedSubject"), "Ok");
                     return;
                 }
-                DateTime dt = new DateTime(Date.Ticks).Add(DateTimeSpan);
+                DateTime x = new DateTime(Date.Year, Date.Month, Date.Day, DateTimeSpan.Hours, DateTimeSpan.Minutes, DateTimeSpan.Seconds);
+                DateTime y = DateTime.Now;
+                if (y.Ticks > x.Ticks)
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("InvalidDate"), "Ok");
+                    return;
+                }
                 STask Stask = new STask()
                 {
                     Name = Name,
                     IsDeadline = IsDeadline,
                     IsDone = false,
                     AddedTime = DateTimeOffset.Now,
-                    DeadLine = dt,
+                    DeadLine = x,
                     SubjectID = SubjectList[Index].ID,
                     SubjectName = SubjectList[Index].Name
                 };
@@ -157,7 +166,7 @@ namespace Stuffort.ViewModel
                 rows = await STaskServices.AddTask(Stask);
                 if (rows > 0)
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                        $"{AppResources.ResourceManager.GetString("TaskSuccessfullySaved")} {Stask.Name}", "Ok");
+                        $"{AppResources.ResourceManager.GetString("TaskSuccessfullySaved")}", "Ok");
                 else
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         AppResources.ResourceManager.GetString("TaskErrorWhileSaving"), "Ok");

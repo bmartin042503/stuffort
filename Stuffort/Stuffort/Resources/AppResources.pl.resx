@@ -123,6 +123,9 @@
   <data name="ChooseSubject" xml:space="preserve">
     <value>Przedmiot</value>
   </data>
+  <data name="ChooseSubjectImproved" xml:space="preserve">
+    <value>Wybierz temat</value>
+  </data>
   <data name="Completed" xml:space="preserve">
     <value>Zakończony</value>
   </data>
@@ -150,14 +153,14 @@
   <data name="HoursAgo" xml:space="preserve">
     <value>godziny temu</value>
   </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>Date is invalid!</value>
+  </data>
   <data name="InvalidSelectedSubject" xml:space="preserve">
     <value>The selected subject is invalid!</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Język:</value>
-  </data>
-  <data name="LanguageSetTo" xml:space="preserve">
-    <value>Language has been set to: </value>
   </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>minuty temu</value>
@@ -170,9 +173,6 @@
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
     <value>Nazwa musi zawierać od 3 do 120 znaków!</value>
-  </data>
-  <data name="NeedReload" xml:space="preserve">
-    <value>You may need to reload the app!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>Nowy temat</value>
@@ -207,6 +207,9 @@
   <data name="SettingsPage" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>Ustawienia zapisane!</value>
+  </data>
   <data name="Soon" xml:space="preserve">
     <value>Wkrótce</value>
   </data>
@@ -235,7 +238,7 @@
     <value>Subject has been successfully deleted!</value>
   </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
-    <value>Subject has been successfully saved! Subject name:</value>
+    <value>Subject has been successfully saved!</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Sukces</value>
@@ -262,7 +265,7 @@
     <value>Task has been successfully deleted!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>Task has been successfully saved! Task name:</value>
+    <value>Task has been successfully saved!</value>
   </data>
   <data name="TaskUncompleted" xml:space="preserve">
     <value>You've set this task as Uncompleted.</value>

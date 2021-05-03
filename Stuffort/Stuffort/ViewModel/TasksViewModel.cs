@@ -58,17 +58,6 @@ namespace Stuffort.ViewModel
             TaskList = new ObservableCollection<STask>();
         }
 
-        private string currenttitle;
-        public string CurrentTitle
-        {
-            get { return currenttitle; }
-            set
-            {
-                currenttitle = value;
-                OnPropertyChanged(nameof(CurrentTitle));
-            }
-        }
-
         public async Task Refresh()
         {
             IsRefreshing = true;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Stuffort.Resources;
+using Stuffort.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,12 @@ namespace Stuffort.View.ShellPages
         public StatsPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            CurrentTitle.Text = AppResources.ResourceManager.GetString("Soon");
         }
     }
 }

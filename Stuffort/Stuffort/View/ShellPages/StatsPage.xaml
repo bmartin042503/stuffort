@@ -6,7 +6,7 @@
              Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{x:Static resx:AppResources.Soon}"
+            <Label x:Name="CurrentTitle"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

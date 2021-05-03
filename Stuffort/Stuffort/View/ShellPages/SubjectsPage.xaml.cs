@@ -25,7 +25,7 @@ namespace Stuffort.View.ShellPages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            SubjectsViewModel.CurrentTitle = AppResources.ResourceManager.GetString("SubjectsPage");
+            CurrentTitle.Text = AppResources.ResourceManager.GetString("SubjectsPage");
             await SubjectsViewModel.UpdateSubjects();
         }
     }

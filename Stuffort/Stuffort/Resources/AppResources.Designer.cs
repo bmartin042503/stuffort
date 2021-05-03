@@ -79,6 +79,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a subject.
+        /// </summary>
+        internal static string ChooseSubjectImproved {
+            get {
+                return ResourceManager.GetString("ChooseSubjectImproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed.
         /// </summary>
         internal static string Completed {
@@ -160,6 +169,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date is invalid!.
+        /// </summary>
+        internal static string InvalidDate {
+            get {
+                return ResourceManager.GetString("InvalidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The selected subject is invalid!.
         /// </summary>
         internal static string InvalidSelectedSubject {
@@ -219,15 +237,6 @@ namespace Stuffort.Resources {
         internal static string NameLengthOverFlow {
             get {
                 return ResourceManager.GetString("NameLengthOverFlow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You may need to reload the app!.
-        /// </summary>
-        internal static string NeedReload {
-            get {
-                return ResourceManager.GetString("NeedReload", resourceCulture);
             }
         }
         
@@ -412,7 +421,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Subject has been successfully saved! Subject name:.
+        ///   Looks up a localized string similar to Subject has been successfully saved!.
         /// </summary>
         internal static string SubjectSuccessfullySaved {
             get {
@@ -493,7 +502,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task has been successfully saved! Task name:.
+        ///   Looks up a localized string similar to Task has been successfully saved!.
         /// </summary>
         internal static string TaskSuccessfullySaved {
             get {

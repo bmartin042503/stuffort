@@ -14,7 +14,7 @@
             <Label Text="{x:Static resx:AppResources.Welcome}" HorizontalTextAlignment="Center" Margin="0,0,0,20" 
                    TextColor="{x:StaticResource stuffortWhite}"
                    FontSize="20"/>
-            <Picker x:Name="languagePicker" ItemsSource="{Binding Languages}"
+            <Picker x:Name="languagePicker"
                 HeightRequest="50"
                 TextColor="{x:StaticResource stuffortWhite}"
                 TitleColor="{x:StaticResource stuffortWhite}"/>
