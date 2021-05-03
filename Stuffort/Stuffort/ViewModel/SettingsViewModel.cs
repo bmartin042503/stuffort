@@ -19,7 +19,7 @@ namespace Stuffort.ViewModel
             SettingsCommand = new SettingsCommand(this, ct);
             Languages = new List<string>()
             {
-                "English", "Magyar", "Polski"
+                "English", "Magyar", "Polski (beta)"
             };
             LanguagePicker = picker;
             LanguagePicker.ItemsSource = Languages;
