@@ -135,6 +135,9 @@
   <data name="ContactPage" xml:space="preserve">
     <value>Kapcsolat</value>
   </data>
+  <data name="CountOfTasks" xml:space="preserve">
+    <value>Feladatok száma:</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Határidő:</value>
   </data>

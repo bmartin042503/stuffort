@@ -18,15 +18,16 @@ namespace Stuffort.ViewModel.Converters
                 return $"{dateTimeOffset:d}";
             else
             {
-                if(diff.TotalSeconds < 60)
-                    return $"{diff.TotalSeconds:0} {AppResources.ResourceManager.GetString("SecondsAgo")}";
+                if(dateTimeOffset.Day == dateTimeNow.Day-1)
+                    return AppResources.ResourceManager.GetString("Yesterday");
+                if (diff.TotalSeconds < 60)
+                    return $"({diff.TotalSeconds:0} {AppResources.ResourceManager.GetString("SecondsAgo")})";
                 if (diff.TotalMinutes < 60)
-                    return $"{diff.TotalMinutes:0} {AppResources.ResourceManager.GetString("MinutesAgo")}";
+                    return $"({diff.TotalMinutes:0} {AppResources.ResourceManager.GetString("MinutesAgo")})";
                 if (diff.TotalHours < 24)
-                    return $"{diff.TotalHours:0} {AppResources.ResourceManager.GetString("HoursAgo")}";
-
-                return AppResources.ResourceManager.GetString("Yesterday");
+                    return $"({diff.TotalHours:0} {AppResources.ResourceManager.GetString("HoursAgo")})";
             }
+            return "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

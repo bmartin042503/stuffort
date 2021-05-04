@@ -135,6 +135,9 @@
   <data name="ContactPage" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="CountOfTasks" xml:space="preserve">
+    <value>Number of tasks:</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Deadline:</value>
   </data>

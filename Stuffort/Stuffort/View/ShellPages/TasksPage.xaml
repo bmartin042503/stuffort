@@ -27,32 +27,43 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Padding="10" HasShadow="True" Margin="0,0,0,15" 
+                        <Frame Padding="15" HasShadow="True" Margin="0,0,0,15" 
                                CornerRadius="15" BackgroundColor="{StaticResource stuffortBlue}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="4*"/>
-                                </Grid.ColumnDefinitions>
-                                <Button TextColor="{StaticResource stuffortWhite}" 
-                            Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Text="{Binding Path=Item2, Converter={StaticResource idicConverter}}"
-                            Style="{StaticResource fontButton}" Margin="-10,0,0,0" FontSize="50"/>
-                                <Label Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" Text="{Binding Item1.Name}"/>
-                                <Label Grid.Row="1" Grid.Column="1" TextColor="White" Text="{Binding Item1.SubjectName}"/>
-                                <Label Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1.DeadLine, Converter={StaticResource dlConverter}}"/>
-                            </Grid>
+                            <StackLayout Orientation="Horizontal">
+                                <Grid Margin="5,0,0,0" Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1.3*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="0.75*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.75*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button TextColor="{StaticResource stuffortWhite}" 
+                                        Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" 
+                                        Text="{Binding Path=Item2, Converter={StaticResource idicConverter}}"
+                                        Style="{StaticResource fontButton}" Margin="-10,0,0,0" FontSize="52.75"
+                                        Command="{Binding Path=BindingContext.TaskDoneCommand, Source={x:Reference tasksPage}}" 
+                                        CommandParameter="{Binding Item1}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" Text="{Binding Item1.Name}"/>
+                                    <Label Grid.Row="1" Grid.Column="1" FontSize="15" TextColor="White" Text="{Binding Item1.SubjectName}"/>
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1.DeadLine, Converter={StaticResource dlConverter}}"/>
+                                    <Label Grid.Row="3" Grid.Column="1" TextColor="LightGray" FontSize="12" Text="{Binding Item1.AddedTime, Converter={StaticResource dtConverter}}"/>
+                                </Grid>
+                                <FlexLayout JustifyContent="SpaceBetween" Margin="0,0,-28,0" Direction="Column">
+                                    <Button Margin="0,-5,0,0" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec55;"
+                                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"/>
+                                    <Button Margin="0,0,0,-5" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec53;"
+                                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"/>
+                                </FlexLayout>
+                            </StackLayout>
                         </Frame>
                         <ViewCell.ContextActions>
                             <MenuItem IconImageSource="ic_action_delete.png" IsDestructive="True" 
                                       Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
-                                      CommandParameter="{Binding Item1}"/>
-                            <MenuItem IconImageSource="ic_action_check_circle.png"
-                                      Command="{Binding Path=BindingContext.TaskDoneCommand, Source={x:Reference tasksPage}}"
                                       CommandParameter="{Binding Item1}"/>
                         </ViewCell.ContextActions>
                     </ViewCell>

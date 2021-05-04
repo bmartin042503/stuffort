@@ -26,7 +26,6 @@ namespace Stuffort.View.ShellPages
             };
             languagePicker.SelectedIndex = 0;
             BindingContext = this.SettingsViewModel;
-            languageIconImage.Source = ImageSource.FromResource("Stuffort.Android.Resources.Images.ic_translate.png");
         }
 
         protected override void OnAppearing()

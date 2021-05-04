@@ -7,8 +7,7 @@
              Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout>
-            <FlexLayout Margin="0,0,0,50" Direction="Row" JustifyContent="SpaceEvenly" AlignItems="Center">
-                <Image HeightRequest="60" WidthRequest="60" x:Name="languageIconImage" Aspect="AspectFit" Grid.Row="0" Grid.Column="0"/>
+            <FlexLayout Margin="10,10,0,350" Direction="Row" JustifyContent="SpaceEvenly" AlignItems="Center">
                 <Label x:Name="languageLbl" Margin="-30,0,0,0" FontSize="20" Grid.Row="0" Grid.Column="1"/>
                 <Picker x:Name="languagePicker"
                         TitleColor="Black"

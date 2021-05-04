@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using MvvmHelpers;
+using System.Linq;
 using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
 using System.Runtime.CompilerServices;
@@ -21,7 +21,7 @@ namespace Stuffort.ViewModel
         public AsyncCommand SubjectCommand { get; }
         public AsyncCommand SubjectRefreshCommand { get; }
         public SubjectRemoveCommand SubjectRemoveCommand { get; set; }
-        public ObservableCollection<Subject> SubjectList { get; set; }
+        public ObservableCollection<Tuple<Subject, string>> SubjectList { get; set; }
 
         private bool isrefreshing;
 
@@ -52,7 +52,7 @@ namespace Stuffort.ViewModel
         }
         public SubjectsViewModel()
         {
-            SubjectList = new ObservableCollection<Subject>();
+            SubjectList = new ObservableCollection<Tuple<Subject,string>>();
             SubjectCommand = new AsyncCommand(NavigateToNewSubject);
             SubjectRemoveCommand = new SubjectRemoveCommand(this);
             SubjectRefreshCommand = new AsyncCommand(Refresh);
@@ -68,8 +68,12 @@ namespace Stuffort.ViewModel
         {
             SubjectList.Clear();
             var subjectList = await SubjectServices.GetSubjects();
+            var tasksList = await STaskServices.GetTasks();
             foreach (var subject in subjectList)
-                SubjectList.Add(subject);
+            {
+                var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectName == subject.Name).Count()}");
+                SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
+            }
         }
     }
 }

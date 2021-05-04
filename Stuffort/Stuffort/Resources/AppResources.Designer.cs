@@ -115,6 +115,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of tasks:.
+        /// </summary>
+        internal static string CountOfTasks {
+            get {
+                return ResourceManager.GetString("CountOfTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deadline:.
         /// </summary>
         internal static string Deadline {
