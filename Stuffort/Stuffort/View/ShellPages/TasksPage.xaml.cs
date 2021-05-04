@@ -26,7 +26,7 @@ namespace Stuffort.View.ShellPages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            CurrentTitle.Text = AppResources.ResourceManager.GetString("TasksPage");
+            this.Title = AppResources.ResourceManager.GetString("TasksPage");
             await TasksViewModel.UpdateTasks();
         }
     }

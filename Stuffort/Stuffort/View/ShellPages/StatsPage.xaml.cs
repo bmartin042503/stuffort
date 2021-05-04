@@ -22,6 +22,7 @@ namespace Stuffort.View.ShellPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            this.Title = AppResources.ResourceManager.GetString("StatsPage");
             CurrentTitle.Text = AppResources.ResourceManager.GetString("Soon");
         }
     }

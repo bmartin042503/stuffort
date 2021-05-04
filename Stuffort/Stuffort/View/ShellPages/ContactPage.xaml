@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:Stuffort.Resources"
              x:Class="Stuffort.View.ShellPages.ContactPage"
+             Shell.BackgroundColor="{StaticResource stuffortBlue}"
              Shell.TabBarIsVisible="False">
     <StackLayout>
         <StackLayout>

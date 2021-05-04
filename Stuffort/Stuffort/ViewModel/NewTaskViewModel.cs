@@ -129,7 +129,7 @@ namespace Stuffort.ViewModel
                     return;
                 }
 
-                if (Name.Length > 120 || Name.Length < 5)
+                if (Name.Length > 120 || Name.Length < 3)
                 {
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
@@ -144,7 +144,7 @@ namespace Stuffort.ViewModel
                 }
                 DateTime x = new DateTime(Date.Year, Date.Month, Date.Day, DateTimeSpan.Hours, DateTimeSpan.Minutes, DateTimeSpan.Seconds);
                 DateTime y = DateTime.Now;
-                if (y.Ticks > x.Ticks)
+                if (y.Ticks > x.Ticks && IsDeadline == true)
                 {
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         AppResources.ResourceManager.GetString("InvalidDate"), "Ok");

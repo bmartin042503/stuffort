@@ -4,6 +4,7 @@
              xmlns:resx="clr-namespace:Stuffort.Resources"
              x:Class="Stuffort.View.ShellPages.TasksPage"
              Shell.TabBarIsVisible="False"
+             Shell.BackgroundColor="{StaticResource stuffortBlue}"
              xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
              x:Name="tasksPage">
     <ContentPage.ToolbarItems>
@@ -16,43 +17,43 @@
             <converters:DateTimeToStringConverter x:Key="dtConverter"/>
             <converters:DeadlineConverter x:Key="dlConverter"/>
             <converters:IsDoneConverter x:Key="idConverter"/>
+            <converters:IsDoneToIconConverter x:Key="idicConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="10">
-        <Label x:Name="CurrentTitle" HorizontalTextAlignment="Center" FontSize="25" Margin="0,0,0,5"/>
+    <StackLayout Margin="15, 17.5, 15, 0">
         <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
+                  HasUnevenRows="True"
                   RefreshCommand="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0">
-                                <Label.Text>
-                                    <MultiBinding StringFormat="{}{0} ({1})">
-                                        <Binding Path="Name"/>
-                                        <Binding Path="SubjectName"/>
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
-                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding AddedTime, Converter={StaticResource dtConverter}}"/>
-                            <Label Grid.Row="1" Grid.Column="1" TextColor="{StaticResource stuffortGreen}" Text="{Binding IsDone, Converter={StaticResource idConverter}}"/>
-                            <Label Grid.Row="0" Grid.Column="1" TextColor="Red" Text="{Binding DeadLine, Converter={StaticResource dlConverter}}"/>
-                        </Grid>
+                        <Frame Padding="10" HasShadow="True" Margin="0,0,0,15" 
+                               CornerRadius="15" BackgroundColor="{StaticResource stuffortBlue}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button TextColor="{StaticResource stuffortWhite}" 
+                            Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Text="{Binding Path=Item2, Converter={StaticResource idicConverter}}"
+                            Style="{StaticResource fontButton}" Margin="-10,0,0,0" FontSize="50"/>
+                                <Label Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" Text="{Binding Item1.Name}"/>
+                                <Label Grid.Row="1" Grid.Column="1" TextColor="White" Text="{Binding Item1.SubjectName}"/>
+                                <Label Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1.DeadLine, Converter={StaticResource dlConverter}}"/>
+                            </Grid>
+                        </Frame>
                         <ViewCell.ContextActions>
                             <MenuItem IconImageSource="ic_action_delete.png" IsDestructive="True" 
                                       Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
-                                      CommandParameter="{Binding .}"/>
+                                      CommandParameter="{Binding Item1}"/>
                             <MenuItem IconImageSource="ic_action_check_circle.png"
                                       Command="{Binding Path=BindingContext.TaskDoneCommand, Source={x:Reference tasksPage}}"
-                                      CommandParameter="{Binding .}"/>
+                                      CommandParameter="{Binding Item1}"/>
                         </ViewCell.ContextActions>
                     </ViewCell>
                 </DataTemplate>

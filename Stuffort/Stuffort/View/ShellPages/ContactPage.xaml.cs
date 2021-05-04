@@ -21,6 +21,7 @@ namespace Stuffort.View.ShellPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            this.Title = AppResources.ResourceManager.GetString("ContactPage");
             labelVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
             if (VersionTracking.IsFirstLaunchForCurrentBuild)
                 labelVersion.Text = $"{AppResources.ResourceManager.GetString("NewVersion")}: {labelVersion.Text}";

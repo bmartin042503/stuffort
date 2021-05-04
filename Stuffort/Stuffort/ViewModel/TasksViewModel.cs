@@ -46,7 +46,7 @@ namespace Stuffort.ViewModel
         public TaskDoneCommand TaskDoneCommand { get; set; }
 
         public int SubjectListCount { get; set; }
-        public ObservableCollection<STask> TaskList { get; set; }
+        public ObservableCollection<Tuple<STask, STask>> TaskList { get; set; }
 
         public TasksViewModel()
         {
@@ -55,7 +55,7 @@ namespace Stuffort.ViewModel
             TaskRemoveCommand = new TaskRemoveCommand(this);
             TaskRefreshCommand = new AsyncCommand(Refresh);
             this.TaskDoneCommand = new TaskDoneCommand(this);
-            TaskList = new ObservableCollection<STask>();
+            TaskList = new ObservableCollection<Tuple<STask, STask>>();
         }
 
         public async Task Refresh()
@@ -72,7 +72,7 @@ namespace Stuffort.ViewModel
             var subjects = await SubjectServices.GetSubjects();
             foreach(var task in tasks)
             {
-                TaskList.Add(task);
+                TaskList.Add(new Tuple<STask, STask>(task, task));
             }
             SubjectListCount = (subjects as List<Subject>).Count;
         }

@@ -26,13 +26,13 @@ namespace Stuffort.View.ShellPages
             };
             languagePicker.SelectedIndex = 0;
             BindingContext = this.SettingsViewModel;
-            languageIconImage.Source = ImageSource.FromResource("Stuffort.Resources.Images.ic_translate.png");
+            languageIconImage.Source = ImageSource.FromResource("Stuffort.Android.Resources.Images.ic_translate.png");
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            CurrentTitle.Text = AppResources.ResourceManager.GetString("SettingsPage");
+            this.Title = AppResources.ResourceManager.GetString("SettingsPage");
             saveBtn.Text = AppResources.ResourceManager.GetString("Save");
             languageLbl.Text = AppResources.ResourceManager.GetString("Language");
         }

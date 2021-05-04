@@ -29,10 +29,10 @@ namespace Stuffort.ViewModel.Commands
             int rows = await SubjectServices.RemoveSubject(selectedItem);
             if (rows > 0)
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                    $"{AppResources.ResourceManager.GetString("TaskSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
+                    $"{AppResources.ResourceManager.GetString("SubjectSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
             else
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    $"{AppResources.ResourceManager.GetString("TaskErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
+                    $"{AppResources.ResourceManager.GetString("SubjectErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
             await SubjectsViewModel.UpdateSubjects();
         }
     }

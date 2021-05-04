@@ -25,6 +25,7 @@ namespace Stuffort.View.ShellPages
         {
             base.OnAppearing();
             CurrentTitle.Text = AppResources.ResourceManager.GetString("NewSubjectPage");
+            this.Title = AppResources.ResourceManager.GetString("NewSubjectPage");
             subjectNameEntry.Placeholder = CurrentTitle.Text = AppResources.ResourceManager.GetString("Name");
             saveBtn.Text = CurrentTitle.Text = AppResources.ResourceManager.GetString("Save");
         }

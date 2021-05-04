@@ -28,6 +28,7 @@ namespace Stuffort.View.ShellPages
         {
             base.OnAppearing();
             CurrentTitle.Text = AppResources.ResourceManager.GetString("NewTaskPage");
+            this.Title = AppResources.ResourceManager.GetString("NewTaskPage");
             chooseSubjectlbl.Text = AppResources.ResourceManager.GetString("ChooseSubject");
             deadLinelbl.Text = AppResources.ResourceManager.GetString("Deadline");
             subjectPicker.Title = AppResources.ResourceManager.GetString("ChooseSubjectImproved");

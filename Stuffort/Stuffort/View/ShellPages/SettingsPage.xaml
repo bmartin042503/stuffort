@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:Stuffort.Resources"
              x:Class="Stuffort.View.ShellPages.SettingsPage"
+             Shell.BackgroundColor="{StaticResource stuffortBlue}"
              Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="CurrentTitle" HorizontalTextAlignment="Center" Margin="0,10" FontSize="25"/>
             <FlexLayout Margin="0,0,0,50" Direction="Row" JustifyContent="SpaceEvenly" AlignItems="Center">
                 <Image HeightRequest="60" WidthRequest="60" x:Name="languageIconImage" Aspect="AspectFit" Grid.Row="0" Grid.Column="0"/>
                 <Label x:Name="languageLbl" Margin="-30,0,0,0" FontSize="20" Grid.Row="0" Grid.Column="1"/>
