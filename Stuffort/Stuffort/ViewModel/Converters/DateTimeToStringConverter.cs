@@ -19,13 +19,13 @@ namespace Stuffort.ViewModel.Converters
             else
             {
                 if(dateTimeOffset.Day == dateTimeNow.Day-1)
-                    return AppResources.ResourceManager.GetString("Yesterday");
+                    return $"{AppResources.ResourceManager.GetString("Added")} {AppResources.ResourceManager.GetString("Yesterday")}";
                 if (diff.TotalSeconds < 60)
-                    return $"({diff.TotalSeconds:0} {AppResources.ResourceManager.GetString("SecondsAgo")})";
+                    return $"{AppResources.ResourceManager.GetString("Added")} {diff.TotalSeconds:0} {AppResources.ResourceManager.GetString("SecondsAgo")}";
                 if (diff.TotalMinutes < 60)
-                    return $"({diff.TotalMinutes:0} {AppResources.ResourceManager.GetString("MinutesAgo")})";
+                    return $"{AppResources.ResourceManager.GetString("Added")} {diff.TotalMinutes:0} {AppResources.ResourceManager.GetString("MinutesAgo")}";
                 if (diff.TotalHours < 24)
-                    return $"({diff.TotalHours:0} {AppResources.ResourceManager.GetString("HoursAgo")})";
+                    return $"{AppResources.ResourceManager.GetString("Added")} {diff.TotalHours:0} {AppResources.ResourceManager.GetString("HoursAgo")}";
             }
             return "";
         }

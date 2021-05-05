@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Added" xml:space="preserve">
+    <value>Hozzáadva:</value>
+  </data>
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Minden jog fenntartva ©</value>
+  </data>
+  <data name="AreYouSureDeleteTask" xml:space="preserve">
+    <value>Biztosan törlöd a feladatot?</value>
+  </data>
+  <data name="AreYouSureDoneTask" xml:space="preserve">
+    <value>Biztosan befejezettre állítod a feladatot?</value>
+  </data>
+  <data name="AreYouSureUndoneTask" xml:space="preserve">
+    <value>Biztosan befejezetlenre állítod a feladatot?</value>
   </data>
   <data name="ChooseSubject" xml:space="preserve">
     <value>Tantárgy:</value>
@@ -142,7 +154,7 @@
     <value>Határidő:</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Törlés:</value>
+    <value>Törlés</value>
   </data>
   <data name="Developer" xml:space="preserve">
     <value>Fejlesztő: Bartos Martin</value>
@@ -191,6 +203,9 @@
   </data>
   <data name="Next" xml:space="preserve">
     <value>Tovább</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nem</value>
   </data>
   <data name="NoDeadline" xml:space="preserve">
     <value>Nincs határidő</value>
@@ -282,7 +297,10 @@
   <data name="Welcome" xml:space="preserve">
     <value>Kérlek válaszd ki a megfelelő nyelvet!</value>
   </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Igen</value>
+  </data>
   <data name="Yesterday" xml:space="preserve">
-    <value>Tegnap</value>
+    <value>tegnap</value>
   </data>
 </root>

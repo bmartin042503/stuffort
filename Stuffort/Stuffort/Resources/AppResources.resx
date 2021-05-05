@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Added" xml:space="preserve">
+    <value>Added:</value>
+  </data>
   <data name="AllRightsReserved" xml:space="preserve">
     <value>All rights reserved ©</value>
+  </data>
+  <data name="AreYouSureDeleteTask" xml:space="preserve">
+    <value>Are you sure to delete this task?</value>
+  </data>
+  <data name="AreYouSureDoneTask" xml:space="preserve">
+    <value>Are you sure to set the task as 'Completed'?</value>
+  </data>
+  <data name="AreYouSureUndoneTask" xml:space="preserve">
+    <value>Are you sure to set the task as 'Uncompleted'?</value>
   </data>
   <data name="ChooseSubject" xml:space="preserve">
     <value>Subject:</value>
@@ -194,6 +206,9 @@
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="NoDeadline" xml:space="preserve">
     <value>No deadline</value>
@@ -282,7 +297,10 @@
   <data name="Welcome" xml:space="preserve">
     <value>Please choose a language!</value>
   </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="Yesterday" xml:space="preserve">
-    <value>Yesterday</value>
+    <value>yesterday</value>
   </data>
 </root>

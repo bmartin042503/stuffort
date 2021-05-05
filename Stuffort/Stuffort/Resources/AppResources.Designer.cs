@@ -61,11 +61,47 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added:.
+        /// </summary>
+        internal static string Added {
+            get {
+                return ResourceManager.GetString("Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All rights reserved ©.
         /// </summary>
         internal static string AllRightsReserved {
             get {
                 return ResourceManager.GetString("AllRightsReserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete this task?.
+        /// </summary>
+        internal static string AreYouSureDeleteTask {
+            get {
+                return ResourceManager.GetString("AreYouSureDeleteTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to set the task as &apos;Completed&apos;?.
+        /// </summary>
+        internal static string AreYouSureDoneTask {
+            get {
+                return ResourceManager.GetString("AreYouSureDoneTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to set the task as &apos;Uncompleted&apos;?.
+        /// </summary>
+        internal static string AreYouSureUndoneTask {
+            get {
+                return ResourceManager.GetString("AreYouSureUndoneTask", resourceCulture);
             }
         }
         
@@ -291,6 +327,15 @@ namespace Stuffort.Resources {
         internal static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -556,7 +601,16 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yesterday.
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yesterday.
         /// </summary>
         internal static string Yesterday {
             get {
