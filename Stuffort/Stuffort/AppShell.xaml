@@ -17,6 +17,10 @@
         <ShellContent ContentTemplate="{DataTemplate local:TasksPage}"/>
     </FlyoutItem>
 
+    <FlyoutItem Title="{x:Static resx:AppResources.StudyTimerPage}" Route="StudyTimerPage" Icon="ic_action_timer.png">
+        <ShellContent ContentTemplate="{DataTemplate local:StudyTimerPage}"/>
+    </FlyoutItem>
+
     <FlyoutItem Title="{x:Static resx:AppResources.StatsPage}" Route="StatsPage" Icon="ic_action_assessment.png">
         <ShellContent ContentTemplate="{DataTemplate local:StatsPage}"/>
     </FlyoutItem>

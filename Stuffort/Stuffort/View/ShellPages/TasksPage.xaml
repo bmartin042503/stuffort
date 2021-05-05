@@ -22,14 +22,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Margin="15, 17.5, 15, 0">
+        <Label x:Name="noTaskLabel" HorizontalOptions="Center" IsVisible="False"/>
         <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
                   HasUnevenRows="True"
                   RefreshCommand="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame Padding="15" HasShadow="True" Margin="0,0,0,15" 
-                               CornerRadius="15" BackgroundColor="{StaticResource stuffortBlue}">
+                        <Frame Margin="0,0,0,15">
                             <StackLayout Orientation="Horizontal">
                                 <Grid Margin="-10,0,0,0" Padding="-5" Grid.Column="0">
                                     <Grid.RowDefinitions>
@@ -55,7 +55,7 @@
                                         </Label.GestureRecognizers>
                                     </Label>
                                     <Label Margin="-3,-5,0,0" Grid.Row="1" Grid.Column="1" FontSize="15" TextColor="White" Text="{Binding Item1.SubjectName}"/>
-                                    <Label Margin="-3,-10,0,0" Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1.DeadLine, Converter={StaticResource dlConverter}}"/>
+                                    <Label Margin="-3,-10,0,0" Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1, Converter={StaticResource dlConverter}}"/>
                                     <Label Margin="-3,-2.5,0,0" Grid.Row="3" Grid.Column="1" TextColor="LightGray" FontSize="12" Text="{Binding Item1.AddedTime, Converter={StaticResource dtConverter}}"/>
                                 </Grid>
                                 <FlexLayout JustifyContent="SpaceBetween" Margin="-60,0,-35,0" Direction="Column">

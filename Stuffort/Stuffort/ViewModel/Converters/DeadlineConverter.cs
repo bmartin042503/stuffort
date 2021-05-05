@@ -1,4 +1,5 @@
-﻿using Stuffort.Resources;
+﻿using Stuffort.Model;
+using Stuffort.Resources;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,13 +12,13 @@ namespace Stuffort.ViewModel.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTimeOffset dTime = (DateTimeOffset)value;
-            if (dTime.Year == 1900 && dTime.Month == 1 && dTime.Day == 1)
-                return AppResources.ResourceManager.GetString("NoDeadline");
-            else
+            STask task = value as STask;
+            if (task.IsDeadline)
             {
+                DateTimeOffset dTime = task.DeadLine;
                 return $"{AppResources.ResourceManager.GetString("Deadline")}\n{dTime:g}";
             }
+            else return AppResources.ResourceManager.GetString("NoDeadline");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -18,13 +18,13 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Margin="15, 17.5, 15, 0">
+            <Label x:Name="noSubjectLabel" HorizontalOptions="Center" IsVisible="False"/>
             <ListView ItemsSource="{Binding SubjectList}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding SubjectRefreshCommand}"
                       IsRefreshing="{Binding IsRefreshing}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame Padding="14" HasShadow="True" Margin="0,0,0,15" 
-                               CornerRadius="15" BackgroundColor="{StaticResource stuffortBlue}">
+                            <Frame Margin="0,0,0,15">
                                 <StackLayout Orientation="Horizontal">
                                     <Grid Margin="0,0,0,-35">
                                         <Grid.ColumnDefinitions>

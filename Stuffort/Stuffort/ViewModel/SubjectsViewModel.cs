@@ -17,8 +17,9 @@ namespace Stuffort.ViewModel
 {
     public class SubjectsViewModel : INotifyPropertyChanged
     {
-        public AsyncCommand SubjectCommand { get; }
-        public AsyncCommand SubjectRefreshCommand { get; }
+        public Label NoSubjectLabel { get; set; }
+        public AsyncCommand SubjectCommand { get; set; }
+        public AsyncCommand SubjectRefreshCommand { get; set; }
         public Command SubjectRemoveCommand { get; set; }
         public Command SubjectRenameCommand { get; set; }
         public ObservableCollection<Tuple<Subject, string>> SubjectList { get; set; }
@@ -50,8 +51,9 @@ namespace Stuffort.ViewModel
             await UpdateSubjects();
             IsRefreshing = false;
         }
-        public SubjectsViewModel()
+        public SubjectsViewModel(Label lbl)
         {
+            NoSubjectLabel = lbl;
             SubjectList = new ObservableCollection<Tuple<Subject,string>>();
             SubjectCommand = new AsyncCommand(NavigateToNewSubject);
             SubjectRemoveCommand = new Command(RemovingSubject);
@@ -107,6 +109,12 @@ namespace Stuffort.ViewModel
                 var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectID == subject.ID).Count()}");
                 SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
             }
+            if (SubjectList.Count == 0)
+            {
+                NoSubjectLabel.IsVisible = true;
+                NoSubjectLabel.Text = AppResources.ResourceManager.GetString("NoSubjects");
+            }
+            else NoSubjectLabel.IsVisible = false;
         }
     }
 }

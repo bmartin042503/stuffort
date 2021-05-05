@@ -219,6 +219,12 @@
   <data name="NoDeadline" xml:space="preserve">
     <value>No deadline</value>
   </data>
+  <data name="NoSubjects" xml:space="preserve">
+    <value>You don't have any subjects</value>
+  </data>
+  <data name="NoTasks" xml:space="preserve">
+    <value>You don't have any tasks</value>
+  </data>
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>
   </data>
@@ -249,6 +255,9 @@
   <data name="Soon" xml:space="preserve">
     <value>Soon</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
   <data name="Stats" xml:space="preserve">
     <value>Stats</value>
   </data>
@@ -257,6 +266,12 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status:</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="StudyTimerPage" xml:space="preserve">
+    <value>Study timer</value>
   </data>
   <data name="SubjectErrorWhileDeleting" xml:space="preserve">
     <value>An error has occured while deleting the subject!</value>

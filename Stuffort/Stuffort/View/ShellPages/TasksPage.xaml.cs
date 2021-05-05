@@ -19,7 +19,7 @@ namespace Stuffort.View.ShellPages
         public TasksPage()
         {
             InitializeComponent();
-            TasksViewModel = new TasksViewModel();
+            TasksViewModel = new TasksViewModel(noTaskLabel);
             BindingContext = TasksViewModel;
         }
 

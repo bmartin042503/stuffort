@@ -19,6 +19,7 @@ namespace Stuffort.ViewModel
 {
     public class TasksViewModel : INotifyPropertyChanged
     {
+        public Label NoTaskLabel { get; set; }
         private bool isrefreshing;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,8 +50,9 @@ namespace Stuffort.ViewModel
         public ObservableCollection<Tuple<STask, STask>> TaskList { get; set; }
 
         public Command TapCommand { get; set; }
-        public TasksViewModel()
+        public TasksViewModel(Label lbl)
         {
+            NoTaskLabel = lbl;
             SubjectListCount = 0;
             TaskCommand = new AsyncCommand(NavigateToNewTask);
             TapCommand = new Command(TapItem);
@@ -151,6 +153,12 @@ namespace Stuffort.ViewModel
                 TaskList.Add(new Tuple<STask, STask>(task, task));
             }
             SubjectListCount = (subjects as List<Subject>).Count;
+            if (TaskList.Count == 0)
+            {
+                NoTaskLabel.IsVisible = true;
+                NoTaskLabel.Text = AppResources.ResourceManager.GetString("NoTasks");
+            }
+            else NoTaskLabel.IsVisible = false;
         }
 
         public async Task NavigateToNewTask()

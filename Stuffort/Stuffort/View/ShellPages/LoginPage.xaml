@@ -28,8 +28,8 @@
                 MinimumWidthRequest="10"
                 HeightRequest="40"
                 BorderColor="{x:StaticResource stuffortWhite}"                 
-                BackgroundColor="{x:StaticResource stuffortBlue}"
-                TextColor="{x:StaticResource stuffortWhite}"
+                BackgroundColor="{x:StaticResource stuffortWhite}"
+                TextColor="{x:StaticResource stuffortBlue}"
                 BorderWidth="2.5"
                 Command="{Binding MainPageCommand}"
                 CommandParameter="{Binding LanguagePicker}"/>

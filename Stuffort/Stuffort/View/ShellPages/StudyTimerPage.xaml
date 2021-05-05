@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stuffort.View.ShellPages.StudyTimerPage"
+             Shell.TabBarIsVisible="False"
+             Shell.BackgroundColor="{StaticResource stuffortBlue}">
+    <ContentPage.Content>
+        <StackLayout Margin="15, 17.5, 15, 0">
+            <Frame BackgroundColor="{StaticResource stuffortBlue}">
+                <Label TextColor="White" Text="{Binding StudyTime, StringFormat='{0:d}'}"
+                   HorizontalOptions="Center" VerticalOptions="Center"
+                   FontSize="82.5"/>
+            </Frame>
+            <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                <StackLayout Orientation="Vertical">
+                    <Button Text="Indítás" HorizontalOptions="Start" WidthRequest="130" HeightRequest="40" BorderRadius="15"
+                    FontSize="15"/>
+                    <Button Text="Leállítás" HorizontalOptions="Start" WidthRequest="130" HeightRequest="40" BorderRadius="15"
+                    FontSize="15" Margin="0,5,0,0"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="Center">
+                    <Label FontSize="18" Text="Válassz egy feladatot" Margin="30,0"/>
+                    <Picker Margin="30,0" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

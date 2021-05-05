@@ -15138,9 +15138,6 @@ namespace Stuffort.Droid
 			// aapt resource value: 0x7F07006B
 			public const int design_snackbar_background = 2131165291;
 			
-			// aapt resource value: 0x7F07007A
-			public const int icon = 2131165306;
-			
 			// aapt resource value: 0x7F07006C
 			public const int ic_action_add = 2131165292;
 			
@@ -15169,19 +15166,22 @@ namespace Stuffort.Droid
 			public const int ic_action_settings = 2131165300;
 			
 			// aapt resource value: 0x7F070075
-			public const int ic_action_translate = 2131165301;
+			public const int ic_action_timer = 2131165301;
 			
 			// aapt resource value: 0x7F070076
-			public const int ic_mtrl_checked_circle = 2131165302;
+			public const int ic_action_translate = 2131165302;
 			
 			// aapt resource value: 0x7F070077
-			public const int ic_mtrl_chip_checked_black = 2131165303;
+			public const int ic_mtrl_checked_circle = 2131165303;
 			
 			// aapt resource value: 0x7F070078
-			public const int ic_mtrl_chip_checked_circle = 2131165304;
+			public const int ic_mtrl_chip_checked_black = 2131165304;
 			
 			// aapt resource value: 0x7F070079
-			public const int ic_mtrl_chip_close_circle = 2131165305;
+			public const int ic_mtrl_chip_checked_circle = 2131165305;
+			
+			// aapt resource value: 0x7F07007A
+			public const int ic_mtrl_chip_close_circle = 2131165306;
 			
 			// aapt resource value: 0x7F07007B
 			public const int material_ic_calendar_black_24dp = 2131165307;
@@ -16742,6 +16742,12 @@ namespace Stuffort.Droid
 		public partial class Mipmap
 		{
 			
+			// aapt resource value: 0x7F0C0003
+			public const int icon = 2131492867;
+			
+			// aapt resource value: 0x7F0C0004
+			public const int icon_round = 2131492868;
+			
 			// aapt resource value: 0x7F0C0000
 			public const int ic_launcher = 2131492864;
 			
@@ -16750,12 +16756,6 @@ namespace Stuffort.Droid
 			
 			// aapt resource value: 0x7F0C0002
 			public const int ic_launcher_round = 2131492866;
-			
-			// aapt resource value: 0x7F0C0003
-			public const int launcher_background = 2131492867;
-			
-			// aapt resource value: 0x7F0C0004
-			public const int launcher_foreground = 2131492868;
 			
 			static Mipmap()
 			{
