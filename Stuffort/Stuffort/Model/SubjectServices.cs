@@ -34,6 +34,15 @@ namespace Stuffort.Model
             await db.CloseAsync();
             return rows;
         }
+        static public async Task<int> RenameSubject(Subject s, string newname)
+        {
+            int rows = 0;
+            await Init();
+            rows += await db.ExecuteAsync($"UPDATE [Subject] SET [Name] = '{newname}' WHERE [ID] = {s.ID}");
+            rows += await db.ExecuteAsync($"UPDATE [STask] SET [SubjectName] = '{newname}' WHERE [SubjectID] = {s.ID}");
+            await db.CloseAsync();
+            return rows;
+        }
 
         static public async Task<int> RemoveSubject(Subject s)
         {

@@ -1,6 +1,5 @@
 ﻿using Stuffort.Model;
 using Stuffort.View.ShellPages;
-using Stuffort.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,6 +42,7 @@ namespace Stuffort.ViewModel
         public AsyncCommand TaskCommand { get; set; }
         public AsyncCommand TaskRefreshCommand { get; set; }
         public Command TaskRemoveCommand { get; set; }
+        public Command TaskRenameCommand { get; set; }
         public Command TaskDoneCommand { get; set; }
 
         public int SubjectListCount { get; set; }
@@ -55,9 +55,25 @@ namespace Stuffort.ViewModel
             TaskCommand = new AsyncCommand(NavigateToNewTask);
             TapCommand = new Command(TapItem);
             TaskRemoveCommand = new Command(TaskRemove);
+            TaskRenameCommand = new Command(TaskRename);
             TaskRefreshCommand = new AsyncCommand(Refresh);
             TaskDoneCommand = new Command(TaskDone);
             TaskList = new ObservableCollection<Tuple<STask, STask>>();
+        }
+
+        public async void TaskRename(object parameter)
+        {
+            STask selectedItem = parameter as STask;
+            string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingTask"), 
+                AppResources.ResourceManager.GetString("RenameTask"), 
+                "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
+            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
+            if (newName.Length > 120 || newName.Length < 3) return;
+            selectedItem.Name = newName;
+            await STaskServices.UpdateTask(selectedItem);
+            await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                AppResources.ResourceManager.GetString("TaskSuccessfullyRenamed"), "Ok");
+            await Refresh();
         }
 
         public async void TaskDone(object parameter)
@@ -73,6 +89,8 @@ namespace Stuffort.ViewModel
                     selectedItem.IsDone = true;
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                         AppResources.ResourceManager.GetString("TaskCompleted"), "Ok");
+                    await STaskServices.UpdateTask(selectedItem);
+                    await Refresh();
                 }
             }
             else
@@ -85,10 +103,10 @@ namespace Stuffort.ViewModel
                     selectedItem.IsDone = false;
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                         AppResources.ResourceManager.GetString("TaskUncompleted"), "Ok");
+                    await STaskServices.UpdateTask(selectedItem);
+                    await Refresh();
                 }
             }
-            await STaskServices.UpdateTask(selectedItem);
-            await Refresh();
         }
 
         public async void TaskRemove(object value)
@@ -106,14 +124,14 @@ namespace Stuffort.ViewModel
                 else
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         $"{AppResources.ResourceManager.GetString("TaskErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
-                await UpdateTasks();
+                await Refresh();
             }
         }
 
         public async void TapItem(object value)
         {
             string name = value as string;
-            if(name.Length > 19) await App.Current.MainPage.DisplayAlert("", name, "Ok");
+            if(name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
         }
 
         public async Task Refresh()

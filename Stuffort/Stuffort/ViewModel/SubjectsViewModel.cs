@@ -1,6 +1,5 @@
 ﻿using Stuffort.Model;
 using Stuffort.View.ShellPages;
-using Stuffort.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +19,8 @@ namespace Stuffort.ViewModel
     {
         public AsyncCommand SubjectCommand { get; }
         public AsyncCommand SubjectRefreshCommand { get; }
-        public SubjectRemoveCommand SubjectRemoveCommand { get; set; }
+        public Command SubjectRemoveCommand { get; set; }
+        public Command SubjectRenameCommand { get; set; }
         public ObservableCollection<Tuple<Subject, string>> SubjectList { get; set; }
 
         private bool isrefreshing;
@@ -54,11 +54,44 @@ namespace Stuffort.ViewModel
         {
             SubjectList = new ObservableCollection<Tuple<Subject,string>>();
             SubjectCommand = new AsyncCommand(NavigateToNewSubject);
-            SubjectRemoveCommand = new SubjectRemoveCommand(this);
+            SubjectRemoveCommand = new Command(RemovingSubject);
             SubjectRefreshCommand = new AsyncCommand(Refresh);
+            SubjectRenameCommand = new Command(SubjectRename);
         }
 
+        public async void SubjectRename(object parameter)
+        {
+            Subject selectedItem = parameter as Subject;
+            string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingSubject"),
+                AppResources.ResourceManager.GetString("RenameSubject"),
+                "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
+            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
+            if (newName.Length > 120 || newName.Length < 3) return;
+            selectedItem.Name = newName;
+            await SubjectServices.RenameSubject(selectedItem, newName);
+            await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                AppResources.ResourceManager.GetString("SubjectSuccessfullyRenamed"), "Ok");
+            await Refresh();
+        }
 
+        public async void RemovingSubject(object parameter)
+        {
+            Subject selectedItem = parameter as Subject;
+            bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Delete"),
+                $"{AppResources.ResourceManager.GetString("AreYouSureDeleteSubject")} ({selectedItem.Name})",
+                AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Delete"));
+            if (!delete)
+            {
+                int rows = await SubjectServices.RemoveSubject(selectedItem);
+                if (rows > 0)
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                        $"{AppResources.ResourceManager.GetString("SubjectSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
+                else
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        $"{AppResources.ResourceManager.GetString("SubjectErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
+                await UpdateSubjects();
+            }
+        }
         async Task NavigateToNewSubject()
         {
             await AppShell.Current.GoToAsync($"{nameof(NewSubjectPage)}");
@@ -71,7 +104,7 @@ namespace Stuffort.ViewModel
             var tasksList = await STaskServices.GetTasks();
             foreach (var subject in subjectList)
             {
-                var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectName == subject.Name).Count()}");
+                var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectID == subject.ID).Count()}");
                 SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
             }
         }

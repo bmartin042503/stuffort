@@ -79,6 +79,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!.
+        /// </summary>
+        internal static string AreYouSureDeleteSubject {
+            get {
+                return ResourceManager.GetString("AreYouSureDeleteSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to delete this task?.
         /// </summary>
         internal static string AreYouSureDeleteTask {
@@ -102,6 +111,15 @@ namespace Stuffort.Resources {
         internal static string AreYouSureUndoneTask {
             get {
                 return ResourceManager.GetString("AreYouSureUndoneTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -358,6 +376,42 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New name for the subject:.
+        /// </summary>
+        internal static string RenameSubject {
+            get {
+                return ResourceManager.GetString("RenameSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New name for the task:.
+        /// </summary>
+        internal static string RenameTask {
+            get {
+                return ResourceManager.GetString("RenameTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename subject.
+        /// </summary>
+        internal static string RenamingSubject {
+            get {
+                return ResourceManager.GetString("RenamingSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename task.
+        /// </summary>
+        internal static string RenamingTask {
+            get {
+                return ResourceManager.GetString("RenamingTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
@@ -475,6 +529,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subject has been successfully renamed!.
+        /// </summary>
+        internal static string SubjectSuccessfullyRenamed {
+            get {
+                return ResourceManager.GetString("SubjectSuccessfullyRenamed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject has been successfully saved!.
         /// </summary>
         internal static string SubjectSuccessfullySaved {
@@ -552,6 +615,15 @@ namespace Stuffort.Resources {
         internal static string TaskSuccessfullyDeleted {
             get {
                 return ResourceManager.GetString("TaskSuccessfullyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task has been successfully renamed!.
+        /// </summary>
+        internal static string TaskSuccessfullyRenamed {
+            get {
+                return ResourceManager.GetString("TaskSuccessfullyRenamed", resourceCulture);
             }
         }
         

@@ -123,6 +123,9 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Wszelkie prawa zastrzeżone ©</value>
   </data>
+  <data name="AreYouSureDeleteSubject" xml:space="preserve">
+    <value>Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!</value>
+  </data>
   <data name="AreYouSureDeleteTask" xml:space="preserve">
     <value>Are you sure to delete this task?</value>
   </data>
@@ -132,8 +135,11 @@
   <data name="AreYouSureUndoneTask" xml:space="preserve">
     <value>Are you sure to set the task as 'Uncompleted'?</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
   <data name="ChooseSubject" xml:space="preserve">
-    <value>Przedmiot</value>
+    <value>Przedmiot:</value>
   </data>
   <data name="ChooseSubjectImproved" xml:space="preserve">
     <value>Wybierz temat</value>
@@ -151,7 +157,7 @@
     <value>Liczba zadań:</value>
   </data>
   <data name="Deadline" xml:space="preserve">
-    <value>Ostateczny termin</value>
+    <value>Ostateczny termin:</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Kasować</value>
@@ -213,6 +219,18 @@
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>
   </data>
+  <data name="RenameSubject" xml:space="preserve">
+    <value>New name for the subject:</value>
+  </data>
+  <data name="RenameTask" xml:space="preserve">
+    <value>New name for the task:</value>
+  </data>
+  <data name="RenamingSubject" xml:space="preserve">
+    <value>Zmienić nazwę tematu</value>
+  </data>
+  <data name="RenamingTask" xml:space="preserve">
+    <value>Zmień nazwę zadania</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Zapisać</value>
   </data>
@@ -255,6 +273,9 @@
   <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
     <value>Subject has been successfully deleted!</value>
   </data>
+  <data name="SubjectSuccessfullyRenamed" xml:space="preserve">
+    <value>Subject has been successfully renamed!</value>
+  </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
     <value>Subject has been successfully saved!</value>
   </data>
@@ -281,6 +302,9 @@
   </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">
     <value>Task has been successfully deleted!</value>
+  </data>
+  <data name="TaskSuccessfullyRenamed" xml:space="preserve">
+    <value>Task has been successfully renamed!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
     <value>Task has been successfully saved!</value>

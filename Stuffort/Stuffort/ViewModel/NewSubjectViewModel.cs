@@ -1,5 +1,4 @@
 ﻿using Stuffort.Model;
-using Stuffort.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

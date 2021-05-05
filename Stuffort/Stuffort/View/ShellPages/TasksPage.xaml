@@ -6,7 +6,6 @@
              Shell.TabBarIsVisible="False"
              Shell.BackgroundColor="{StaticResource stuffortBlue}"
              xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
-             xmlns:fitlabel="clr-namespace:Stuffort.ViewModel.Renderers"
              x:Name="tasksPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_action_add.png"
@@ -55,15 +54,18 @@
                                             <TapGestureRecognizer Command="{Binding Path=BindingContext.TapCommand, Source={x:Reference tasksPage}}" CommandParameter="{Binding Item1.Name}"/>
                                         </Label.GestureRecognizers>
                                     </Label>
-                                    <Label Margin="-3,-7.5,0,0" Grid.Row="1" Grid.Column="1" FontSize="15" TextColor="White" Text="{Binding Item1.SubjectName}"/>
+                                    <Label Margin="-3,-5,0,0" Grid.Row="1" Grid.Column="1" FontSize="15" TextColor="White" Text="{Binding Item1.SubjectName}"/>
                                     <Label Margin="-3,-10,0,0" Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1.DeadLine, Converter={StaticResource dlConverter}}"/>
                                     <Label Margin="-3,-2.5,0,0" Grid.Row="3" Grid.Column="1" TextColor="LightGray" FontSize="12" Text="{Binding Item1.AddedTime, Converter={StaticResource dtConverter}}"/>
                                 </Grid>
                                 <FlexLayout JustifyContent="SpaceBetween" Margin="-60,0,-35,0" Direction="Column">
                                     <Button Margin="0,-5,0,0" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec55;"
-                                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"/>
+                                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"
+                                        Command="{Binding Path=BindingContext.TaskRenameCommand, Source={x:Reference tasksPage}}"
+                                        CommandParameter="{Binding Item1}"/>
                                     <Button Margin="0,0,0,-5" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec53;"
-                                            Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20" Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
+                                            Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20" 
+                                            Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
                                             CommandParameter="{Binding Item1}"/>
                                 </FlexLayout>
                             </StackLayout>

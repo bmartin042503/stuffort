@@ -123,6 +123,9 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Minden jog fenntartva ©</value>
   </data>
+  <data name="AreYouSureDeleteSubject" xml:space="preserve">
+    <value>Biztosan törlöd a tantárgyat? Minden feladat törölve lesz, amelyik a tantárgyhoz tartozik!</value>
+  </data>
   <data name="AreYouSureDeleteTask" xml:space="preserve">
     <value>Biztosan törlöd a feladatot?</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="AreYouSureUndoneTask" xml:space="preserve">
     <value>Biztosan befejezetlenre állítod a feladatot?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Vissza</value>
   </data>
   <data name="ChooseSubject" xml:space="preserve">
     <value>Tantárgy:</value>
@@ -213,6 +219,18 @@
   <data name="Rename" xml:space="preserve">
     <value>Átnevezés</value>
   </data>
+  <data name="RenameSubject" xml:space="preserve">
+    <value>Add meg a tantárgy új nevét:</value>
+  </data>
+  <data name="RenameTask" xml:space="preserve">
+    <value>Add meg a feladat új nevét:</value>
+  </data>
+  <data name="RenamingSubject" xml:space="preserve">
+    <value>Tantárgy átnevezése</value>
+  </data>
+  <data name="RenamingTask" xml:space="preserve">
+    <value>Feladat átnevezése</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Mentés</value>
   </data>
@@ -255,6 +273,9 @@
   <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
     <value>A tantárgy sikeresen törölve!</value>
   </data>
+  <data name="SubjectSuccessfullyRenamed" xml:space="preserve">
+    <value>Tantárgy sikeresen átnevezve!</value>
+  </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
     <value>A tantárgy sikeresen elmentve!</value>
   </data>
@@ -281,6 +302,9 @@
   </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">
     <value>A feladat sikeresen törölve!</value>
+  </data>
+  <data name="TaskSuccessfullyRenamed" xml:space="preserve">
+    <value>Feladat sikeresen átnevezve!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
     <value>A feladat sikeresen mentve!</value>

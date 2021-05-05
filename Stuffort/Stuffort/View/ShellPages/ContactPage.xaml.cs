@@ -26,6 +26,7 @@ namespace Stuffort.View.ShellPages
             if (VersionTracking.IsFirstLaunchForCurrentBuild)
                 labelVersion.Text = $"{AppResources.ResourceManager.GetString("NewVersion")}: {labelVersion.Text}";
             allRightsReserved.Text = AppResources.ResourceManager.GetString("AllRightsReserved");
+            labelDeveloper.Text = AppResources.ResourceManager.GetString("Developer");
         }
     }
 }

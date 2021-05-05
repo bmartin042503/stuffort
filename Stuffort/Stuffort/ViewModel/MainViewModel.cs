@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using Stuffort.Configuration;
+using Stuffort.Resources;
 using Stuffort.View;
 using Stuffort.View.ShellPages;
-using Stuffort.ViewModel.Commands;
 using Xamarin.Forms;
 
 namespace Stuffort.ViewModel
@@ -24,17 +25,37 @@ namespace Stuffort.ViewModel
         }
 
         public Picker LanguagePicker { get; set; }
+        public Command MainPageCommand { get; set; }
 
-        public MainPageCommand MainPageCommand { get; set; }
+        public ConfigurationType ConfType { get; set; }
         public MainViewModel(ConfigurationType ct, Picker picker, string name)
         {
-            this.MainPageCommand = new MainPageCommand(this, ct);
             List<string> Languages = new List<string>()
             {
                 "English", "Magyar", "Polski (beta)"
             };
+            MainPageCommand = new Command(LanguageSetting);
+            ConfType = ct;
             LanguagePicker = picker;
             LanguagePicker.ItemsSource = Languages;
+        }
+
+        public void LanguageSetting(object value)
+        {
+            var picker = value as Picker;
+            CultureInfo language = new CultureInfo(picker.SelectedIndex == 0 ? "" : picker.SelectedIndex == 1 ? "hu" : "pl");
+            Thread.CurrentThread.CurrentUICulture = language;
+            AppResources.Culture = language;
+            ConfType.Language = language.ToString();
+            ConfigurationServices.SaveConfigurationFile(ConfType);          
+            var items = Shell.Current.Items;
+            foreach(var item in items)
+            {
+                if (item.Route == "LoginPage")
+                    continue;
+                item.Title = AppResources.ResourceManager.GetString(item.Route);
+            }
+            NavigateToHomepage();
         }
 
         public async void NavigateToHomepage()

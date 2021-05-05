@@ -11,8 +11,13 @@ namespace Stuffort.ViewModel.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string val = value as string;
-            if (val.Length > 19)
-                return $"{val.Substring(0,19)}..";
+            int uppers = 0;
+            for(int i = 0; i < val.Length; ++i)
+                if (Char.IsUpper(val[i])) uppers++;
+            if (val.Length > 14 && uppers > 3)
+                return $"{val.Substring(0,14)}..";
+            if (val.Length > 24)
+                return $"{val.Substring(0,24)}..";
             return val;
         }
 
