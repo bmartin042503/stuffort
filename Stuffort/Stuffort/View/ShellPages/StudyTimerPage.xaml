@@ -6,22 +6,38 @@
              Shell.BackgroundColor="{StaticResource stuffortBlue}">
     <ContentPage.Content>
         <StackLayout Margin="15, 17.5, 15, 0">
-            <Frame BackgroundColor="{StaticResource stuffortBlue}">
-                <Label TextColor="White" Text="{Binding StudyTime, StringFormat='{0:d}'}"
+            <Frame CornerRadius="10">
+                <Label TextColor="White" Text="{Binding StudyTime, StringFormat='{0:T}'}"
                    HorizontalOptions="Center" VerticalOptions="Center"
                    FontSize="82.5"/>
             </Frame>
-            <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                <StackLayout Orientation="Vertical">
-                    <Button Text="Indítás" HorizontalOptions="Start" WidthRequest="130" HeightRequest="40" BorderRadius="15"
-                    FontSize="15"/>
-                    <Button Text="Leállítás" HorizontalOptions="Start" WidthRequest="130" HeightRequest="40" BorderRadius="15"
-                    FontSize="15" Margin="0,5,0,0"/>
-                </StackLayout>
-                <StackLayout HorizontalOptions="Center">
-                    <Label FontSize="18" Text="Válassz egy feladatot" Margin="30,0"/>
-                    <Picker Margin="30,0" />
-                </StackLayout>
+            <Frame Margin="0,5,0,0" CornerRadius="10" HeightRequest="45" Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{StaticResource fontButton}" Text="{Binding IconChanging}"
+                        Margin="0,-10,-20,-10" Command="{Binding TimerHandler}"
+                        FontSize="30" TextColor="{StaticResource stuffortWhite}"/>
+                    <Button Grid.Column="1" Style="{StaticResource fontButton}" Text="&#xee00;"
+                        FontSize="30" TextColor="{StaticResource stuffortWhite}"
+                        Margin="0,-10,0,-10"/>
+                    <Picker x:Name="taskPicker"
+                            Grid.Column="2" Margin="0,0,5,0"
+                            TextColor="{StaticResource stuffortWhite}"
+                            TitleColor="{StaticResource stuffortWhite}"
+                            ItemsSource="{Binding TaskList}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndex="0"/>
+                </Grid>
+            </Frame>
+            <StackLayout Orientation="Horizontal" Margin="2,10,0,0" 
+                         HorizontalOptions="Start">
+                <Label Text="Szabad időzítő:"
+                       FontSize="20" Margin="0,0,5,0"/>
+                <Switch x:Name="switchTimer" IsToggled="{Binding IsFreeTimer, Mode=TwoWay}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

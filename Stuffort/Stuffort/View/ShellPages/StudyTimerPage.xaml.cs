@@ -1,4 +1,5 @@
-﻿using Stuffort.ViewModel;
+﻿using Stuffort.Resources;
+using Stuffort.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,14 @@ namespace Stuffort.View.ShellPages
         public StudyTimerPage()
         {
             InitializeComponent();
-            this.StudyTimerViewModel = new StudyTimerViewModel();
+            this.StudyTimerViewModel = new StudyTimerViewModel(switchTimer, taskPicker);
             BindingContext = StudyTimerViewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
         }
     }
 }

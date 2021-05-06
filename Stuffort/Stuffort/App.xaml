@@ -4,6 +4,7 @@
              x:Class="Stuffort.App">
     <Application.Resources>
         <ResourceDictionary>
+            <!--icofont.com-->
             <OnPlatform x:TypeArguments="x:String"
                         x:Key="FontIcon">
                 <On Platform="Android" Value="font_icon.ttf#Regular"/>

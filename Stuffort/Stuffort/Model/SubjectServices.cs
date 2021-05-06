@@ -18,14 +18,6 @@ namespace Stuffort.Model
             await db.CreateTableAsync<Subject>();
         }
 
-        static public async void DeleteAll()
-        {
-            await Init();
-            await db.DeleteAllAsync<Subject>();
-            await db.DeleteAllAsync<STask>();
-            await db.CloseAsync();
-        }
-
         static public async Task<int> AddSubject(Subject s)
         {
             int rows = 0;
@@ -51,6 +43,8 @@ namespace Stuffort.Model
             int tasksToRemoveID = s.ID;
             rows += await db.ExecuteAsync($"DELETE FROM [Subject] WHERE [ID] = {s.ID}");
             rows += await db.ExecuteAsync($"DELETE FROM [STask] WHERE [SubjectID] = {s.ID}");
+            rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [TaskID] = -1 WHERE [SubjectID] = {s.ID}");
+            rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [SubjectID] = -1 WHERE [SubjectID] = {s.ID}");
             await db.CloseAsync();
             return rows;
         }

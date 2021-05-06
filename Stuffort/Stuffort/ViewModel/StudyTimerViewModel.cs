@@ -6,32 +6,18 @@ using Xamarin.Forms;
 using System.Timers;
 using System.ComponentModel;
 using Stuffort.Resources;
+using Stuffort.Model;
 
 namespace Stuffort.ViewModel
 {
     public class StudyTimerViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged == null)
-                return;
+        public bool IsFreeTimer { get; set; }
+        public List<STask> TaskList { get; set; }
 
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private bool HasStarted { get; set; }
-
-        private string timerstatus;
-        public string TimerStatus
-        {
-            get { return timerstatus; }
-            set
-            {
-                timerstatus = value;
-                OnPropertyChanged(nameof(TimerStatus));
-            }
-        }
+        private Switch FreeTimerSwitch;
+        private Picker TaskPicker;
+        private bool HasStarted;
 
         private TimeSpan studytime;
         public TimeSpan StudyTime
@@ -44,100 +30,80 @@ namespace Stuffort.ViewModel
             }
         }
 
-        public Command TimerHandler { get; set; }
-        public StudyTimerViewModel()
+        private string iconchanging;
+        public string IconChanging
         {
-            StudyTime = new TimeSpan();
-            HasStarted = false;
-            TimerStatus = string.Empty;
-            TimerHandler = new Command(TimeSwitch);
+            get { return iconchanging; }
+            set
+            {
+                iconchanging = value;
+                OnPropertyChanged(nameof(IconChanging));
+            }
         }
 
-        public void TimeSwitch()
+        public Command TimerHandler { get; set; }
+        public StudyTimerViewModel(Switch sw, Picker pi)
+        {
+            IconChanging = "\uec74;";
+            FreeTimerSwitch = sw;
+            TaskPicker = pi;
+            StudyTime = new TimeSpan();
+            HasStarted = false;
+            IsFreeTimer = false;
+            TimerHandler = new Command(TimeSwitch);
+            TaskList = new List<STask>();
+        }
+
+        public async void UpdateTasks()
+        {
+            TaskList.Clear();
+            var tasks = await STaskServices.GetTasks();
+            foreach (var task in tasks)
+                TaskList.Add(task);
+        }
+
+        public async void TimeSwitch()
         {
             if (HasStarted == false)
             {
-                TimerStatus = "Stop";
                 HasStarted = true;
+                IconChanging = "\uec72;";
+                TaskPicker.IsEnabled = false;
+                FreeTimerSwitch.IsEnabled = false;
+                Statistics newStat = new Statistics();
+                newStat.Started = DateTime.Now;
+                newStat.Time = new TimeSpan();
+                if (!IsFreeTimer)
+                {
+                    newStat.SubjectID = (TaskPicker.SelectedItem as STask).SubjectID;
+                    newStat.TaskID = (TaskPicker.SelectedItem as STask).ID;
+                }
+                else
+                {
+                    newStat.SubjectID = -1;
+                    newStat.TaskID = -1;
+                }
+                await StatisticsServices.AddStatistics(newStat);
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    StudyTime.Add(new TimeSpan(0,0,1));
+                    StudyTime = StudyTime.Add(new TimeSpan(0,0,1));
                     return HasStarted;
                 });
             }
             else
             {
                 HasStarted = false;
-                TimerStatus = "Start";
+                IconChanging = "\uec74;";
             }
         }
 
-
-    }
-}
-
-public class StudyTimerViewModel : INotifyPropertyChanged
-{
-    public event PropertyChangedEventHandler PropertyChanged;
-    public void OnPropertyChanged(string propertyName)
-    {
-        if (PropertyChanged == null)
-            return;
-
-        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private bool HasStarted { get; set; }
-
-    private string timerstatus;
-    public string TimerStatus
-    {
-        get { return timerstatus; }
-        set
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
         {
-            timerstatus = value;
-            OnPropertyChanged(nameof(TimerStatus));
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-
-    private TimeSpan studytime;
-    public TimeSpan StudyTime
-    {
-        get { return studytime; }
-        set
-        {
-            studytime = value;
-            OnPropertyChanged(nameof(StudyTime));
-        }
-    }
-
-    public Command TimerHandler { get; set; }
-    public StudyTimerViewModel()
-    {
-        StudyTime = new TimeSpan();
-        HasStarted = false;
-        TimerStatus = AppResources.ResourceManager.GetString("Start");
-        TimerHandler = new Command(TimeSwitch);
-    }
-
-    public void TimeSwitch()
-    {
-        if (HasStarted == false)
-        {
-            TimerStatus = AppResources.ResourceManager.GetString("Stop");
-            HasStarted = true;
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-            {
-                StudyTime = StudyTime.Add(new TimeSpan(0,0,1));
-                return HasStarted;
-            });
-        }
-        else
-        {
-            HasStarted = false;
-            TimerStatus = AppResources.ResourceManager.GetString("Start");
-        }
-    }
-
-
 }
