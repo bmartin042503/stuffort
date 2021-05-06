@@ -14,17 +14,24 @@ namespace Stuffort.View.ShellPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StudyTimerPage : ContentPage
     {
+        private bool Running;
         public StudyTimerViewModel StudyTimerViewModel;
         public StudyTimerPage()
         {
             InitializeComponent();
-            this.StudyTimerViewModel = new StudyTimerViewModel(switchTimer, taskPicker);
-            BindingContext = StudyTimerViewModel;
+            Running = false;
+            this.StudyTimerViewModel = new StudyTimerViewModel(Running, switchTimer, taskPicker);
+            BindingContext = this.StudyTimerViewModel;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
+            if (Running == false)
+            {
+                await StudyTimerViewModel.InitializeStats();
+                StudyTimerViewModel.ImportTasks();
+            }
             this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
         }
     }

@@ -28,6 +28,7 @@ namespace Stuffort.View.ShellPages
             InitializeComponent();
             //File.Delete(ConfigurationServices.FilePath);
             //File.Delete(App.DatabaseLocation);
+            //StatisticsServices.DeleteAll();
             loginPageVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
             ConfType = ConfigurationServices.GetConfigurationData();
             var name = this.GetType().Name;

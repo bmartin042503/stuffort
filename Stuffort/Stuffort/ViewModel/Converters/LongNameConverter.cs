@@ -16,8 +16,8 @@ namespace Stuffort.ViewModel.Converters
                 if (Char.IsUpper(val[i])) uppers++;
             if (val.Length > 14 && uppers > 3)
                 return $"{val.Substring(0,14)}..";
-            if (val.Length > 24)
-                return $"{val.Substring(0,24)}..";
+            if (val.Length > 21)
+                return $"{val.Substring(0,21)}..";
             return val;
         }
 

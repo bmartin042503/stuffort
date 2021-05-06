@@ -28,6 +28,23 @@ namespace Stuffort.Model
             return rows;
         }
 
+        static public async Task<int> UpdateStatistics(Statistics s)
+        {
+            await Init();
+            int rows = 0;
+            rows += await db.UpdateAsync(s);
+            await db.CloseAsync();
+            return rows;
+        }
+
+        static public void DeleteAll()
+        {
+            db = new SQLiteAsyncConnection(App.DatabaseLocation);
+            db.CreateTableAsync<Statistics>();
+            db.DeleteAllAsync<Statistics>();
+            db.CloseAsync();
+        }
+
         static public async Task<int> DeleteStatistics(Statistics s)
         {
             await Init();

@@ -97,7 +97,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to set the task as &apos;Completed&apos;?.
+        ///   Looks up a localized string similar to Do you want to set the task as &apos;Completed&apos;?.
         /// </summary>
         internal static string AreYouSureDoneTask {
             get {
@@ -106,7 +106,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure to set the task as &apos;Uncompleted&apos;?.
+        ///   Looks up a localized string similar to Do you want to set the task as &apos;Uncompleted&apos;?.
         /// </summary>
         internal static string AreYouSureUndoneTask {
             get {
@@ -147,6 +147,15 @@ namespace Stuffort.Resources {
         internal static string Completed {
             get {
                 return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congratulations.
+        /// </summary>
+        internal static string Congratulations {
+            get {
+                return ResourceManager.GetString("Congratulations", resourceCulture);
             }
         }
         
@@ -439,6 +448,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving timer.
+        /// </summary>
+        internal static string SavingTimer {
+            get {
+                return ResourceManager.GetString("SavingTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to seconds ago.
         /// </summary>
         internal static string SecondsAgo {
@@ -520,7 +538,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Study timer.
+        ///   Looks up a localized string similar to Study Timer.
         /// </summary>
         internal static string StudyTimerPage {
             get {
@@ -687,6 +705,51 @@ namespace Stuffort.Resources {
         internal static string TaskUncompleted {
             get {
                 return ResourceManager.GetString("TaskUncompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to have at least a minute in the timer to save it!.
+        /// </summary>
+        internal static string TimerAtLeast1Min {
+            get {
+                return ResourceManager.GetString("TimerAtLeast1Min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time spent:.
+        /// </summary>
+        internal static string TimerSpent {
+            get {
+                return ResourceManager.GetString("TimerSpent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer has started! Have a great time!.
+        /// </summary>
+        internal static string TimerStarted {
+            get {
+                return ResourceManager.GetString("TimerStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer saved successfully!.
+        /// </summary>
+        internal static string TimerSuccessfullySaved {
+            get {
+                return ResourceManager.GetString("TimerSuccessfullySaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task:.
+        /// </summary>
+        internal static string TimerTask {
+            get {
+                return ResourceManager.GetString("TimerTask", resourceCulture);
             }
         }
         

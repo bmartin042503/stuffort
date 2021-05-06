@@ -130,10 +130,10 @@
     <value>Are you sure to delete this task?</value>
   </data>
   <data name="AreYouSureDoneTask" xml:space="preserve">
-    <value>Are you sure to set the task as 'Completed'?</value>
+    <value>Do you want to set the task as 'Completed'?</value>
   </data>
   <data name="AreYouSureUndoneTask" xml:space="preserve">
-    <value>Are you sure to set the task as 'Uncompleted'?</value>
+    <value>Do you want to set the task as 'Uncompleted'?</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -146,6 +146,9 @@
   </data>
   <data name="Completed" xml:space="preserve">
     <value>Completed</value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>Congratulations</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
@@ -243,6 +246,9 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SavingTimer" xml:space="preserve">
+    <value>Saving timer</value>
+  </data>
   <data name="SecondsAgo" xml:space="preserve">
     <value>seconds ago</value>
   </data>
@@ -271,7 +277,7 @@
     <value>Stop</value>
   </data>
   <data name="StudyTimerPage" xml:space="preserve">
-    <value>Study timer</value>
+    <value>Study Timer</value>
   </data>
   <data name="SubjectErrorWhileDeleting" xml:space="preserve">
     <value>An error has occured while deleting the subject!</value>
@@ -326,6 +332,21 @@
   </data>
   <data name="TaskUncompleted" xml:space="preserve">
     <value>You've set this task as Uncompleted.</value>
+  </data>
+  <data name="TimerAtLeast1Min" xml:space="preserve">
+    <value>You need to have at least a minute in the timer to save it!</value>
+  </data>
+  <data name="TimerSpent" xml:space="preserve">
+    <value>Time spent:</value>
+  </data>
+  <data name="TimerStarted" xml:space="preserve">
+    <value>Timer has started! Have a great time!</value>
+  </data>
+  <data name="TimerSuccessfullySaved" xml:space="preserve">
+    <value>Timer saved successfully!</value>
+  </data>
+  <data name="TimerTask" xml:space="preserve">
+    <value>Task:</value>
   </data>
   <data name="Uncompleted" xml:space="preserve">
     <value>Uncompleted</value>
