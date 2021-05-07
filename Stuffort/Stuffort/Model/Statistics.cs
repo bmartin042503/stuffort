@@ -16,7 +16,8 @@ namespace Stuffort.Model
         public int SubjectID { get; set; }
         public int TaskID { get; set; }
         public DateTime Started { get; set; }
+        public DateTime Finished { get; set; }
         public bool IsDone { get; set; }
-        public bool TaskConnection { get; set; }
+        public bool TaskDisconnection { get; set; }
     }
 }

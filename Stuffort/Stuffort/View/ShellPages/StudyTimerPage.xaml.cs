@@ -29,8 +29,8 @@ namespace Stuffort.View.ShellPages
             base.OnAppearing();
             if (Running == false)
             {
-                await StudyTimerViewModel.InitializeStats();
-                StudyTimerViewModel.ImportTasks();
+                await this.StudyTimerViewModel.InitializeStats();
+                await this.StudyTimerViewModel.ImportTasks();
             }
             this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
         }

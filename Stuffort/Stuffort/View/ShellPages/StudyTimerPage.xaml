@@ -1,15 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
              x:Class="Stuffort.View.ShellPages.StudyTimerPage"
              Shell.TabBarIsVisible="False"
              Shell.BackgroundColor="{StaticResource stuffortBlue}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:LongNameConverter x:Key="lnConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Margin="15, 17.5, 15, 0">
             <Frame CornerRadius="10">
-                <Label TextColor="White" Text="{Binding StudyTime, StringFormat='{0:t}'}"
+                <StackLayout>
+                    <Label TextColor="White" Text="{Binding TaskName, Converter={StaticResource lnConverter}}" HorizontalOptions="Center"
+                           FontSize="20" Margin="0,0,0,-20" IsVisible="{Binding TaskNameVisible}"/>
+                    <Label TextColor="White" Text="{Binding CurrentStats.Time, StringFormat='{0:t}'}"
                    HorizontalOptions="Center" VerticalOptions="Center"
                    FontSize="82.5"/>
+                </StackLayout>
             </Frame>
             <Frame Margin="0,5,0,0" CornerRadius="10" HeightRequest="45" Padding="10">
                 <Grid>
@@ -19,7 +29,7 @@
                         <ColumnDefinition Width=".575*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Style="{StaticResource fontButton}" Text="{Binding IconChanging}"
+                    <Button Grid.Column="0" Style="{StaticResource fontButton}" Text="{Binding IconStatus}"
                         Margin="0,-10,0,-10" Command="{Binding TimerHandler}"
                         FontSize="30" TextColor="{StaticResource stuffortWhite}"/>
                     <Button Grid.Column="1" Style="{StaticResource fontButton}" Text="&#xee00;"
@@ -30,6 +40,7 @@
                         Margin="0,-10,0,-10" Command="{Binding TimerClear}"/>
                     <Picker x:Name="taskPicker"
                             Grid.Column="3" Margin="0,0,5,0"
+                            TextColor="{StaticResource stuffortWhite}"
                             ItemsSource="{Binding TaskList}"
                             ItemDisplayBinding="{Binding Name}"/>
                 </Grid>

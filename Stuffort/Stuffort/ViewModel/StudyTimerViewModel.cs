@@ -16,48 +16,80 @@ namespace Stuffort.ViewModel
     {
         //"\uec74" start
         //"\uec72" stop
-        private bool Running;
 
-        private string iconchanging;
-        public string IconChanging
+        private Picker TaskPicker;
+        private Switch TaskSwitch;
+        private bool Running;
+        private ObservableCollection<STask> tasklist;
+        public ObservableCollection<STask> TaskList
         {
-            get { return iconchanging; }
+            get { return tasklist; }
             set
             {
-                iconchanging = value;
-                OnPropertyChanged(nameof(IconChanging));
+                tasklist = value;
+                OnPropertyChanged(nameof(TaskList));
+            }
+        }
+        private string taskname;
+        public string TaskName
+        {
+            get { return taskname; }
+            set
+            {
+                taskname = value;
+                OnPropertyChanged(nameof(TaskName));
             }
         }
 
-        private Statistics CurrentStats;
-
-        private TimeSpan studytime;
-        public TimeSpan StudyTime
+        private bool tasknamevisible;
+        public bool TaskNameVisible
         {
-            get { return studytime; }
+            get { return tasknamevisible; }
             set
             {
-                studytime = value;
-                OnPropertyChanged(nameof(StudyTime));
+                tasknamevisible = value;
+                OnPropertyChanged(nameof(TaskNameVisible));
+            }
+        }
+
+        private string iconstatus;
+        public string IconStatus
+        {
+            get { return iconstatus; }
+            set
+            {
+                iconstatus = value;
+                OnPropertyChanged(nameof(IconStatus));
             }
         }
         public Command TimerHandler { get; set; }
         public Command TimerSave { get; set; }
-
         public Command TimerClear { get; set; }
 
-        public ObservableCollection<STask> TaskList { get; set; }
+        private Statistics currentstats;
+        public Statistics CurrentStats
+        {
+            get { return currentstats; }
+            set { currentstats = value; }
+        }
 
-        public Picker TaskPicker { get; set; }
-        public Switch SwitchTimer { get; set; }
+        public TimeSpan StudyTime
+        {
+            get { return currentstats.Time; }
+            set
+            {
+                currentstats.Time = value;
+                OnPropertyChanged(nameof(CurrentStats));
+            }
+        }
 
         private bool isfreetimer;
         public bool IsFreeTimer
         {
             get { return isfreetimer; }
-            set
-            {
+            set {
                 isfreetimer = value;
+                CurrentStats.TaskDisconnection = value;
                 if (value == true)
                     TaskPicker.IsEnabled = false;
                 else
@@ -65,22 +97,128 @@ namespace Stuffort.ViewModel
                 OnPropertyChanged(nameof(IsFreeTimer));
             }
         }
-
         public StudyTimerViewModel(bool run, Switch sw, Picker pc)
         {
             TaskList = new ObservableCollection<STask>();
-            ImportTasks();
+            IconStatus = "\uec74";
             Running = run;
-            IconChanging = "\uec74";
-            TimerHandler = new Command(TimerSwitch);
-            TimerSave = new Command(StudyTimeSave);
-            TimerClear = new Command(StudyTimeClear);
-            SwitchTimer = sw;
             TaskPicker = pc;
-            pc.SelectedIndex = 0;
+            TaskSwitch = sw;
+            TimerHandler = new Command(TimerSwitch);
+            TimerSave = new Command(SaveData);
+            TimerClear = new Command(ResetData);
         }
 
-        public async void ImportTasks()
+        public async void ResetData()
+        {
+            var stats = await StatisticsServices.GetStatistics();
+            foreach(var stat in stats)
+            {
+                await App.Current.MainPage.DisplayAlert("Statisztika-Adatok",
+                    $"ID: {stat.ID}\nElindítva: {stat.Started:g}\nBefejezve: {stat.Finished:g}\nTask-ID: {stat.TaskID}\nSubject-ID: {stat.SubjectID}\nTask-Connection: {stat.TaskDisconnection}\nIsDone értéke: {stat.IsDone}\nIdő: {stat.Time:t}", "Ok");
+            }
+        }
+
+        public async void TimerSwitch()
+        {
+            if(Running == false)
+            {
+                if(StudyTime.TotalSeconds == 0)
+                {
+                    if(CurrentStats.TaskDisconnection == false)
+                    {
+                        STask selectedTask = TaskPicker.SelectedItem as STask;
+                        CurrentStats.TaskID = selectedTask.ID;
+                        CurrentStats.SubjectID = selectedTask.SubjectID;
+                        TaskName = $"{selectedTask.Name} ({selectedTask.SubjectName})";
+                        TaskNameVisible = true;
+                    }
+                    else
+                    {
+                        CurrentStats.TaskID = -1;
+                        CurrentStats.SubjectID = -1;
+                        TaskNameVisible = false;
+                    }
+                    CurrentStats.Started = DateTime.Now;
+                    await StatisticsServices.AddStatistics(CurrentStats);
+                }
+                else
+                {
+                    if (CurrentStats.TaskDisconnection == false)
+                    {
+                        STask selectedTask = TaskPicker.SelectedItem as STask;
+                        TaskName = $"{selectedTask.Name} ({selectedTask.SubjectName})";
+                        TaskNameVisible = true;
+                    }
+                    else TaskNameVisible = false;
+                }
+                TaskPicker.IsEnabled = false;
+                TaskSwitch.IsEnabled = false;
+                Running = true;
+                IconStatus = "\uec72";
+                int count = 0;
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                {
+                    if (Running)
+                    {
+                        Device.BeginInvokeOnMainThread(async() => { 
+                            if(count == 45)
+                            {
+                                await StatisticsServices.UpdateStatistics(CurrentStats);
+                                count = 0;
+                            }
+                        });
+                        StudyTime = StudyTime.Add(TimeSpan.FromSeconds(1));
+                        count++;
+                    }
+                    return Running;
+                });
+            }
+            else
+            {
+                IconStatus = "\uec74";
+                Running = false;
+                await StatisticsServices.UpdateStatistics(CurrentStats);
+            }
+        }
+
+        public async void SaveData()
+        {
+            if(StudyTime.TotalSeconds < 60)
+            {
+                IconStatus = "\uec74";
+                Running = false;
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("TimerAtLeast1Min"), "Ok");
+                return;
+            }
+            string taskName = string.Empty;
+            if(CurrentStats.TaskDisconnection == false)
+            {
+                STask selectedTask = TaskPicker.SelectedItem as STask;
+                selectedTask.IsDone = true;
+                taskName = selectedTask.Name;
+                await STaskServices.UpdateTask(selectedTask);
+            }
+            else
+            {
+                taskName = "-";
+            }
+            CurrentStats.IsDone = true;
+            CurrentStats.Finished = DateTime.Now;
+            IconStatus = "\uec74";
+            Running = false;
+            await StatisticsServices.UpdateStatistics(CurrentStats);
+            await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
+                    $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimeSpent")} {CurrentStats.Time:t}\n{AppResources.ResourceManager.GetString("TimerTask")} {taskName}", "Ok");
+            CurrentStats = new Statistics();
+            StudyTime = new TimeSpan();
+            TaskNameVisible = false;
+            TaskSwitch.IsToggled = false;
+            await ImportTasks();
+        }
+
+        public async Task ImportTasks()
         {
             TaskList.Clear();
             var tasks = await STaskServices.GetTasks();
@@ -89,160 +227,47 @@ namespace Stuffort.ViewModel
                 if (task.IsDone == false)
                     TaskList.Add(task);
             }
-            if(TaskList.Count == 0)
+            if (TaskList.Count == 0)
             {
                 TaskPicker.IsEnabled = false;
-                IsFreeTimer = true;
-                SwitchTimer.IsEnabled = false;
+                TaskSwitch.IsEnabled = false;
             }
             else
             {
                 TaskPicker.IsEnabled = true;
-                SwitchTimer.IsEnabled = true;
+                TaskSwitch.IsEnabled = true;
+                TaskPicker.SelectedItem = TaskList[0];
             }
         }
 
-        public async void StudyTimeClear()
-        {
-            var stats = await StatisticsServices.GetStatistics();
-            foreach(var stat in stats)
-            {
-                await App.Current.MainPage.DisplayAlert("Statisztika-Adat", $"ID: {stat.ID} - Kezdés: {stat.Started:d}\nIdő: {stat.Time:t}\nTask és SID: {stat.TaskID} - {stat.SubjectID}\nTaskConn és TaskDone: {stat.TaskConnection} {stat.IsDone}", "Ok");
-            }    
-        }
-
-        public async void StudyTimeSave()
-        {
-            /*if(StudyTime.TotalSeconds < 60)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"), 
-                    AppResources.ResourceManager.GetString("TimerAtLeast1Min"),"Ok");
-            }*/
-            Running = false;
-            if(IsFreeTimer == false)
-            {
-                bool complete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDoneTask"),
-                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
-                if(!complete)
-                {
-                    STask selectedTask = TaskPicker.SelectedItem as STask;
-                    selectedTask.IsDone = true;
-                    await STaskServices.UpdateTask(selectedTask);
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
-                        $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimerSpent")} {StudyTime:t} {AppResources.ResourceManager.GetString("TimerTask")} {selectedTask.Name}", "Ok");
-                }
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
-                    $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimerSpent")} {StudyTime:t}", "Ok");
-            }
-            CurrentStats.IsDone = true;
-            CurrentStats.TaskConnection = !IsFreeTimer;
-            CurrentStats.Time = StudyTime;
-            await StatisticsServices.UpdateStatistics(CurrentStats);
-            StudyTime = new TimeSpan();
-            ImportTasks();
-            IconChanging = "\uec74";
-        }     
-
-        public async void TimerSwitch()
-        {
-            try
-            {
-                if (Running == false)
-                {
-                    if (StudyTime.TotalSeconds == 0)
-                    {
-                        if (IsFreeTimer == false && TaskList.Count != 0)
-                        {
-                            STask selectedTask = TaskPicker.SelectedItem as STask;
-                            CurrentStats.TaskConnection = true;
-                            CurrentStats.TaskID = selectedTask.ID;
-                            CurrentStats.SubjectID = selectedTask.SubjectID;
-                        }
-                        else
-                        {
-                            CurrentStats.TaskID = -1;
-                            CurrentStats.SubjectID = -1;
-                        }
-                        CurrentStats.Started = DateTime.Now;
-                        await StatisticsServices.AddStatistics(CurrentStats);
-                    }
-                    else
-                    {
-                        TaskPicker.SelectedItem = TaskList.Where(x => x.ID == CurrentStats.TaskID);
-                    }
-                    SwitchTimer.IsEnabled = false;
-                    TaskPicker.IsEnabled = false;
-                    IconChanging = "\uec72";
-                    Running = true;
-                    int count = 0;
-                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-                    {
-                        if (Running)
-                        {
-
-                            StudyTime = StudyTime.Add(new TimeSpan(0, 0, 1));
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                if (count == 45)
-                                {
-                                    count = 0;
-                                    CurrentStats.Time = StudyTime;
-                                    await StatisticsServices.UpdateStatistics(CurrentStats);
-                                    await App.Current.MainPage.DisplayAlert("Success", "Stat is updated!", "Ok");
-                                }
-                            });
-                            count++;
-                        }
-                        return Running;
-                    });
-                }
-                else
-                {
-                    CurrentStats.Time = StudyTime;
-                    await StatisticsServices.UpdateStatistics(CurrentStats);
-                    Running = false;
-                    IconChanging = "\uec74";
-                }
-            }
-            catch(Exception ex) {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"), 
-                    $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
-        }
         public async Task InitializeStats()
         {
-            try
+            var stats = await StatisticsServices.GetStatistics();
+            if(stats != null && stats.Count() != 0)
             {
-                var stats = await StatisticsServices.GetStatistics();
-                CurrentStats = new Statistics();
-                if (stats != null && stats.Count() != 0)
+                var orderedstats = from stat in stats
+                                   orderby stat.ID descending
+                                   select stat;
+                foreach(var stat in orderedstats)
                 {
-                    var orderedStats = from stat in stats
-                                       orderby stat.ID descending
-                                       select stat;
-                    foreach (var stat in orderedStats)
+                    if (stat.IsDone == false)
                     {
-                        if (stat.IsDone == false)
-                        {
-                            CurrentStats = stat;
-                            SwitchTimer.IsEnabled = false;
-                            TaskPicker.IsEnabled = false;
-                            StudyTime = CurrentStats.Time;
-                            break;
-                        }
+                        CurrentStats = stat;
+                        StudyTime = stat.Time;
+                        TaskPicker.SelectedItem = TaskList.Where(x => x.ID == CurrentStats.TaskID);
+                        TaskPicker.IsEnabled = false;
+                        TaskSwitch.IsEnabled = false;
+                        return;
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+            CurrentStats = new Statistics();
+            CurrentStats.TaskDisconnection = true;
+            StudyTime = new TimeSpan();
+            TaskPicker.IsEnabled = true;
+            TaskSwitch.IsEnabled = true;
         }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {
