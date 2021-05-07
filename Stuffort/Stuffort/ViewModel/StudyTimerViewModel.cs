@@ -41,6 +41,17 @@ namespace Stuffort.ViewModel
             }
         }
 
+        private string subjectname;
+        public string SubjectName
+        {
+            get { return subjectname; }
+            set
+            {
+                subjectname = value;
+                OnPropertyChanged(nameof(SubjectName));
+            }
+        }
+
         private bool tasknamevisible;
         public bool TaskNameVisible
         {
@@ -99,6 +110,8 @@ namespace Stuffort.ViewModel
         }
         public StudyTimerViewModel(bool run, Switch sw, Picker pc)
         {
+            TaskName = "";
+            SubjectName = "";
             TaskList = new ObservableCollection<STask>();
             IconStatus = "\uec74";
             Running = run;
@@ -130,7 +143,8 @@ namespace Stuffort.ViewModel
                         STask selectedTask = TaskPicker.SelectedItem as STask;
                         CurrentStats.TaskID = selectedTask.ID;
                         CurrentStats.SubjectID = selectedTask.SubjectID;
-                        TaskName = $"{selectedTask.Name} ({selectedTask.SubjectName})";
+                        TaskName = selectedTask.Name;
+                        SubjectName = selectedTask.SubjectName;
                         TaskNameVisible = true;
                     }
                     else
@@ -147,7 +161,8 @@ namespace Stuffort.ViewModel
                     if (CurrentStats.TaskDisconnection == false)
                     {
                         STask selectedTask = TaskPicker.SelectedItem as STask;
-                        TaskName = $"{selectedTask.Name} ({selectedTask.SubjectName})";
+                        TaskName = selectedTask.Name;
+                        SubjectName = selectedTask.SubjectName;
                         TaskNameVisible = true;
                     }
                     else TaskNameVisible = false;
@@ -195,16 +210,23 @@ namespace Stuffort.ViewModel
             string taskName = string.Empty;
             if(CurrentStats.TaskDisconnection == false)
             {
-                STask selectedTask = TaskPicker.SelectedItem as STask;
-                selectedTask.IsDone = true;
-                taskName = selectedTask.Name;
-                await STaskServices.UpdateTask(selectedTask);
+                bool completed = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDoneTask"),
+                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                if (!completed)
+                {
+                    STask selectedTask = TaskPicker.SelectedItem as STask;
+                    selectedTask.IsDone = true;
+                    taskName = selectedTask.Name;
+                    await STaskServices.UpdateTask(selectedTask);
+                    CurrentStats.IsDone = true;
+                }
+                else CurrentStats.IsDone = true;
             }
             else
             {
                 taskName = "-";
+                CurrentStats.IsDone = true;
             }
-            CurrentStats.IsDone = true;
             CurrentStats.Finished = DateTime.Now;
             IconStatus = "\uec74";
             Running = false;
@@ -254,7 +276,14 @@ namespace Stuffort.ViewModel
                     {
                         CurrentStats = stat;
                         StudyTime = stat.Time;
-                        TaskPicker.SelectedItem = TaskList.Where(x => x.ID == CurrentStats.TaskID);
+                        if (stat.SubjectID != -1 && stat.TaskID != -1)
+                        {
+                            TaskPicker.SelectedItem = TaskList.Where(x => x.ID == CurrentStats.TaskID);
+                            STask selectedItem = TaskPicker.SelectedItem as STask;
+                            TaskName = selectedItem.Name;
+                            SubjectName = selectedItem.SubjectName;
+                            TaskNameVisible = true;
+                        }
                         TaskPicker.IsEnabled = false;
                         TaskSwitch.IsEnabled = false;
                         return;
@@ -262,7 +291,7 @@ namespace Stuffort.ViewModel
                 }
             }
             CurrentStats = new Statistics();
-            CurrentStats.TaskDisconnection = true;
+            IsFreeTimer = false;
             StudyTime = new TimeSpan();
             TaskPicker.IsEnabled = true;
             TaskSwitch.IsEnabled = true;
