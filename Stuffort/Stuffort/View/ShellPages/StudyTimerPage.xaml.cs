@@ -20,18 +20,15 @@ namespace Stuffort.View.ShellPages
         {
             InitializeComponent();
             Running = false;
-            this.StudyTimerViewModel = new StudyTimerViewModel(Running, switchTimer, taskPicker);
+            this.StudyTimerViewModel = new StudyTimerViewModel(Running, switchTimer, taskPicker, timerHandlerBtn);
             BindingContext = this.StudyTimerViewModel;
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (Running == false)
-            {
-                await this.StudyTimerViewModel.ImportTasks();
-                await this.StudyTimerViewModel.InitializeStats();
-            }
+            await this.StudyTimerViewModel.ImportTasks();
+            await this.StudyTimerViewModel.InitializeStats();
             this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
         }
     }

@@ -189,6 +189,9 @@
   <data name="LanguageSetTo" xml:space="preserve">
     <value>Language has been set to: </value>
   </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>minutes ago</value>
   </data>
@@ -242,6 +245,9 @@
   </data>
   <data name="RenamingTask" xml:space="preserve">
     <value>Rename task</value>
+  </data>
+  <data name="ResetTimer" xml:space="preserve">
+    <value>Do you want to reset the timer? Data will be deleted.</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

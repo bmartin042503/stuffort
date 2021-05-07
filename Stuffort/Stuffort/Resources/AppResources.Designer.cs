@@ -277,6 +277,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading.
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to minutes ago.
         /// </summary>
         internal static string MinutesAgo {
@@ -435,6 +444,15 @@ namespace Stuffort.Resources {
         internal static string RenamingTask {
             get {
                 return ResourceManager.GetString("RenamingTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to reset the timer? Data will be deleted..
+        /// </summary>
+        internal static string ResetTimer {
+            get {
+                return ResourceManager.GetString("ResetTimer", resourceCulture);
             }
         }
         

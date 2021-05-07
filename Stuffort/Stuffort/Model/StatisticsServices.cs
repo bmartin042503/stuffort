@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
+using Stuffort.Resources;
 
 namespace Stuffort.Model
 {
@@ -12,29 +13,46 @@ namespace Stuffort.Model
 
         static public async Task Init()
         {
-            if (db != null)
-                return;
+            try
+            {
+                if (db != null)
+                    return;
 
-            db = new SQLiteAsyncConnection(App.DatabaseLocation);
-            await db.CreateTableAsync<Statistics>();
+                db = new SQLiteAsyncConnection(App.DatabaseLocation);
+                await db.CreateTableAsync<Statistics>();
+            }
+            catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok"); }
         }
 
         static public async Task<int> AddStatistics(Statistics s)
         {
-            await Init();
-            int rows = 0;
-            rows += await db.InsertAsync(s);
-            await db.CloseAsync();
-            return rows;
+            try 
+            {
+                await Init();
+                int rows = 0;
+                rows += await db.InsertAsync(s);
+                await db.CloseAsync();
+                return rows;
+            }
+            catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok"); }
+            return 0;
         }
 
         static public async Task<int> UpdateStatistics(Statistics s)
         {
-            await Init();
-            int rows = 0;
-            rows += await db.UpdateAsync(s);
-            await db.CloseAsync();
-            return rows;
+            try 
+            {
+                await Init();
+                int rows = 0;
+                rows += await db.UpdateAsync(s);
+                await db.CloseAsync();
+                return rows;
+            }
+            catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok"); }
+            return 0;
         }
 
         static public void DeleteAll()
@@ -47,19 +65,30 @@ namespace Stuffort.Model
 
         static public async Task<int> DeleteStatistics(Statistics s)
         {
-            await Init();
-            int rows = 0;
-            rows += await db.ExecuteAsync($"DELETE From [Statistics] WHERE [ID] = {s.ID}");
-            await db.CloseAsync();
-            return rows;
+            try {
+                await Init();
+                int rows = 0;
+                rows += await db.ExecuteAsync($"DELETE From [Statistics] WHERE [ID] = {s.ID}");
+                await db.CloseAsync();
+                return rows;
+            }
+            catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok"); }
+            return 0;
         }
 
         static public async Task<IEnumerable<Statistics>> GetStatistics()
         {
-            await Init();
-            var statList = await db.Table<Statistics>().ToListAsync();
-            await db.CloseAsync();
-            return statList;
+            try
+            {
+                await Init();
+                var statList = await db.Table<Statistics>().ToListAsync();
+                await db.CloseAsync();
+                return statList;
+            }
+            catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok"); }
+            return null;
         }
     }
 }

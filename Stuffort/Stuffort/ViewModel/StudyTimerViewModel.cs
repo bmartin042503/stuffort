@@ -9,6 +9,8 @@ using System.ComponentModel;
 using Stuffort.Resources;
 using Stuffort.Model;
 using System.Collections.ObjectModel;
+using System.Threading;
+using Acr.UserDialogs;
 
 namespace Stuffort.ViewModel
 {
@@ -17,8 +19,10 @@ namespace Stuffort.ViewModel
         //"\uec74" start
         //"\uec72" stop
 
+        private INotificationManager notificationManager;
         private Picker TaskPicker;
         private Switch TaskSwitch;
+        private Button TimerHandlerButton;
         private bool Running;
         private ObservableCollection<STask> tasklist;
         public ObservableCollection<STask> TaskList
@@ -63,16 +67,6 @@ namespace Stuffort.ViewModel
             }
         }
 
-        private string iconstatus;
-        public string IconStatus
-        {
-            get { return iconstatus; }
-            set
-            {
-                iconstatus = value;
-                OnPropertyChanged(nameof(IconStatus));
-            }
-        }
         public Command TimerHandler { get; set; }
         public Command TimerSave { get; set; }
         public Command TimerClear { get; set; }
@@ -94,26 +88,14 @@ namespace Stuffort.ViewModel
             }
         }
 
-        private bool isfreetimer;
-        public bool IsFreeTimer
+        public StudyTimerViewModel(bool run, Switch sw, Picker pc, Button btn)
         {
-            get { return isfreetimer; }
-            set {
-                isfreetimer = value;
-                CurrentStats.TaskDisconnection = value;
-                if (value == true)
-                    TaskPicker.IsEnabled = false;
-                else
-                    TaskPicker.IsEnabled = true;
-                OnPropertyChanged(nameof(IsFreeTimer));
-            }
-        }
-        public StudyTimerViewModel(bool run, Switch sw, Picker pc)
-        {
+            notificationManager = DependencyService.Get<INotificationManager>();
+            TimerHandlerButton = btn;
             TaskName = "";
             SubjectName = "";
             TaskList = new ObservableCollection<STask>();
-            IconStatus = "\uec74";
+            TimerHandlerButton.Text = "\uec74";
             Running = run;
             TaskPicker = pc;
             TaskSwitch = sw;
@@ -124,16 +106,47 @@ namespace Stuffort.ViewModel
 
         public async void ResetData()
         {
-            var stats = await StatisticsServices.GetStatistics();
-            foreach(var stat in stats)
+            bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("ResetTimer"),
+                AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+            if (!delete)
             {
-                await App.Current.MainPage.DisplayAlert("Statisztika-Adatok",
-                    $"ID: {stat.ID}\nElindítva: {stat.Started:g}\nBefejezve: {stat.Finished:g}\nTask-ID: {stat.TaskID}\nSubject-ID: {stat.SubjectID}\nTask-Connection: {stat.TaskDisconnection}\nIsDone értéke: {stat.IsDone}\nIdő: {stat.Time:t}", "Ok");
+                Running = false;
+                await StatisticsServices.DeleteStatistics(CurrentStats);
+                StudyTime = new TimeSpan();
+                CurrentStats = new Statistics();
+                TaskName = string.Empty;
+                SubjectName = string.Empty;
+                TaskNameVisible = false;
+                if (TaskList.Count != 0)
+                {
+                    TaskPicker.IsEnabled = true;
+                    TaskSwitch.IsEnabled = true;
+                }
+                else
+                {
+                    TaskPicker.IsEnabled = false;
+                    TaskSwitch.IsEnabled = false;
+                    CurrentStats.TaskDisconnection = true;
+                }
+                TimerHandlerButton.Text = "\uec74";
             }
+
+        }
+
+        public void SwitchRefresh()
+        {
+            TimerHandlerButton.IsEnabled = false;
+            UserDialogs.Instance.ShowLoading(AppResources.ResourceManager.GetString("Loading"));
+            Task.Run(async () => {
+                await Task.Delay(1250);
+                UserDialogs.Instance.HideLoading();
+            });
+            TimerHandlerButton.IsEnabled = true;
         }
 
         public async void TimerSwitch()
         {
+            SwitchRefresh();
             if(Running == false)
             {
                 if(StudyTime.TotalSeconds == 0)
@@ -167,10 +180,10 @@ namespace Stuffort.ViewModel
                     }
                     else TaskNameVisible = false;
                 }
+                Running = true;
                 TaskPicker.IsEnabled = false;
                 TaskSwitch.IsEnabled = false;
-                Running = true;
-                IconStatus = "\uec72";
+                TimerHandlerButton.Text = "\uec72";
                 int count = 0;
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
@@ -191,7 +204,7 @@ namespace Stuffort.ViewModel
             }
             else
             {
-                IconStatus = "\uec74";
+                TimerHandlerButton.Text = "\uec74";
                 Running = false;
                 await StatisticsServices.UpdateStatistics(CurrentStats);
             }
@@ -201,12 +214,13 @@ namespace Stuffort.ViewModel
         {
             if(StudyTime.TotalSeconds < 60)
             {
-                IconStatus = "\uec74";
+                TimerHandlerButton.Text = "\uec74";
                 Running = false;
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                     AppResources.ResourceManager.GetString("TimerAtLeast1Min"), "Ok");
                 return;
             }
+            Running = false;
             string taskName = string.Empty;
             if(CurrentStats.TaskDisconnection == false)
             {
@@ -218,9 +232,8 @@ namespace Stuffort.ViewModel
                     selectedTask.IsDone = true;
                     taskName = selectedTask.Name;
                     await STaskServices.UpdateTask(selectedTask);
-                    CurrentStats.IsDone = true;
                 }
-                else CurrentStats.IsDone = true;
+                CurrentStats.IsDone = true;
             }
             else
             {
@@ -228,8 +241,7 @@ namespace Stuffort.ViewModel
                 CurrentStats.IsDone = true;
             }
             CurrentStats.Finished = DateTime.Now;
-            IconStatus = "\uec74";
-            Running = false;
+            TimerHandlerButton.Text = "\uec74";
             await StatisticsServices.UpdateStatistics(CurrentStats);
             await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
                     $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimeSpent")} {CurrentStats.Time:t}\n{AppResources.ResourceManager.GetString("TimerTask")} {taskName}", "Ok");
@@ -242,59 +254,73 @@ namespace Stuffort.ViewModel
 
         public async Task ImportTasks()
         {
-            TaskList.Clear();
-            var tasks = await STaskServices.GetTasks();
-            foreach(var task in tasks)
+            if (Running == false)
             {
-                if (task.IsDone == false)
-                    TaskList.Add(task);
-            }
-            if (TaskList.Count == 0)
-            {
-                TaskPicker.IsEnabled = false;
-                TaskSwitch.IsEnabled = false;
-            }
-            else
-            {
-                TaskPicker.IsEnabled = true;
-                TaskSwitch.IsEnabled = true;
-                TaskPicker.SelectedItem = TaskList[0];
+                TaskList.Clear();
+                var tasks = await STaskServices.GetTasks();
+                foreach (var task in tasks)
+                {
+                    if (task.IsDone == false)
+                        TaskList.Add(task);
+                }
+                if (TaskList.Count == 0)
+                {
+                    TaskPicker.IsEnabled = false;
+                    TaskSwitch.IsEnabled = false;
+                }
+                else
+                {
+                    TaskPicker.IsEnabled = true;
+                    TaskSwitch.IsEnabled = true;
+                    TaskPicker.SelectedItem = TaskList[0];
+                }
             }
         }
 
         public async Task InitializeStats()
         {
-            var stats = await StatisticsServices.GetStatistics();
-            if(stats != null && stats.Count() != 0)
+            if (Running == false)
             {
-                var orderedstats = from stat in stats
-                                   orderby stat.ID descending
-                                   select stat;
-                foreach(var stat in orderedstats)
+                var stats = await StatisticsServices.GetStatistics();
+                if (stats != null && stats.Count() != 0)
                 {
-                    if (stat.IsDone == false)
+                    var orderedstats = from stat in stats
+                                       orderby stat.ID descending
+                                       select stat;
+                    foreach (var stat in orderedstats)
                     {
-                        CurrentStats = stat;
-                        StudyTime = stat.Time;
-                        if (stat.SubjectID != -1 && stat.TaskID != -1)
+                        if (stat.IsDone == false)
                         {
-                            TaskPicker.SelectedItem = TaskList.Where(x => x.ID == CurrentStats.TaskID);
-                            STask selectedItem = TaskPicker.SelectedItem as STask;
-                            TaskName = selectedItem.Name;
-                            SubjectName = selectedItem.SubjectName;
-                            TaskNameVisible = true;
+                            CurrentStats = stat;
+                            StudyTime = stat.Time;
+                            if (stat.SubjectID != -1 && stat.TaskID != -1)
+                            {
+                                STask selectedItem = null;
+                                for(int i = 0; i < TaskList.Count; ++i)
+                                {
+                                    if(TaskList[i].ID == CurrentStats.TaskID)
+                                    {
+                                        selectedItem = TaskList[i];
+                                        break;
+                                    }
+                                }
+                                if (selectedItem == null) return;
+                                TaskPicker.SelectedItem = selectedItem;
+                                TaskName = selectedItem.Name;
+                                SubjectName = selectedItem.SubjectName;
+                                CurrentStats.TaskDisconnection = false;
+                                TaskPicker.IsEnabled = false;
+                                TaskSwitch.IsEnabled = false;
+                                TaskNameVisible = true;
+                            }
+                            return;
                         }
-                        TaskPicker.IsEnabled = false;
-                        TaskSwitch.IsEnabled = false;
-                        return;
                     }
                 }
+                CurrentStats = new Statistics();
+                CurrentStats.TaskDisconnection = true;
+                StudyTime = new TimeSpan();
             }
-            CurrentStats = new Statistics();
-            IsFreeTimer = false;
-            StudyTime = new TimeSpan();
-            TaskPicker.IsEnabled = true;
-            TaskSwitch.IsEnabled = true;
         }
         
         public event PropertyChangedEventHandler PropertyChanged;
