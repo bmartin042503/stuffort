@@ -29,16 +29,7 @@ namespace Stuffort.ViewModel
             }
         }
 
-        private Statistics currentstats;
-        public Statistics CurrentStats
-        {
-            get { return currentstats; }
-            set
-            {
-                currentstats = value;
-                OnPropertyChanged(nameof(CurrentStats));
-            }
-        }
+        private Statistics CurrentStats;
 
         private TimeSpan studytime;
         public TimeSpan StudyTime
@@ -69,6 +60,8 @@ namespace Stuffort.ViewModel
                 isfreetimer = value;
                 if (value == true)
                     TaskPicker.IsEnabled = false;
+                else
+                    TaskPicker.IsEnabled = true;
                 OnPropertyChanged(nameof(IsFreeTimer));
             }
         }
@@ -99,6 +92,7 @@ namespace Stuffort.ViewModel
             if(TaskList.Count == 0)
             {
                 TaskPicker.IsEnabled = false;
+                IsFreeTimer = true;
                 SwitchTimer.IsEnabled = false;
             }
             else
@@ -108,12 +102,12 @@ namespace Stuffort.ViewModel
             }
         }
 
-        public void StudyTimeClear()
+        public async void StudyTimeClear()
         {
-            var stats = StatisticsServices.GetStatistics().Result;
+            var stats = await StatisticsServices.GetStatistics();
             foreach(var stat in stats)
             {
-                App.Current.MainPage.DisplayAlert("Statisztika-Adat", $"ID: {stat.ID} - Kezdés: {stat.Started:d}\nIdő: {stat.Time:t}\nTask és SID: {stat.TaskID} - {stat.SubjectID}\nTaskConn és TaskDone: {stat.TaskConnection} {stat.IsDone}", "Ok");
+                await App.Current.MainPage.DisplayAlert("Statisztika-Adat", $"ID: {stat.ID} - Kezdés: {stat.Started:d}\nIdő: {stat.Time:t}\nTask és SID: {stat.TaskID} - {stat.SubjectID}\nTaskConn és TaskDone: {stat.TaskConnection} {stat.IsDone}", "Ok");
             }    
         }
 
@@ -125,15 +119,15 @@ namespace Stuffort.ViewModel
                     AppResources.ResourceManager.GetString("TimerAtLeast1Min"),"Ok");
             }*/
             Running = false;
-            if(CurrentStats.TaskConnection == true)
+            if(IsFreeTimer == false)
             {
                 bool complete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDoneTask"),
                     AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
-                if(complete)
+                if(!complete)
                 {
-                    var tasks = STaskServices.GetTasks().Result;
-                    STask selectedTask = tasks.Where(x => x.ID == CurrentStats.TaskID) as STask;
+                    STask selectedTask = TaskPicker.SelectedItem as STask;
                     selectedTask.IsDone = true;
+                    await STaskServices.UpdateTask(selectedTask);
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
                         $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimerSpent")} {StudyTime:t} {AppResources.ResourceManager.GetString("TimerTask")} {selectedTask.Name}", "Ok");
                 }
@@ -144,17 +138,12 @@ namespace Stuffort.ViewModel
                     $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimerSpent")} {StudyTime:t}", "Ok");
             }
             CurrentStats.IsDone = true;
-            CurrentStats.TaskConnection = IsFreeTimer;
+            CurrentStats.TaskConnection = !IsFreeTimer;
             CurrentStats.Time = StudyTime;
             await StatisticsServices.UpdateStatistics(CurrentStats);
             StudyTime = new TimeSpan();
             ImportTasks();
             IconChanging = "\uec74";
-        }
-
-        public async void SaveStat(Statistics s)
-        {
-            
         }     
 
         public async void TimerSwitch()
@@ -163,16 +152,14 @@ namespace Stuffort.ViewModel
             {
                 if (Running == false)
                 {
-                    Running = true;
                     if (StudyTime.TotalSeconds == 0)
                     {
                         if (IsFreeTimer == false && TaskList.Count != 0)
                         {
+                            STask selectedTask = TaskPicker.SelectedItem as STask;
                             CurrentStats.TaskConnection = true;
-                            CurrentStats.TaskID = TaskList[TaskPicker.SelectedIndex].ID;
-                            var subjects = SubjectServices.GetSubjects().Result;
-                            Subject selectedSubject = subjects.Where(x => x.ID == TaskList[TaskPicker.SelectedIndex].SubjectID) as Subject;
-                            CurrentStats.SubjectID = selectedSubject.ID;
+                            CurrentStats.TaskID = selectedTask.ID;
+                            CurrentStats.SubjectID = selectedTask.SubjectID;
                         }
                         else
                         {
@@ -180,31 +167,44 @@ namespace Stuffort.ViewModel
                             CurrentStats.SubjectID = -1;
                         }
                         CurrentStats.Started = DateTime.Now;
-                        SwitchTimer.IsEnabled = false;
-                        TaskPicker.IsEnabled = false;
                         await StatisticsServices.AddStatistics(CurrentStats);
                     }
+                    else
+                    {
+                        TaskPicker.SelectedItem = TaskList.Where(x => x.ID == CurrentStats.TaskID);
+                    }
+                    SwitchTimer.IsEnabled = false;
+                    TaskPicker.IsEnabled = false;
                     IconChanging = "\uec72";
+                    Running = true;
                     int count = 0;
                     Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                     {
-                        Device.BeginInvokeOnMainThread(async () => {
-                            if (count == 45)
+                        if (Running)
+                        {
+
+                            StudyTime = StudyTime.Add(new TimeSpan(0, 0, 1));
+                            Device.BeginInvokeOnMainThread(async () =>
                             {
-                                await StatisticsServices.UpdateStatistics(CurrentStats);
-                                count = 0;
-                            }
+                                if (count == 45)
+                                {
+                                    count = 0;
+                                    CurrentStats.Time = StudyTime;
+                                    await StatisticsServices.UpdateStatistics(CurrentStats);
+                                    await App.Current.MainPage.DisplayAlert("Success", "Stat is updated!", "Ok");
+                                }
+                            });
                             count++;
-                        });
-                        StudyTime = StudyTime.Add(new TimeSpan(0, 0, 1));
+                        }
                         return Running;
                     });
                 }
                 else
                 {
+                    CurrentStats.Time = StudyTime;
+                    await StatisticsServices.UpdateStatistics(CurrentStats);
                     Running = false;
                     IconChanging = "\uec74";
-                    await StatisticsServices.UpdateStatistics(CurrentStats);
                 }
             }
             catch(Exception ex) {
@@ -214,23 +214,32 @@ namespace Stuffort.ViewModel
         }
         public async Task InitializeStats()
         {
-            var stats = await StatisticsServices.GetStatistics();
-            CurrentStats = new Statistics();
-            if (stats != null)
+            try
             {
-                var orderedStats = from stat in stats
-                                   orderby stat.ID descending
-                                   select stat;
-                foreach (var stat in orderedStats)
+                var stats = await StatisticsServices.GetStatistics();
+                CurrentStats = new Statistics();
+                if (stats != null && stats.Count() != 0)
                 {
-                    if (stat.IsDone == false)
+                    var orderedStats = from stat in stats
+                                       orderby stat.ID descending
+                                       select stat;
+                    foreach (var stat in orderedStats)
                     {
-                        CurrentStats = stat;
-                        SwitchTimer.IsEnabled = false;
-                        TaskPicker.IsEnabled = false;
-                        break;
+                        if (stat.IsDone == false)
+                        {
+                            CurrentStats = stat;
+                            SwitchTimer.IsEnabled = false;
+                            TaskPicker.IsEnabled = false;
+                            StudyTime = CurrentStats.Time;
+                            break;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
