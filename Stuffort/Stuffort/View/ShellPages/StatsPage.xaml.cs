@@ -18,15 +18,30 @@ namespace Stuffort.View.ShellPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StatsPage : ContentPage
     {
+        public StatsViewModel StatsViewModel;
         public StatsPage()
         {
             InitializeComponent();
+            this.StatsViewModel = new StatsViewModel();
+            BindingContext = this.StatsViewModel;
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            this.Title = AppResources.ResourceManager.GetString("StatsPage");
             var stats = await StatisticsServices.GetStatistics();
+            if(stats == null || stats.Count() == 0)
+            {
+                await DisplayAlert(AppResources.ResourceManager.GetString("Error"), AppResources.ResourceManager.GetString("NoStats"), "Ok");
+                await Shell.Current.GoToAsync($"//{nameof(SubjectsPage)}");
+                return;
+            }
+            this.StatsViewModel.NumberOf_Subjects();
+            this.StatsViewModel.Completed_Tasks();
+            this.StatsViewModel.CountOf_Sessions();
+            this.StatsViewModel.Longest_Session();
+            this.StatsViewModel.AllSessions_Time();
             var data = from stat in stats
                        group stat by stat.SubjectName
                        into newlist
@@ -73,7 +88,6 @@ namespace Stuffort.View.ShellPages
             }
             statsViewYear.Chart = new BarChart { Entries = EntryList2, LabelTextSize = 40, IsAnimated = true, AnimationProgress=1.5f, ValueLabelOrientation = Orientation.Horizontal,
             LabelOrientation = Orientation.Horizontal};
-            this.Title = AppResources.ResourceManager.GetString("StatsPage");
         }
 
         public string LocalLongnameConverter(string val)

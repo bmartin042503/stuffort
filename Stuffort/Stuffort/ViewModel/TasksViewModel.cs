@@ -133,7 +133,7 @@ namespace Stuffort.ViewModel
         public async void TapItem(object value)
         {
             string name = value as string;
-            if(name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
+            if(name.Length > 21) await App.Current.MainPage.DisplayAlert("", name, "Ok");
         }
 
         public async Task Refresh()

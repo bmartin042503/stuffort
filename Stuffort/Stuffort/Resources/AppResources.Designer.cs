@@ -169,6 +169,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed tasks:.
+        /// </summary>
+        internal static string CompletedTasks {
+            get {
+                return ResourceManager.GetString("CompletedTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Congratulations.
         /// </summary>
         internal static string Congratulations {
@@ -192,6 +201,24 @@ namespace Stuffort.Resources {
         internal static string ContactPage {
             get {
                 return ResourceManager.GetString("ContactPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of sessions:.
+        /// </summary>
+        internal static string CountOfSessions {
+            get {
+                return ResourceManager.GetString("CountOfSessions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of subjects:.
+        /// </summary>
+        internal static string CountOfSubjects {
+            get {
+                return ResourceManager.GetString("CountOfSubjects", resourceCulture);
             }
         }
         
@@ -295,6 +322,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        internal static string HoursL {
+            get {
+                return ResourceManager.GetString("HoursL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date is invalid!.
         /// </summary>
         internal static string InvalidDate {
@@ -367,6 +403,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Longest session:.
+        /// </summary>
+        internal static string LongestSession {
+            get {
+                return ResourceManager.GetString("LongestSession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to March.
         /// </summary>
         internal static string March {
@@ -399,6 +444,15 @@ namespace Stuffort.Resources {
         internal static string MinutesAgo {
             get {
                 return ResourceManager.GetString("MinutesAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes.
+        /// </summary>
+        internal static string MinutesL {
+            get {
+                return ResourceManager.GetString("MinutesL", resourceCulture);
             }
         }
         
@@ -489,6 +543,15 @@ namespace Stuffort.Resources {
         internal static string NoDeadline {
             get {
                 return ResourceManager.GetString("NoDeadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No stats available! Start a session first!.
+        /// </summary>
+        internal static string NoStats {
+            get {
+                return ResourceManager.GetString("NoStats", resourceCulture);
             }
         }
         
@@ -606,6 +669,15 @@ namespace Stuffort.Resources {
         internal static string SecondsAgo {
             get {
                 return ResourceManager.GetString("SecondsAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to seconds.
+        /// </summary>
+        internal static string SecondsL {
+            get {
+                return ResourceManager.GetString("SecondsL", resourceCulture);
             }
         }
         

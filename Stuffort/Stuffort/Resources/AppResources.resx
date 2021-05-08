@@ -153,6 +153,9 @@
   <data name="Completed" xml:space="preserve">
     <value>Completed</value>
   </data>
+  <data name="CompletedTasks" xml:space="preserve">
+    <value>Completed tasks:</value>
+  </data>
   <data name="Congratulations" xml:space="preserve">
     <value>Congratulations</value>
   </data>
@@ -161,6 +164,12 @@
   </data>
   <data name="ContactPage" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="CountOfSessions" xml:space="preserve">
+    <value>Number of sessions:</value>
+  </data>
+  <data name="CountOfSubjects" xml:space="preserve">
+    <value>Number of subjects:</value>
   </data>
   <data name="CountOfTasks" xml:space="preserve">
     <value>Number of tasks:</value>
@@ -195,6 +204,9 @@
   <data name="HoursAgo" xml:space="preserve">
     <value>hours ago</value>
   </data>
+  <data name="HoursL" xml:space="preserve">
+    <value>hours</value>
+  </data>
   <data name="InvalidDate" xml:space="preserve">
     <value>Date is invalid!</value>
   </data>
@@ -219,6 +231,9 @@
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
   </data>
+  <data name="LongestSession" xml:space="preserve">
+    <value>Longest session:</value>
+  </data>
   <data name="March" xml:space="preserve">
     <value>March</value>
   </data>
@@ -230,6 +245,9 @@
   </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>minutes ago</value>
+  </data>
+  <data name="MinutesL" xml:space="preserve">
+    <value>minutes</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -260,6 +278,9 @@
   </data>
   <data name="NoDeadline" xml:space="preserve">
     <value>No deadline</value>
+  </data>
+  <data name="NoStats" xml:space="preserve">
+    <value>No stats available! Start a session first!</value>
   </data>
   <data name="NoSubjects" xml:space="preserve">
     <value>You don't have any subjects</value>
@@ -299,6 +320,9 @@
   </data>
   <data name="SecondsAgo" xml:space="preserve">
     <value>seconds ago</value>
+  </data>
+  <data name="SecondsL" xml:space="preserve">
+    <value>seconds</value>
   </data>
   <data name="September" xml:space="preserve">
     <value>September</value>
