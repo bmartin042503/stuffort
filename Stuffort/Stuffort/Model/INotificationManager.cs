@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Stuffort.Model
 {
+    public class NotificationEventArgs : EventArgs
+    {
+        public string Title { get; set; }
+        public string Message { get; set; }
+    }
     public interface INotificationManager
     {
         event EventHandler NotificationReceived;

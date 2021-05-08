@@ -736,6 +736,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Study Timer is running!.
+        /// </summary>
+        internal static string TimerHasStartedNotification {
+            get {
+                return ResourceManager.GetString("TimerHasStartedNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time spent:.
         /// </summary>
         internal static string TimerSpent {

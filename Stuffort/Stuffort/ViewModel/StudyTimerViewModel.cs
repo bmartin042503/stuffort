@@ -18,7 +18,6 @@ namespace Stuffort.ViewModel
     {
         //"\uec74" start
         //"\uec72" stop
-
         private INotificationManager notificationManager;
         private Picker TaskPicker;
         private Switch TaskSwitch;
@@ -180,6 +179,8 @@ namespace Stuffort.ViewModel
                     }
                     else TaskNameVisible = false;
                 }
+                notificationManager.SendNotification(AppResources.ResourceManager.GetString("StudyTimerPage"),
+                    AppResources.ResourceManager.GetString("TimerHasStartedNotification"), DateTime.Now);
                 Running = true;
                 TaskPicker.IsEnabled = false;
                 TaskSwitch.IsEnabled = false;

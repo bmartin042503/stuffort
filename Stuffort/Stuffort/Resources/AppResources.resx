@@ -342,6 +342,9 @@
   <data name="TimerAtLeast1Min" xml:space="preserve">
     <value>You need to have at least a minute in the timer to save it!</value>
   </data>
+  <data name="TimerHasStartedNotification" xml:space="preserve">
+    <value>Study Timer is running!</value>
+  </data>
   <data name="TimerSpent" xml:space="preserve">
     <value>Time spent:</value>
   </data>
