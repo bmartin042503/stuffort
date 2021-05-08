@@ -123,6 +123,9 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>All rights reserved ©</value>
   </data>
+  <data name="April" xml:space="preserve">
+    <value>April</value>
+  </data>
   <data name="AreYouSureDeleteSubject" xml:space="preserve">
     <value>Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="AreYouSureUndoneTask" xml:space="preserve">
     <value>Do you want to set the task as 'Uncompleted'?</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>August</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -162,6 +168,9 @@
   <data name="Deadline" xml:space="preserve">
     <value>Deadline:</value>
   </data>
+  <data name="December" xml:space="preserve">
+    <value>December</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -174,6 +183,15 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error message:</value>
   </data>
+  <data name="February" xml:space="preserve">
+    <value>February</value>
+  </data>
+  <data name="FreeTimer" xml:space="preserve">
+    <value>Free timer:</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>h</value>
+  </data>
   <data name="HoursAgo" xml:space="preserve">
     <value>hours ago</value>
   </data>
@@ -183,6 +201,15 @@
   <data name="InvalidSelectedSubject" xml:space="preserve">
     <value>The selected subject is invalid!</value>
   </data>
+  <data name="January" xml:space="preserve">
+    <value>January</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>July</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>June</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language:</value>
   </data>
@@ -191,6 +218,15 @@
   </data>
   <data name="Loading" xml:space="preserve">
     <value>Loading</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>March</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>m</value>
   </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>minutes ago</value>
@@ -231,6 +267,12 @@
   <data name="NoTasks" xml:space="preserve">
     <value>You don't have any tasks</value>
   </data>
+  <data name="November" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>October</value>
+  </data>
   <data name="Rename" xml:space="preserve">
     <value>Rename</value>
   </data>
@@ -257,6 +299,9 @@
   </data>
   <data name="SecondsAgo" xml:space="preserve">
     <value>seconds ago</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>September</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -359,6 +404,9 @@
   </data>
   <data name="Uncompleted" xml:space="preserve">
     <value>Uncompleted</value>
+  </data>
+  <data name="UndefinedSubject" xml:space="preserve">
+    <value>Free timer</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version:</value>

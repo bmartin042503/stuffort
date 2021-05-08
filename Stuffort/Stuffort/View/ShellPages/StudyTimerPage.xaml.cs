@@ -31,5 +31,13 @@ namespace Stuffort.View.ShellPages
             await this.StudyTimerViewModel.InitializeStats();
             this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
         }
+
+        private void switchTimer_Toggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value == true)
+                taskPicker.IsEnabled = false;
+            else
+                taskPicker.IsEnabled = true;
+        }
     }
 }

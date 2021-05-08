@@ -7,14 +7,14 @@
              Shell.TabBarIsVisible="False">
     <StackLayout>
         <StackLayout>
-            <Label Text="Stuffort" HorizontalOptions="Center" FontSize="60" Margin="0,25,0,0" FontFamily="Dosis"
+            <Label Text="Stuffort" HorizontalOptions="Center" FontSize="80" Margin="0,25,0,-10" FontFamily="Dosis"
                    TextColor="{StaticResource stuffortBlue}"/>
-            <Label x:Name="labelVersion" HorizontalOptions="Center" FontSize="20" TextColor="{StaticResource stuffortBlue}"/>
+            <Label x:Name="labelVersion" HorizontalOptions="Center" FontSize="22.5" TextColor="{StaticResource stuffortBlue}"/>
         </StackLayout>
         <StackLayout>
-            <Label x:Name="labelDeveloper" Margin="0,40,0,0" HorizontalOptions="Center"/>
-            <Label Text="E-mail: bmartin042503@gmail.com" Margin="0,0,0,15" HorizontalOptions="Center"/>
-            <Label x:Name="allRightsReserved" HorizontalOptions="Center"/>
+            <Label x:Name="labelDeveloper" Margin="0,40,0,0" FontSize="20" HorizontalOptions="Center"/>
+            <Label Text="E-mail: bmartin042503@gmail.com" FontSize="20" Margin="0,0,0,15" HorizontalOptions="Center"/>
+            <Label x:Name="allRightsReserved" HorizontalOptions="Center" FontSize="20"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

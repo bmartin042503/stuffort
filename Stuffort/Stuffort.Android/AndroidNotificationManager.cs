@@ -102,8 +102,8 @@ namespace Stuffort.Droid
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
-                .SetLargeIcon(Resource.Drawable.)
-                .SetSmallIcon(Resource.Drawable.ic_action_add)
+                .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.ic_stat_st))
+                .SetSmallIcon(Resource.Drawable.ic_stat_st)
                 .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
 
             Notification notification = builder.Build();

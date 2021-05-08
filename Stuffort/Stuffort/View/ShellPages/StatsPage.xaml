@@ -2,14 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Stuffort.View.ShellPages.StatsPage"
-             xmlns:resx="clr-namespace:Stuffort.Resources"
+             xmlns:resx="clr-namespace:Stuffort.Resources" 
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              Shell.BackgroundColor="{StaticResource stuffortBlue}"
              Shell.TabBarIsVisible="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="CurrentTitle"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView Margin="5,20,5,0">
+            <StackLayout>
+                <microcharts:ChartView x:Name="statsViewSubjects" HeightRequest="600"/>
+                <Label Margin="0,40,0,0" Text="2021. év" HorizontalOptions="Center" FontSize="30"/> 
+                <microcharts:ChartView x:Name="statsViewYear" HeightRequest="400" Margin="0,0,0,40"/>
+                <Label Text="LŐCSÖS"/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

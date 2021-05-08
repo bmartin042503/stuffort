@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
+             xmlns:resx="clr-namespace:Stuffort.Resources"
              x:Class="Stuffort.View.ShellPages.StudyTimerPage"
              Shell.TabBarIsVisible="False"
              Shell.BackgroundColor="{StaticResource stuffortBlue}">
@@ -15,13 +16,13 @@
             <Frame CornerRadius="10">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center"
-                                 Margin="0,0,0,-20" IsVisible="{Binding TaskNameVisible}">
+                                 Margin="0,0,0,-15" IsVisible="{Binding TaskNameVisible}">
                         <Label TextColor="White"
                                Text="{Binding Path=TaskName, Converter={StaticResource lnConverter}}"
-                               FontSize="20"/>
+                               FontSize="17"/>
                         <Label TextColor="White"
                                Text="{Binding Path=SubjectName, Converter={StaticResource lnConverter}, StringFormat='({0})'}" 
-                               FontSize="20"/>
+                               FontSize="17"/>
                     </StackLayout>
                     <Label TextColor="White" Text="{Binding CurrentStats.Time, StringFormat='{0:t}'}"
                        HorizontalOptions="Center" VerticalOptions="Center"
@@ -54,9 +55,12 @@
             </Frame>
             <StackLayout Orientation="Horizontal" Margin="2,10,0,0" 
                          HorizontalOptions="Start">
-                <Label Text="Free timer:"
-                       FontSize="20" Margin="0,0,5,0"/>
-                <Switch x:Name="switchTimer" IsToggled="{Binding CurrentStats.TaskDisconnection, Mode=TwoWay}"/>
+                <Label Text="{x:Static resx:AppResources.FreeTimer}"
+                       FontSize="20" Margin="0,0,5,0" TextColor="{StaticResource stuffortBlue}"
+                       FontAttributes="Bold"/>
+                <Switch x:Name="switchTimer" Margin="0,1,0,0" OnColor="{StaticResource stuffortDarkBlue}" 
+                        ThumbColor="{StaticResource stuffortBlue}"
+                        IsToggled="{Binding CurrentStats.TaskDisconnection, Mode=TwoWay}" Toggled="switchTimer_Toggled"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

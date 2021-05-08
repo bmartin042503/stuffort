@@ -14,6 +14,7 @@ namespace Stuffort.Model
         [NotNull]
         public TimeSpan Time { get; set; }
         public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
         public int TaskID { get; set; }
         public DateTime Started { get; set; }
         public DateTime Finished { get; set; }

@@ -79,6 +79,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to April.
+        /// </summary>
+        internal static string April {
+            get {
+                return ResourceManager.GetString("April", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!.
         /// </summary>
         internal static string AreYouSureDeleteSubject {
@@ -111,6 +120,15 @@ namespace Stuffort.Resources {
         internal static string AreYouSureUndoneTask {
             get {
                 return ResourceManager.GetString("AreYouSureUndoneTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to August.
+        /// </summary>
+        internal static string August {
+            get {
+                return ResourceManager.GetString("August", resourceCulture);
             }
         }
         
@@ -196,6 +214,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to December.
+        /// </summary>
+        internal static string December {
+            get {
+                return ResourceManager.GetString("December", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string Delete {
@@ -232,6 +259,33 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to February.
+        /// </summary>
+        internal static string February {
+            get {
+                return ResourceManager.GetString("February", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free timer:.
+        /// </summary>
+        internal static string FreeTimer {
+            get {
+                return ResourceManager.GetString("FreeTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to h.
+        /// </summary>
+        internal static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to hours ago.
         /// </summary>
         internal static string HoursAgo {
@@ -259,6 +313,33 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to January.
+        /// </summary>
+        internal static string January {
+            get {
+                return ResourceManager.GetString("January", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to July.
+        /// </summary>
+        internal static string July {
+            get {
+                return ResourceManager.GetString("July", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to June.
+        /// </summary>
+        internal static string June {
+            get {
+                return ResourceManager.GetString("June", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language:.
         /// </summary>
         internal static string Language {
@@ -282,6 +363,33 @@ namespace Stuffort.Resources {
         internal static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to March.
+        /// </summary>
+        internal static string March {
+            get {
+                return ResourceManager.GetString("March", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to May.
+        /// </summary>
+        internal static string May {
+            get {
+                return ResourceManager.GetString("May", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to m.
+        /// </summary>
+        internal static string Minutes {
+            get {
+                return ResourceManager.GetString("Minutes", resourceCulture);
             }
         }
         
@@ -403,6 +511,24 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to November.
+        /// </summary>
+        internal static string November {
+            get {
+                return ResourceManager.GetString("November", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to October.
+        /// </summary>
+        internal static string October {
+            get {
+                return ResourceManager.GetString("October", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
         internal static string Rename {
@@ -480,6 +606,15 @@ namespace Stuffort.Resources {
         internal static string SecondsAgo {
             get {
                 return ResourceManager.GetString("SecondsAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to September.
+        /// </summary>
+        internal static string September {
+            get {
+                return ResourceManager.GetString("September", resourceCulture);
             }
         }
         
@@ -786,6 +921,15 @@ namespace Stuffort.Resources {
         internal static string Uncompleted {
             get {
                 return ResourceManager.GetString("Uncompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free timer.
+        /// </summary>
+        internal static string UndefinedSubject {
+            get {
+                return ResourceManager.GetString("UndefinedSubject", resourceCulture);
             }
         }
         

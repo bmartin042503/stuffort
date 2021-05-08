@@ -20,7 +20,8 @@
         <StackLayout Orientation="Horizontal">
             <Label x:Name="deadLinelbl" FontSize="17.5" Margin="0,0,30,0"
                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-            <Switch Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" Margin="0,10" IsToggled="{Binding IsDeadline, Mode=TwoWay}"/>
+            <Switch Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" Margin="0,10" IsToggled="{Binding IsDeadline, Mode=TwoWay}"
+                    OnColor="{StaticResource stuffortDarkBlue}" ThumbColor="{StaticResource stuffortBlue}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <DatePicker MinimumDate="{Binding DateTimeNow}" Date="{Binding Date, Mode=TwoWay}" IsEnabled="{Binding IsDeadline}"/>

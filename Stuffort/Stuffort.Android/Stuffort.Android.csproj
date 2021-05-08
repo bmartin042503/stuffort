@@ -72,6 +72,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.1.0.514</Version>
     </PackageReference>
+    <PackageReference Include="Microcharts.Forms">
+      <Version>0.9.5.9</Version>
+    </PackageReference>
     <PackageReference Include="Refractored.MvvmHelpers">
       <Version>1.6.2</Version>
     </PackageReference>

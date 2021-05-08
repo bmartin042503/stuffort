@@ -135,7 +135,7 @@ namespace Stuffort.ViewModel
         public void SwitchRefresh()
         {
             TimerHandlerButton.IsEnabled = false;
-            UserDialogs.Instance.ShowLoading(AppResources.ResourceManager.GetString("Loading"));
+            UserDialogs.Instance.ShowLoading(AppResources.ResourceManager.GetString("Loading"), new MaskType());
             Task.Run(async () => {
                 await Task.Delay(1250);
                 UserDialogs.Instance.HideLoading();
@@ -157,12 +157,14 @@ namespace Stuffort.ViewModel
                         CurrentStats.SubjectID = selectedTask.SubjectID;
                         TaskName = selectedTask.Name;
                         SubjectName = selectedTask.SubjectName;
+                        CurrentStats.SubjectName = selectedTask.SubjectName;
                         TaskNameVisible = true;
                     }
                     else
                     {
                         CurrentStats.TaskID = -1;
                         CurrentStats.SubjectID = -1;
+                        CurrentStats.SubjectName = "UNDEFINED";
                         TaskNameVisible = false;
                     }
                     CurrentStats.Started = DateTime.Now;
