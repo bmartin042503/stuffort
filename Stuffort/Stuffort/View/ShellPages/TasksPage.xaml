@@ -74,9 +74,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ImageButton x:Name="addTaskBtn" BackgroundColor="Transparent" 
-                     AbsoluteLayout.LayoutBounds=".95,.95,80,80" CornerRadius="50"
-                     AbsoluteLayout.LayoutFlags="PositionProportional"
-                     Command="{Binding TaskCommand}" CommandParameter="{Binding SubjectListCount}"/>
     </AbsoluteLayout>
 </ContentPage>

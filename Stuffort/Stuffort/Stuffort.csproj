@@ -12,12 +12,10 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\Dosis-Book.ttf" />
-    <None Remove="Resources\Images\add_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\Dosis-Book.ttf" />
-    <EmbeddedResource Include="Resources\Images\add_icon.png" />
   </ItemGroup>
 
   <ItemGroup>

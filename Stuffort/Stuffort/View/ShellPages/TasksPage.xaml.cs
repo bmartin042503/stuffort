@@ -20,7 +20,6 @@ namespace Stuffort.View.ShellPages
         {
             InitializeComponent();
             TasksViewModel = new TasksViewModel(noTaskLabel);
-            addTaskBtn.Source = ImageSource.FromResource("Stuffort.Resources.Images.add_icon.png");
             BindingContext = TasksViewModel;
         }
 
