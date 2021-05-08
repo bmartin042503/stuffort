@@ -34,6 +34,8 @@ namespace Stuffort.View.ShellPages
             this.Title = AppResources.ResourceManager.GetString("SettingsPage");
             saveBtn.Text = AppResources.ResourceManager.GetString("Save");
             languageLbl.Text = AppResources.ResourceManager.GetString("Language");
+            deleteBtn.Text = AppResources.ResourceManager.GetString("DeleteEverything");
+            this.SettingsViewModel.SetNotification();
         }
     }
 }

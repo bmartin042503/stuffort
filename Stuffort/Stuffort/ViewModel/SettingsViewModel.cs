@@ -1,26 +1,57 @@
 ﻿using Stuffort.Configuration;
+using Stuffort.Model;
 using Stuffort.Resources;
 using Stuffort.View.ShellPages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Threading;
 using Xamarin.Forms;
 
 namespace Stuffort.ViewModel
 {
-    public class SettingsViewModel
+    public class SettingsViewModel : INotifyPropertyChanged
     {
         public Command SettingsCommand { get; set; }
+        public Command DeleteCommand { get; set; }
         public Picker LanguagePicker { get; set; }
 
         public List<string> Languages { get; set; }
 
-        public ConfigurationType ConfType { get; set; }
+        private bool notificationenabled;
+        public bool NotificationEnabled
+        {
+            get { return notificationenabled; }
+            set
+            {
+                notificationenabled = value;
+                OnPropertyChanged(nameof(NotificationEnabled));
+            }
+        }
+
+        private ConfigurationType ConfType;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged == null)
+                return;
+
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void SetNotification()
+        {
+            NotificationEnabled = (ConfigurationServices.GetConfigurationData()).NotificationEnabled;
+        }
+
         public SettingsViewModel(ConfigurationType ct, Picker picker)
         {
             SettingsCommand = new Command(SaveSettings);
+            DeleteCommand = new Command(DeleteEverything);
             ConfType = ct;
             Languages = new List<string>()
             {
@@ -31,6 +62,21 @@ namespace Stuffort.ViewModel
             LanguagePicker.SelectedIndex = ct.Language == "pl" ? 2 : ct.Language == "hu" ? 1 : 0;
         }
 
+        public async void DeleteEverything()
+        {
+            bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Warning"),
+                AppResources.ResourceManager.GetString("AreYouSureDeleteEverything"), AppResources.ResourceManager.GetString("Cancel"), 
+                AppResources.ResourceManager.GetString("Yes"));
+            if(!delete)
+            {
+                await SubjectServices.DeleteAll();
+                await STaskServices.DeleteAll();
+                await StatisticsServices.DeleteAll();
+                await App.Current.MainPage.DisplayAlert("",AppResources.ResourceManager.GetString("DataDeleted"), "Ok");
+                NavigateToHomepage();
+            }
+        }
+
         public void SaveSettings(object parameter)
         {
             var picker = parameter as Picker;
@@ -38,6 +84,7 @@ namespace Stuffort.ViewModel
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = language;
             ConfType.Language = language.ToString();
+            ConfType.NotificationEnabled = NotificationEnabled;
             ConfigurationServices.SaveConfigurationFile(ConfType);
             var items = Shell.Current.Items;
             foreach (var item in items)

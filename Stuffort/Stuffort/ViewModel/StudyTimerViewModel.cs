@@ -11,6 +11,7 @@ using Stuffort.Model;
 using System.Collections.ObjectModel;
 using System.Threading;
 using Acr.UserDialogs;
+using Stuffort.Configuration;
 
 namespace Stuffort.ViewModel
 {
@@ -181,8 +182,12 @@ namespace Stuffort.ViewModel
                     }
                     else TaskNameVisible = false;
                 }
-                notificationManager.SendNotification(AppResources.ResourceManager.GetString("StudyTimerPage"),
-                    AppResources.ResourceManager.GetString("TimerHasStartedNotification"), DateTime.Now);
+                ConfigurationType ct = ConfigurationServices.GetConfigurationData();
+                if (ct.NotificationEnabled == true)
+                {
+                    notificationManager.SendNotification(AppResources.ResourceManager.GetString("StudyTimerPage"),
+                        AppResources.ResourceManager.GetString("TimerHasStartedNotification"), DateTime.Now);
+                }
                 Running = true;
                 TaskPicker.IsEnabled = false;
                 TaskSwitch.IsEnabled = false;

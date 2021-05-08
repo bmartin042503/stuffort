@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 using System.Threading.Tasks;
+using Stuffort.Resources;
 
 namespace Stuffort.Model
 {
@@ -16,6 +17,21 @@ namespace Stuffort.Model
 
             db = new SQLiteAsyncConnection(App.DatabaseLocation);
             await db.CreateTableAsync<Subject>();
+        }
+
+        static async public Task DeleteAll()
+        {
+            try
+            {
+                await Init();
+                await db.DeleteAllAsync<Subject>();
+                await db.CloseAsync();
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
         static public async Task<int> AddSubject(Subject s)

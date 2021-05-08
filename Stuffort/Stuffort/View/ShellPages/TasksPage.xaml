@@ -21,7 +21,7 @@
             <converters:LongNameConverter x:Key="lnConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="15, 17.5, 15, 0">
+    <AbsoluteLayout Margin="15, 17.5, 15, 0">
         <Label x:Name="noTaskLabel" HorizontalOptions="Center" IsVisible="False"/>
         <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
                   HasUnevenRows="True"
@@ -74,5 +74,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackLayout>
+        <ImageButton x:Name="addTaskBtn" BackgroundColor="Transparent" 
+                     AbsoluteLayout.LayoutBounds=".95,.95,80,80" CornerRadius="50"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                     Command="{Binding TaskCommand}" CommandParameter="{Binding SubjectListCount}"/>
+    </AbsoluteLayout>
 </ContentPage>

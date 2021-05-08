@@ -55,12 +55,16 @@ namespace Stuffort.Model
             return 0;
         }
 
-        static public void DeleteAll()
+        static async public Task DeleteAll()
         {
-            db = new SQLiteAsyncConnection(App.DatabaseLocation);
-            db.CreateTableAsync<Statistics>();
-            db.DeleteAllAsync<Statistics>();
-            db.CloseAsync();
+            try
+            {
+                await Init();
+                await db.DeleteAllAsync<Statistics>();
+                await db.CloseAsync();
+            }
+            catch(Exception ex) { await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok"); }
         }
 
         static public async Task<int> DeleteStatistics(Statistics s)

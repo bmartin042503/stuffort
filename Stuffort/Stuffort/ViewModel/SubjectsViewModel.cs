@@ -22,6 +22,7 @@ namespace Stuffort.ViewModel
         public AsyncCommand SubjectRefreshCommand { get; set; }
         public Command SubjectRemoveCommand { get; set; }
         public Command SubjectRenameCommand { get; set; }
+        public Command TapCommand { get; set; }
         public ObservableCollection<Tuple<Subject, string>> SubjectList { get; set; }
 
         private bool isrefreshing;
@@ -44,6 +45,11 @@ namespace Stuffort.ViewModel
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
+        public async void TapItem(object value)
+        {
+            string name = value as string;
+            if (name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
+        }
 
         public async Task Refresh()
         {
@@ -55,6 +61,7 @@ namespace Stuffort.ViewModel
         {
             NoSubjectLabel = lbl;
             SubjectList = new ObservableCollection<Tuple<Subject,string>>();
+            TapCommand = new Command(TapItem);
             SubjectCommand = new AsyncCommand(NavigateToNewSubject);
             SubjectRemoveCommand = new Command(RemovingSubject);
             SubjectRefreshCommand = new AsyncCommand(Refresh);
@@ -67,8 +74,19 @@ namespace Stuffort.ViewModel
             string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingSubject"),
                 AppResources.ResourceManager.GetString("RenameSubject"),
                 "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
-            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
-            if (newName.Length > 120 || newName.Length < 3) return;
+            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName))
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
+                return;
+            }
+
+            if (newName.Length > 120 || newName.Length < 3)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                return;
+            }
             selectedItem.Name = newName;
             await SubjectServices.RenameSubject(selectedItem, newName);
             await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),

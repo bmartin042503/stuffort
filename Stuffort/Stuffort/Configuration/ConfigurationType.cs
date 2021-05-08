@@ -7,10 +7,10 @@ namespace Stuffort.Configuration
     public class ConfigurationType
     {
         public ConfigurationType() { }
-        public ConfigurationType(string lang, bool darkm)
+        public ConfigurationType(string lang, bool notificationenabled)
         {
             this.language = lang;
-            this.darkMode = darkm;
+            this.NotificationEnabled = notificationenabled;
         }
 
         private string language;
@@ -20,11 +20,11 @@ namespace Stuffort.Configuration
             set { language = value; }
         }
 
-        private bool darkMode;
-        public bool DarkMode
+        private bool notificationenabled;
+        public bool NotificationEnabled
         {
-            get { return darkMode; }
-            set { darkMode = value; }
+            get { return notificationenabled; }
+            set { notificationenabled = value; }
         }
     }
 }

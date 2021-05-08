@@ -47,6 +47,7 @@ namespace Stuffort.ViewModel
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = language;
             ConfType.Language = language.ToString();
+            ConfType.NotificationEnabled = true;
             ConfigurationServices.SaveConfigurationFile(ConfType);          
             var items = Shell.Current.Items;
             foreach(var item in items)

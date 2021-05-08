@@ -18,7 +18,7 @@ namespace Stuffort.Configuration
             using (FileStream fs = new FileStream(FilePath, FileMode.Create))
             {
                 XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
-                ser.Serialize(fs, new ConfigurationType(ct.Language, ct.DarkMode));
+                ser.Serialize(fs, new ConfigurationType(ct.Language, ct.NotificationEnabled));
             }
             
         }

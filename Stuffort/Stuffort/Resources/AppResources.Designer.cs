@@ -88,6 +88,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete everything? There is no backup..
+        /// </summary>
+        internal static string AreYouSureDeleteEverything {
+            get {
+                return ResourceManager.GetString("AreYouSureDeleteEverything", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!.
         /// </summary>
         internal static string AreYouSureDeleteSubject {
@@ -232,6 +241,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data deleted..
+        /// </summary>
+        internal static string DataDeleted {
+            get {
+                return ResourceManager.GetString("DataDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deadline:.
         /// </summary>
         internal static string Deadline {
@@ -255,6 +273,15 @@ namespace Stuffort.Resources {
         internal static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete everything.
+        /// </summary>
+        internal static string DeleteEverything {
+            get {
+                return ResourceManager.GetString("DeleteEverything", resourceCulture);
             }
         }
         
@@ -709,6 +736,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings saved successfully!.
+        /// </summary>
+        internal static string SettingsSaved {
+            get {
+                return ResourceManager.GetString("SettingsSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soon.
         /// </summary>
         internal static string Soon {
@@ -1011,6 +1047,15 @@ namespace Stuffort.Resources {
         internal static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
         

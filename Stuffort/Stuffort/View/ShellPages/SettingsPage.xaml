@@ -7,19 +7,34 @@
              Shell.TabBarIsVisible="False">
     <ContentPage.Content>
         <StackLayout>
-            <FlexLayout Margin="10,10,0,350" Direction="Row" JustifyContent="SpaceEvenly" AlignItems="Center">
-                <Label x:Name="languageLbl" Margin="-30,0,0,0" FontSize="20" Grid.Row="0" Grid.Column="1"/>
-                <Picker x:Name="languagePicker"
-                        TitleColor="Black"
-                        WidthRequest="200"
-                        Grid.Row="1" Grid.Column="2"/>
-            </FlexLayout>
+            <Grid Margin="20,20,20,280">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" x:Name="languageLbl" Margin="0,0,0,0" FontSize="20"
+                       VerticalOptions="Center"/>
+                <Picker Grid.Row="0" Grid.Column="1" x:Name="languagePicker" VerticalOptions="Center"
+                        TitleColor="Black"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="Értesítések:" FontSize="20"
+                       VerticalOptions="Center"/>
+                <Switch Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start"
+                        IsToggled="{Binding NotificationEnabled, Mode=TwoWay}"/>
+            </Grid>
             <Button x:Name="saveBtn"
                     Text="{x:Static resx:AppResources.Save}"
-                    Margin="130,20"
-                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,80" CornerRadius="10" FontSize="17.5"
+                    WidthRequest="125" FontAttributes="Bold" HeightRequest="45"
                     Command="{Binding SettingsCommand}"
                     CommandParameter="{Binding LanguagePicker}"/>
+            <Button x:Name="deleteBtn" HeightRequest="45" HorizontalOptions="Center" WidthRequest="200"
+                    BackgroundColor="Transparent" TextColor="Red" BorderColor="Red" CornerRadius="10"
+                    Command="{Binding DeleteCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

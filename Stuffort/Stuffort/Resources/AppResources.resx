@@ -126,6 +126,9 @@
   <data name="April" xml:space="preserve">
     <value>April</value>
   </data>
+  <data name="AreYouSureDeleteEverything" xml:space="preserve">
+    <value>Are you sure to delete everything? There is no backup.</value>
+  </data>
   <data name="AreYouSureDeleteSubject" xml:space="preserve">
     <value>Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!</value>
   </data>
@@ -174,6 +177,9 @@
   <data name="CountOfTasks" xml:space="preserve">
     <value>Number of tasks:</value>
   </data>
+  <data name="DataDeleted" xml:space="preserve">
+    <value>Data deleted.</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Deadline:</value>
   </data>
@@ -182,6 +188,9 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="DeleteEverything" xml:space="preserve">
+    <value>Delete everything</value>
   </data>
   <data name="Developer" xml:space="preserve">
     <value>Developer: Martin Bartos</value>
@@ -333,6 +342,9 @@
   <data name="SettingsPage" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>Settings saved successfully!</value>
+  </data>
   <data name="Soon" xml:space="preserve">
     <value>Soon</value>
   </data>
@@ -434,6 +446,9 @@
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version:</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Please choose a language!</value>

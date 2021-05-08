@@ -69,8 +69,19 @@ namespace Stuffort.ViewModel
             string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingTask"), 
                 AppResources.ResourceManager.GetString("RenameTask"), 
                 "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
-            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
-            if (newName.Length > 120 || newName.Length < 3) return;
+            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName))
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
+                return;
+            }
+
+            if (newName.Length > 120 || newName.Length < 3)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                return;
+            }
             selectedItem.Name = newName;
             await STaskServices.UpdateTask(selectedItem);
             await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
@@ -133,7 +144,7 @@ namespace Stuffort.ViewModel
         public async void TapItem(object value)
         {
             string name = value as string;
-            if(name.Length > 21) await App.Current.MainPage.DisplayAlert("", name, "Ok");
+            if(name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
         }
 
         public async Task Refresh()
