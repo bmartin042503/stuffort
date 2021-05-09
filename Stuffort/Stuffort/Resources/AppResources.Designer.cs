@@ -97,6 +97,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure to delete this from timer history?.
+        /// </summary>
+        internal static string AreYouSureDeleteStat {
+            get {
+                return ResourceManager.GetString("AreYouSureDeleteStat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!.
         /// </summary>
         internal static string AreYouSureDeleteSubject {
@@ -327,6 +336,15 @@ namespace Stuffort.Resources {
         internal static string FreeTimer {
             get {
                 return ResourceManager.GetString("FreeTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free timer.
+        /// </summary>
+        internal static string FreeTimerTitle {
+            get {
+                return ResourceManager.GetString("FreeTimerTitle", resourceCulture);
             }
         }
         

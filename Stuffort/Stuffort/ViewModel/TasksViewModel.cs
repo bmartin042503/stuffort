@@ -185,7 +185,7 @@ namespace Stuffort.ViewModel
         public async Task Refresh()
         {
             IsRefreshing = true;
-            await Task.Delay(1000);
+            await Task.Delay(750);
             await UpdateTasks();
             IsRefreshing = false;
         }

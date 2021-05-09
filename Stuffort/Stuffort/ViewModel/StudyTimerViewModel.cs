@@ -34,6 +34,29 @@ namespace Stuffort.ViewModel
                 OnPropertyChanged(nameof(TaskList));
             }
         }
+
+        private ObservableCollection<Statistics> statslist;
+        public ObservableCollection<Statistics> StatsList
+        {
+            get { return statslist; }
+            set
+            {
+                statslist = value;
+                OnPropertyChanged(nameof(StatsList));
+            }
+        }
+
+        private bool isrefreshing;
+        public bool IsRefreshing
+        {
+            get { return isrefreshing; }
+            set 
+            { 
+                isrefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+
         private string taskname;
         public string TaskName
         {
@@ -70,6 +93,8 @@ namespace Stuffort.ViewModel
         public Command TimerHandler { get; set; }
         public Command TimerSave { get; set; }
         public Command TimerClear { get; set; }
+        public Command RefreshStatsCommand { get; set; }
+        public Command StatsRemoveCommand { get; set; }
 
         private Statistics currentstats;
         public Statistics CurrentStats
@@ -89,7 +114,8 @@ namespace Stuffort.ViewModel
         }
 
         public StudyTimerViewModel(bool run, Switch sw, Picker pc, Button btn)
-        {
+        { 
+            StatsList = new ObservableCollection<Statistics>();
             notificationManager = DependencyService.Get<INotificationManager>();
             TimerHandlerButton = btn;
             TaskName = "";
@@ -102,13 +128,35 @@ namespace Stuffort.ViewModel
             TimerHandler = new Command(TimerSwitch);
             TimerSave = new Command(SaveData);
             TimerClear = new Command(ResetData);
+            RefreshStatsCommand = new Command(Refresh);
+            StatsRemoveCommand = new Command(RemoveStat);
         }
 
-        public async void ResetData()
+        public async void RemoveStat(object value)
         {
-            bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("ResetTimer"),
+            if (value == null) return;
+            Statistics stat = value as Statistics;
+            bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDeleteStat"),
                 AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
-            if (!delete)
+            if(!delete)
+            {
+                if (stat.ID == CurrentStats.ID) ResetData("true");
+                else await StatisticsServices.DeleteStatistics(stat);
+                await ImportStats();
+            }
+        }
+
+        public async void ResetData(object value)
+        {
+            string val = value as string;
+            bool skipit = bool.Parse(val);
+            bool delete = true;
+            if (skipit == false)
+            {
+                delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("ResetTimer"),
+                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+            }
+            if (!delete || skipit == true)
             {
                 Running = false;
                 await StatisticsServices.DeleteStatistics(CurrentStats);
@@ -282,6 +330,32 @@ namespace Stuffort.ViewModel
                     TaskPicker.IsEnabled = true;
                     TaskSwitch.IsEnabled = true;
                     TaskPicker.SelectedItem = TaskList[0];
+                }
+            }
+        }
+
+        public async void Refresh()
+        {
+            IsRefreshing = true;
+            await Task.Delay(500);
+            await ImportStats();
+            IsRefreshing = false;
+        }
+
+        public async Task ImportStats()
+        {
+            StatsList.Clear();
+            var stats = await StatisticsServices.GetStatistics();
+            if(stats != null && stats.Count() != 0)
+            {
+                var orderedstats = from stat in stats
+                                   orderby stat.ID descending
+                                   select stat;
+                foreach(var stat in orderedstats)
+                {
+                    if (stat.SubjectName == "UNDEFINED") stat.TemporaryName = AppResources.ResourceManager.GetString("FreeTimerTitle");
+                    else stat.TemporaryName = SubjectName;
+                    StatsList.Add(stat);
                 }
             }
         }

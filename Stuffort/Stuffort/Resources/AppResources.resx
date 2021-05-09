@@ -129,6 +129,9 @@
   <data name="AreYouSureDeleteEverything" xml:space="preserve">
     <value>Are you sure to delete everything? There is no backup.</value>
   </data>
+  <data name="AreYouSureDeleteStat" xml:space="preserve">
+    <value>Are you sure to delete this from timer history?</value>
+  </data>
   <data name="AreYouSureDeleteSubject" xml:space="preserve">
     <value>Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="FreeTimer" xml:space="preserve">
     <value>Free timer:</value>
+  </data>
+  <data name="FreeTimerTitle" xml:space="preserve">
+    <value>Free timer</value>
   </data>
   <data name="Hours" xml:space="preserve">
     <value>h</value>

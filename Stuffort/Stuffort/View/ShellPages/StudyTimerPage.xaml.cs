@@ -29,6 +29,8 @@ namespace Stuffort.View.ShellPages
             base.OnAppearing();
             await this.StudyTimerViewModel.ImportTasks();
             await this.StudyTimerViewModel.InitializeStats();
+            await this.StudyTimerViewModel.ImportStats();
+            freeTimerLbl.Text = AppResources.ResourceManager.GetString("FreeTimer");
             this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
         }
 

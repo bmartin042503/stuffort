@@ -20,5 +20,8 @@ namespace Stuffort.Model
         public DateTime Finished { get; set; }
         public bool IsDone { get; set; }
         public bool TaskDisconnection { get; set; }
+
+        [Ignore]
+        public string TemporaryName { get; set; }
     }
 }
