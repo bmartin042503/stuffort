@@ -6,6 +6,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Diagnostics;
+using Stuffort.Resources;
 
 namespace Stuffort.Configuration
 {
@@ -15,30 +16,47 @@ namespace Stuffort.Configuration
         public static string FilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData),FileName);
         static public void SaveConfigurationFile(ConfigurationType ct)
         {
-            using (FileStream fs = new FileStream(FilePath, FileMode.Create))
+            try
             {
-                XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
-                ser.Serialize(fs, new ConfigurationType(ct.Language, ct.NotificationEnabled));
+                using (FileStream fs = new FileStream(FilePath, FileMode.Create))
+                {
+                    XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
+                    ser.Serialize(fs, new ConfigurationType(ct.Language, ct.NotificationEnabled));
+                }
             }
-            
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
+
         }
         static public ConfigurationType GetConfigurationData()
         {
-            ConfigurationType ct = new ConfigurationType();
-            if (File.Exists(FilePath))
+            try
             {
-                using (FileStream fs = new FileStream(FilePath, FileMode.Open))
+                ConfigurationType ct = new ConfigurationType();
+                if (File.Exists(FilePath))
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
-                    ct = (ConfigurationType)ser.Deserialize(fs);
+                    using (FileStream fs = new FileStream(FilePath, FileMode.Open))
+                    {
+                        XmlSerializer ser = new XmlSerializer(typeof(ConfigurationType));
+                        ct = (ConfigurationType)ser.Deserialize(fs);
+                    }
+                    return ct;
                 }
-                return ct;
-            }
-            else
+                else
+                {
+                    SaveConfigurationFile(new ConfigurationType("undefined", false));
+                    return new ConfigurationType("undefined", false);
+                }
+            } 
+            catch (Exception ex)
             {
-                SaveConfigurationFile(new ConfigurationType("undefined", false));
-                return new ConfigurationType("undefined", false);
+                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
+            return null;
         }
 
     }

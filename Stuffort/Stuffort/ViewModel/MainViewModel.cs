@@ -62,7 +62,7 @@ namespace Stuffort.ViewModel
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
 $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
