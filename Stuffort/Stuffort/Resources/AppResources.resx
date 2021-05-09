@@ -181,7 +181,7 @@
     <value>Number of tasks:</value>
   </data>
   <data name="DataDeleted" xml:space="preserve">
-    <value>Data deleted.</value>
+    <value>All data deleted.</value>
   </data>
   <data name="Deadline" xml:space="preserve">
     <value>Deadline:</value>
@@ -208,10 +208,13 @@
     <value>February</value>
   </data>
   <data name="FreeTimer" xml:space="preserve">
-    <value>Free timer:</value>
+    <value>Timer without tasks:</value>
   </data>
   <data name="FreeTimerTitle" xml:space="preserve">
-    <value>Free timer</value>
+    <value>No task</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
   </data>
   <data name="Hours" xml:space="preserve">
     <value>h</value>
@@ -304,7 +307,7 @@
     <value>You don't have any tasks</value>
   </data>
   <data name="Notifications" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Notifications:</value>
   </data>
   <data name="November" xml:space="preserve">
     <value>November</value>
@@ -391,13 +394,13 @@
     <value>Stop</value>
   </data>
   <data name="StudyTimerPage" xml:space="preserve">
-    <value>Study Timer</value>
+    <value>Timer</value>
   </data>
   <data name="SubjectErrorWhileDeleting" xml:space="preserve">
-    <value>An error has occured while deleting the subject!</value>
+    <value>An error has occurred while deleting the subject!</value>
   </data>
   <data name="SubjectErrorWhileSaving" xml:space="preserve">
-    <value>An error has occured while saving the subject!</value>
+    <value>An error has occurred while saving the subject!</value>
   </data>
   <data name="Subjects" xml:space="preserve">
     <value>Subjects</value>
@@ -421,10 +424,10 @@
     <value>You've set this task as Completed. Congratulations!</value>
   </data>
   <data name="TaskErrorWhileDeleting" xml:space="preserve">
-    <value>An error has occured while deleting the task!</value>
+    <value>An error has occurred while deleting the task!</value>
   </data>
   <data name="TaskErrorWhileSaving" xml:space="preserve">
-    <value>An error has occured while saving the task!</value>
+    <value>An error has occurred while saving the task!</value>
   </data>
   <data name="TaskListCountIsZero" xml:space="preserve">
     <value>You need to have at least one subject before adding a task!</value>
@@ -451,7 +454,7 @@
     <value>You need to have at least a minute in the timer to save it!</value>
   </data>
   <data name="TimerHasStartedNotification" xml:space="preserve">
-    <value>Study Timer is running!</value>
+    <value>Timer is running!</value>
   </data>
   <data name="TimerSpent" xml:space="preserve">
     <value>Time spent:</value>
@@ -469,7 +472,7 @@
     <value>Uncompleted</value>
   </data>
   <data name="UndefinedSubject" xml:space="preserve">
-    <value>Free timer</value>
+    <value>No task</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version:</value>

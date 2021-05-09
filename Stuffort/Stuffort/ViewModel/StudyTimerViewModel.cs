@@ -218,6 +218,7 @@ namespace Stuffort.ViewModel
                     }
                     CurrentStats.Started = DateTime.Now;
                     await StatisticsServices.AddStatistics(CurrentStats);
+                    await ImportStats();
                 }
                 else
                 {
@@ -274,6 +275,7 @@ namespace Stuffort.ViewModel
                 Running = false;
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                     AppResources.ResourceManager.GetString("TimerAtLeast1Min"), "Ok");
+                await StatisticsServices.UpdateStatistics(CurrentStats);
                 return;
             }
             Running = false;
@@ -304,9 +306,11 @@ namespace Stuffort.ViewModel
                     $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimeSpent")} {CurrentStats.Time:t}\n{AppResources.ResourceManager.GetString("TimerTask")} {taskName}", "Ok");
             CurrentStats = new Statistics();
             StudyTime = new TimeSpan();
+            CurrentStats.TaskDisconnection = true;
             TaskNameVisible = false;
-            TaskSwitch.IsToggled = false;
+            TaskSwitch.IsToggled = true;
             await ImportTasks();
+            await ImportStats();
         }
 
         public async Task ImportTasks()

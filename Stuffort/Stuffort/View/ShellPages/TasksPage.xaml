@@ -67,7 +67,7 @@
                                     <Label Margin="-3,-10,0,0" Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Path=Instance , Converter={StaticResource dlConverter}}"/>
                                     <Label Margin="-3,-2.5,0,0" Grid.Row="3" Grid.Column="1" TextColor="LightGray" FontSize="12" Text="{Binding AddedTime, Converter={StaticResource dtConverter}}"/>
                                 </Grid>
-                                <FlexLayout JustifyContent="SpaceBetween" Margin="-60,0,-35,0" Direction="Column">
+                                <FlexLayout JustifyContent="SpaceBetween" Margin="-70,0,-47.5,0" Direction="Column">
                                     <Button Margin="0,-5,0,0" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec55;"
                                             Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"
                                             Command="{Binding Path=BindingContext.TaskRenameCommand, Source={x:Reference tasksPage}}"

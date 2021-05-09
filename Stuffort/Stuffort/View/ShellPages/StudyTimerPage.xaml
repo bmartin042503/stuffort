@@ -68,7 +68,7 @@
                          Command="{Binding RefreshStatsCommand}">
                 <CollectionView ItemsSource="{Binding StatsList}" HeightRequest="400">
                     <CollectionView.Header>
-                        <Label Text="History" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" 
+                        <Label x:Name="historyLbl" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" 
                            TextColor="{StaticResource stuffortBlue}" Margin="0,0,0,0"/>
                     </CollectionView.Header>
                     <CollectionView.ItemsLayout>

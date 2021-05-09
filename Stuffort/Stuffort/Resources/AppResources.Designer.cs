@@ -250,7 +250,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data deleted..
+        ///   Looks up a localized string similar to All data deleted..
         /// </summary>
         internal static string DataDeleted {
             get {
@@ -331,7 +331,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free timer:.
+        ///   Looks up a localized string similar to Timer without tasks:.
         /// </summary>
         internal static string FreeTimer {
             get {
@@ -340,11 +340,20 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free timer.
+        ///   Looks up a localized string similar to No task.
         /// </summary>
         internal static string FreeTimerTitle {
             get {
                 return ResourceManager.GetString("FreeTimerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        internal static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
             }
         }
         
@@ -619,7 +628,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notifications.
+        ///   Looks up a localized string similar to Notifications:.
         /// </summary>
         internal static string Notifications {
             get {
@@ -880,7 +889,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Study Timer.
+        ///   Looks up a localized string similar to Timer.
         /// </summary>
         internal static string StudyTimerPage {
             get {
@@ -889,7 +898,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occured while deleting the subject!.
+        ///   Looks up a localized string similar to An error has occurred while deleting the subject!.
         /// </summary>
         internal static string SubjectErrorWhileDeleting {
             get {
@@ -898,7 +907,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occured while saving the subject!.
+        ///   Looks up a localized string similar to An error has occurred while saving the subject!.
         /// </summary>
         internal static string SubjectErrorWhileSaving {
             get {
@@ -970,7 +979,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occured while deleting the task!.
+        ///   Looks up a localized string similar to An error has occurred while deleting the task!.
         /// </summary>
         internal static string TaskErrorWhileDeleting {
             get {
@@ -979,7 +988,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occured while saving the task!.
+        ///   Looks up a localized string similar to An error has occurred while saving the task!.
         /// </summary>
         internal static string TaskErrorWhileSaving {
             get {
@@ -1060,7 +1069,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Study Timer is running!.
+        ///   Looks up a localized string similar to Timer is running!.
         /// </summary>
         internal static string TimerHasStartedNotification {
             get {
@@ -1114,7 +1123,7 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Free timer.
+        ///   Looks up a localized string similar to No task.
         /// </summary>
         internal static string UndefinedSubject {
             get {

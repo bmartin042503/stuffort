@@ -17,6 +17,8 @@ namespace Stuffort.Model
 
             db = new SQLiteAsyncConnection(App.DatabaseLocation);
             await db.CreateTableAsync<Subject>();
+            await db.CreateTableAsync<STask>();
+            await db.CreateTableAsync<Statistics>();
         }
 
         static async public Task DeleteAll()

@@ -123,17 +123,29 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Wszelkie prawa zastrzeżone ©</value>
   </data>
+  <data name="April" xml:space="preserve">
+    <value>Kwiecień</value>
+  </data>
+  <data name="AreYouSureDeleteEverything" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć wszystko? Nie ma kopii zapasowej.</value>
+  </data>
+  <data name="AreYouSureDeleteStat" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć to z historii minutników?</value>
+  </data>
   <data name="AreYouSureDeleteSubject" xml:space="preserve">
-    <value>Are you sure to delete this subject? All the tasks will be deleted that connects to the subject!</value>
+    <value>Czy na pewno chcesz usunąć ten temat? Wszystkie zadania zostaną usunięte, które łączy się z tematem!</value>
   </data>
   <data name="AreYouSureDeleteTask" xml:space="preserve">
-    <value>Are you sure to delete this task?</value>
+    <value>Czy na pewno chcesz usunąć to zadanie?</value>
   </data>
   <data name="AreYouSureDoneTask" xml:space="preserve">
-    <value>Are you sure to set the task as 'Completed'?</value>
+    <value>Czy chcesz ustawić zadanie jako „Ukończone”?</value>
   </data>
   <data name="AreYouSureUndoneTask" xml:space="preserve">
-    <value>Are you sure to set the task as 'Uncompleted'?</value>
+    <value>Czy chcesz ustawić zadanie jako „Nieukończone”?</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Sierpień</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
@@ -147,20 +159,41 @@
   <data name="Completed" xml:space="preserve">
     <value>Zakończony</value>
   </data>
+  <data name="CompletedTasks" xml:space="preserve">
+    <value>Wykonane zadania:</value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>Gratulacje</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
   <data name="ContactPage" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="CountOfSessions" xml:space="preserve">
+    <value>Liczba uruchomień timera:</value>
+  </data>
+  <data name="CountOfSubjects" xml:space="preserve">
+    <value>Liczba przedmiotów:</value>
+  </data>
   <data name="CountOfTasks" xml:space="preserve">
     <value>Liczba zadań:</value>
+  </data>
+  <data name="DataDeleted" xml:space="preserve">
+    <value>Wszystkie dane zostały usunięte.</value>
   </data>
   <data name="Deadline" xml:space="preserve">
     <value>Ostateczny termin:</value>
   </data>
+  <data name="December" xml:space="preserve">
+    <value>Grudzień</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Kasować</value>
+  </data>
+  <data name="DeleteEverything" xml:space="preserve">
+    <value>Usuń wszystkie dane</value>
   </data>
   <data name="Developer" xml:space="preserve">
     <value>Deweloper: Martin Bartos</value>
@@ -171,26 +204,74 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Komunikat o błędzie:</value>
   </data>
+  <data name="February" xml:space="preserve">
+    <value>Luty</value>
+  </data>
+  <data name="FreeTimer" xml:space="preserve">
+    <value>Chronometrażysta</value>
+  </data>
+  <data name="FreeTimerTitle" xml:space="preserve">
+    <value>Minutnik bez zadania</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Historia</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>go.</value>
+  </data>
   <data name="HoursAgo" xml:space="preserve">
-    <value>godziny temu</value>
+    <value>godzinę temu</value>
+  </data>
+  <data name="HoursL" xml:space="preserve">
+    <value>godziny</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
-    <value>Date is invalid!</value>
+    <value>Data jest nieprawidłowa!</value>
   </data>
   <data name="InvalidSelectedSubject" xml:space="preserve">
-    <value>The selected subject is invalid!</value>
+    <value>Wybrany temat jest nieprawidłowy!</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Styczeń</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Lipiec</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Czerwiec</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Język:</value>
   </data>
+  <data name="LanguageSetTo" xml:space="preserve">
+    <value>Język został ustawiony na:</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Ładowanie</value>
+  </data>
+  <data name="LongestSession" xml:space="preserve">
+    <value>Najdłuższa sesja:</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Marsz</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Może</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>m</value>
+  </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>minuty temu</value>
+  </data>
+  <data name="MinutesL" xml:space="preserve">
+    <value>minuty</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nazwa</value>
   </data>
   <data name="NameIsEmpty" xml:space="preserve">
-    <value>Imię jest puste</value>
+    <value>Imię jest puste!</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
     <value>Nazwa musi zawierać od 3 do 120 znaków!</value>
@@ -199,10 +280,10 @@
     <value>Nowy temat</value>
   </data>
   <data name="NewSubjectPage" xml:space="preserve">
-    <value>New subject</value>
+    <value>Nowy temat</value>
   </data>
   <data name="NewTaskPage" xml:space="preserve">
-    <value>New task</value>
+    <value>Nowe zadanie</value>
   </data>
   <data name="NewVersion" xml:space="preserve">
     <value>Nowa wersja</value>
@@ -214,28 +295,61 @@
     <value>Nie</value>
   </data>
   <data name="NoDeadline" xml:space="preserve">
-    <value>No deadline</value>
+    <value>Brak terminu</value>
+  </data>
+  <data name="NoStats" xml:space="preserve">
+    <value>Brak dostępnych statystyk! Najpierw rozpocznij sesję!</value>
+  </data>
+  <data name="NoSubjects" xml:space="preserve">
+    <value>Nie masz żadnych przedmiotów</value>
+  </data>
+  <data name="NoTasks" xml:space="preserve">
+    <value>Nie masz żadnych zadań</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Powiadomienia</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Listopad</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Październik</value>
   </data>
   <data name="Rename" xml:space="preserve">
-    <value>Rename</value>
+    <value>Przemianować</value>
   </data>
   <data name="RenameSubject" xml:space="preserve">
-    <value>New name for the subject:</value>
+    <value>Nowa nazwa tematu:</value>
   </data>
   <data name="RenameTask" xml:space="preserve">
-    <value>New name for the task:</value>
+    <value>Nowa nazwa zadania:</value>
   </data>
   <data name="RenamingSubject" xml:space="preserve">
-    <value>Zmienić nazwę tematu</value>
+    <value>Zmień nazwę tematu</value>
   </data>
   <data name="RenamingTask" xml:space="preserve">
     <value>Zmień nazwę zadania</value>
   </data>
+  <data name="ResetTimer" xml:space="preserve">
+    <value>Czy chcesz zresetować licznik czasu? Dane zostaną usunięte.</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Zapisać</value>
   </data>
+  <data name="SavingTimer" xml:space="preserve">
+    <value>Oszczędzanie timera</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Szukaj..</value>
+  </data>
   <data name="SecondsAgo" xml:space="preserve">
     <value>sekundy temu</value>
+  </data>
+  <data name="SecondsL" xml:space="preserve">
+    <value>sekundy</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Wrzesień</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>
@@ -244,16 +358,31 @@
     <value>Ustawienia</value>
   </data>
   <data name="SettingsSaved" xml:space="preserve">
-    <value>Ustawienia zapisane!</value>
+    <value>Ustawienia zostały zapisane pomyślnie!</value>
   </data>
   <data name="Soon" xml:space="preserve">
     <value>Wkrótce</value>
+  </data>
+  <data name="SortByCompleted" xml:space="preserve">
+    <value>Sortowanie według zakończone</value>
+  </data>
+  <data name="SortByNewest" xml:space="preserve">
+    <value>Sortowanie według najnowszych</value>
+  </data>
+  <data name="SortByOldest" xml:space="preserve">
+    <value>Sortowanie według najstarszych</value>
+  </data>
+  <data name="SortByUncompleted" xml:space="preserve">
+    <value>Sortowanie nieukończone</value>
+  </data>
+  <data name="Sorting" xml:space="preserve">
+    <value>Sortowanie</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Początek</value>
   </data>
   <data name="Stats" xml:space="preserve">
-    <value>Statystyka</value>
+    <value>Statystyki</value>
   </data>
   <data name="StatsPage" xml:space="preserve">
     <value>Statystyka</value>
@@ -264,14 +393,17 @@
   <data name="Stop" xml:space="preserve">
     <value>Zatrzymać</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="StudyTimerPage" xml:space="preserve">
-    <value>Study timer</value>
+    <value>Chronometrażysta</value>
   </data>
   <data name="SubjectErrorWhileDeleting" xml:space="preserve">
-    <value>An error has occured while deleting the subject!</value>
+    <value>Wystąpił błąd podczas usuwania tematu!</value>
   </data>
   <data name="SubjectErrorWhileSaving" xml:space="preserve">
-    <value>An error has occured while saving the subject!</value>
+    <value>Wystąpił błąd podczas zapisywania tematu!</value>
   </data>
   <data name="Subjects" xml:space="preserve">
     <value>Tematy</value>
@@ -280,28 +412,28 @@
     <value>Tematy</value>
   </data>
   <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
-    <value>Subject has been successfully deleted!</value>
+    <value>Temat został pomyślnie usunięty!</value>
   </data>
   <data name="SubjectSuccessfullyRenamed" xml:space="preserve">
-    <value>Subject has been successfully renamed!</value>
+    <value>Nazwa tematu została pomyślnie zmieniona!</value>
   </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
-    <value>Subject has been successfully saved!</value>
+    <value>Temat został pomyślnie zapisany!</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Sukces</value>
   </data>
   <data name="TaskCompleted" xml:space="preserve">
-    <value>You've set this task as Completed. Congratulations!</value>
+    <value>Ustawiłeś to zadanie jako ukończone. Gratulacje!</value>
   </data>
   <data name="TaskErrorWhileDeleting" xml:space="preserve">
-    <value>An error has occured while deleting the task!</value>
+    <value>Wystąpił błąd podczas usuwania zadania!</value>
   </data>
   <data name="TaskErrorWhileSaving" xml:space="preserve">
-    <value>An error has occured while saving the task!</value>
+    <value>Wystąpił błąd podczas zapisywania zadania!</value>
   </data>
   <data name="TaskListCountIsZero" xml:space="preserve">
-    <value>You need to have at least one subject before adding a task!</value>
+    <value>Przed dodaniem zadania musisz mieć co najmniej jeden temat!</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>Zadania</value>
@@ -310,25 +442,49 @@
     <value>Zadania</value>
   </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">
-    <value>Task has been successfully deleted!</value>
+    <value>Zadanie zostało pomyślnie usunięte!</value>
   </data>
   <data name="TaskSuccessfullyRenamed" xml:space="preserve">
-    <value>Task has been successfully renamed!</value>
+    <value>Nazwa zadania została pomyślnie zmieniona!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>Task has been successfully saved!</value>
+    <value>Zadanie zostało pomyślnie zapisane!</value>
   </data>
   <data name="TaskUncompleted" xml:space="preserve">
-    <value>You've set this task as Uncompleted.</value>
+    <value>Ustawiłeś to zadanie jako nieukończone.</value>
+  </data>
+  <data name="TimerAtLeast1Min" xml:space="preserve">
+    <value>Aby go zapisać, musisz mieć co najmniej minutę na liczniku czasu!</value>
+  </data>
+  <data name="TimerHasStartedNotification" xml:space="preserve">
+    <value>Timer działa!</value>
+  </data>
+  <data name="TimerSpent" xml:space="preserve">
+    <value>Czas spędzony:</value>
+  </data>
+  <data name="TimerStarted" xml:space="preserve">
+    <value>Timer ruszył! Baw się dobrze!</value>
+  </data>
+  <data name="TimerSuccessfullySaved" xml:space="preserve">
+    <value>Licznik czasu został zapisany pomyślnie!</value>
+  </data>
+  <data name="TimerTask" xml:space="preserve">
+    <value>Zadanie:</value>
   </data>
   <data name="Uncompleted" xml:space="preserve">
     <value>Nieukończone</value>
   </data>
+  <data name="UndefinedSubject" xml:space="preserve">
+    <value>Minutnik bez zadania</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>Wersja:</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Ostrzeżenie</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Please choose a language!</value>
+    <value>Wybierz język!</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>

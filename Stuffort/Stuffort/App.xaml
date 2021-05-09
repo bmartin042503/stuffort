@@ -11,17 +11,18 @@
             </OnPlatform>
             <Color x:Key="stuffortBlue">#528fdb</Color>
             <Color x:Key="stuffortDarkBlue">#2e4f78</Color>
-            <Color x:Key="stuffortWhite">#FFFFFF</Color>
+            <Color x:Key="stuffortWhite">#ffffff</Color>
             <Color x:Key="stuffortDone">#BBDEA5</Color>
             <Color x:Key="stuffortGreen">#6AE020</Color>
             <Color x:Key="stuffortGray">#CBD1D3</Color>
             <Color x:Key="stuffortLightBlue">#80afe8</Color>
             <Style TargetType="Button">
-                <Setter Property="BorderRadius" Value="20"/>
-                <Setter Property="BorderColor" Value="{x:StaticResource stuffortBlue}"/>
-                <Setter Property="BackgroundColor" Value="{x:StaticResource stuffortBlue}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource stuffortBlue}"/>
                 <Setter Property="TextColor" Value="{x:StaticResource stuffortWhite}"/>
-                <Setter Property="BorderWidth" Value="2.5"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HeightRequest" Value="42"/>
+                <Setter Property="WidthRequest" Value="130"/>
+                <Setter Property="FontSize" Value="17"/>
             </Style>
             <Style TargetType="Frame">
                 <Setter Property="Padding" Value="15"/>

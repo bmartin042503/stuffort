@@ -27,7 +27,7 @@
             <DatePicker MinimumDate="{Binding DateTimeNow}" Date="{Binding Date, Mode=TwoWay}" IsEnabled="{Binding IsDeadline}"/>
             <TimePicker Time="{Binding DateTimeSpan, Mode=TwoWay}" IsEnabled="{Binding IsDeadline}"/>
         </StackLayout>
-        <Button Margin="0,30" Text="{x:Static resx:AppResources.Save}" HeightRequest="40" WidthRequest="120" Command="{Binding NewTaskCommand}"/>
+        <Button Margin="0,60,0,0" x:Name="saveBtn" Text="{x:Static resx:AppResources.Save}" Command="{Binding NewTaskCommand}"/>
     </FlexLayout>
 </ContentPage>
     

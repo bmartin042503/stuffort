@@ -123,17 +123,29 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Minden jog fenntartva ©</value>
   </data>
+  <data name="April" xml:space="preserve">
+    <value>Április</value>
+  </data>
+  <data name="AreYouSureDeleteEverything" xml:space="preserve">
+    <value>Biztosan törölsz mindent? Nincs biztonsági mentés!</value>
+  </data>
+  <data name="AreYouSureDeleteStat" xml:space="preserve">
+    <value>Biztosan törölni szeretnéd az előzmények közül?</value>
+  </data>
   <data name="AreYouSureDeleteSubject" xml:space="preserve">
-    <value>Biztosan törlöd a tantárgyat? Minden feladat törölve lesz, amelyik a tantárgyhoz tartozik!</value>
+    <value>Biztosan törlöd a tantárgyat? Minden más feladat ami a tantárgyhoz kapcsolódik törölve lesz!</value>
   </data>
   <data name="AreYouSureDeleteTask" xml:space="preserve">
     <value>Biztosan törlöd a feladatot?</value>
   </data>
   <data name="AreYouSureDoneTask" xml:space="preserve">
-    <value>Biztosan befejezettre állítod a feladatot?</value>
+    <value>'Befejezett'-re állítod a feladatot?</value>
   </data>
   <data name="AreYouSureUndoneTask" xml:space="preserve">
-    <value>Biztosan befejezetlenre állítod a feladatot?</value>
+    <value>'Befejezetlen'-re állítod a feladatot?</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Augusztus</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Vissza</value>
@@ -142,10 +154,16 @@
     <value>Tantárgy:</value>
   </data>
   <data name="ChooseSubjectImproved" xml:space="preserve">
-    <value>Válassz egy tantárgyat</value>
+    <value>Válassz tantárgyat</value>
   </data>
   <data name="Completed" xml:space="preserve">
-    <value>Teljesítve</value>
+    <value>Kész</value>
+  </data>
+  <data name="CompletedTasks" xml:space="preserve">
+    <value>Befejezett feladatok:</value>
+  </data>
+  <data name="Congratulations" xml:space="preserve">
+    <value>Gratulálunk</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Kapcsolat</value>
@@ -153,14 +171,29 @@
   <data name="ContactPage" xml:space="preserve">
     <value>Kapcsolat</value>
   </data>
+  <data name="CountOfSessions" xml:space="preserve">
+    <value>Időmérő használatainak száma:</value>
+  </data>
+  <data name="CountOfSubjects" xml:space="preserve">
+    <value>Tantárgyak száma:</value>
+  </data>
   <data name="CountOfTasks" xml:space="preserve">
     <value>Feladatok száma:</value>
+  </data>
+  <data name="DataDeleted" xml:space="preserve">
+    <value>Adatok törölve!</value>
   </data>
   <data name="Deadline" xml:space="preserve">
     <value>Határidő:</value>
   </data>
+  <data name="December" xml:space="preserve">
+    <value>December</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Törlés</value>
+  </data>
+  <data name="DeleteEverything" xml:space="preserve">
+    <value>Összes adat törlése</value>
   </data>
   <data name="Developer" xml:space="preserve">
     <value>Fejlesztő: Bartos Martin</value>
@@ -169,10 +202,28 @@
     <value>Hiba</value>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
-    <value>Hiba üzenet:</value>
+    <value>Hiba üzenete:</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Február</value>
+  </data>
+  <data name="FreeTimer" xml:space="preserve">
+    <value>Feladat nélküli:</value>
+  </data>
+  <data name="FreeTimerTitle" xml:space="preserve">
+    <value>Feladat nélküli</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Előzmények</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>ó</value>
   </data>
   <data name="HoursAgo" xml:space="preserve">
     <value>órája</value>
+  </data>
+  <data name="HoursL" xml:space="preserve">
+    <value>óra</value>
   </data>
   <data name="InvalidDate" xml:space="preserve">
     <value>A dátum nem megfelelő!</value>
@@ -180,11 +231,41 @@
   <data name="InvalidSelectedSubject" xml:space="preserve">
     <value>A kiválasztott tantárgy nem megfelelő!</value>
   </data>
+  <data name="January" xml:space="preserve">
+    <value>Január</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Július</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Június</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Nyelv:</value>
   </data>
+  <data name="LanguageSetTo" xml:space="preserve">
+    <value>Nyelv átállítva a következőre:</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Betöltés</value>
+  </data>
+  <data name="LongestSession" xml:space="preserve">
+    <value>Leghosszabb időtartam:</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Március</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Május</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>p</value>
+  </data>
   <data name="MinutesAgo" xml:space="preserve">
     <value>perce</value>
+  </data>
+  <data name="MinutesL" xml:space="preserve">
+    <value>perc</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Név</value>
@@ -193,16 +274,16 @@
     <value>A név üres!</value>
   </data>
   <data name="NameLengthOverFlow" xml:space="preserve">
-    <value>A név 3-120 karakter közötti hosszúságú lehet!</value>
+    <value>A név 3-120 karakter között lehet!</value>
   </data>
   <data name="NewSubject" xml:space="preserve">
     <value>Új tantárgy</value>
   </data>
   <data name="NewSubjectPage" xml:space="preserve">
-    <value>Új tantárgy hozzáadása</value>
+    <value>Új tantárgy</value>
   </data>
   <data name="NewTaskPage" xml:space="preserve">
-    <value>Új feladat hozzáadása</value>
+    <value>Új feladat</value>
   </data>
   <data name="NewVersion" xml:space="preserve">
     <value>Új verzió</value>
@@ -216,20 +297,32 @@
   <data name="NoDeadline" xml:space="preserve">
     <value>Nincs határidő</value>
   </data>
+  <data name="NoStats" xml:space="preserve">
+    <value>Nincs elérhető statisztikai adat! Használd az időmérőt!</value>
+  </data>
   <data name="NoSubjects" xml:space="preserve">
     <value>Nincs egy tantárgyad sem</value>
   </data>
   <data name="NoTasks" xml:space="preserve">
     <value>Nincs egy feladatod sem</value>
   </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Értesítések</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>November</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Október</value>
+  </data>
   <data name="Rename" xml:space="preserve">
     <value>Átnevezés</value>
   </data>
   <data name="RenameSubject" xml:space="preserve">
-    <value>Add meg a tantárgy új nevét:</value>
+    <value>Tantárgy új neve:</value>
   </data>
   <data name="RenameTask" xml:space="preserve">
-    <value>Add meg a feladat új nevét:</value>
+    <value>Feladat új neve:</value>
   </data>
   <data name="RenamingSubject" xml:space="preserve">
     <value>Tantárgy átnevezése</value>
@@ -237,11 +330,26 @@
   <data name="RenamingTask" xml:space="preserve">
     <value>Feladat átnevezése</value>
   </data>
+  <data name="ResetTimer" xml:space="preserve">
+    <value>Visszaállítod az időzítőt az eredeti állapotára? Az eddigi adatok törölve lesznek!</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Mentés</value>
   </data>
+  <data name="SavingTimer" xml:space="preserve">
+    <value>Időmérő mentése</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Keresés..</value>
+  </data>
   <data name="SecondsAgo" xml:space="preserve">
     <value>másodperce</value>
+  </data>
+  <data name="SecondsL" xml:space="preserve">
+    <value>másodperc</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Szeptember</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Beállítások</value>
@@ -254,6 +362,21 @@
   </data>
   <data name="Soon" xml:space="preserve">
     <value>Hamarosan</value>
+  </data>
+  <data name="SortByCompleted" xml:space="preserve">
+    <value>Rendezés befejezett szerint</value>
+  </data>
+  <data name="SortByNewest" xml:space="preserve">
+    <value>Rendezés újak szerint</value>
+  </data>
+  <data name="SortByOldest" xml:space="preserve">
+    <value>Rendezés régiek szerint</value>
+  </data>
+  <data name="SortByUncompleted" xml:space="preserve">
+    <value>Rendezés befejezetlen szerint</value>
+  </data>
+  <data name="Sorting" xml:space="preserve">
+    <value>Rendezés</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Indítás</value>
@@ -268,10 +391,13 @@
     <value>Állapot:</value>
   </data>
   <data name="Stop" xml:space="preserve">
-    <value>Leállítás</value>
+    <value>Megállítás</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="StudyTimerPage" xml:space="preserve">
-    <value>Tanulási időzítő</value>
+    <value>Időmérő</value>
   </data>
   <data name="SubjectErrorWhileDeleting" xml:space="preserve">
     <value>Hiba történt a tantárgy törlése során!</value>
@@ -286,19 +412,19 @@
     <value>Tantárgyak</value>
   </data>
   <data name="SubjectSuccessfullyDeleted" xml:space="preserve">
-    <value>A tantárgy sikeresen törölve!</value>
+    <value>Tantárgy sikeresen törölve!</value>
   </data>
   <data name="SubjectSuccessfullyRenamed" xml:space="preserve">
     <value>Tantárgy sikeresen átnevezve!</value>
   </data>
   <data name="SubjectSuccessfullySaved" xml:space="preserve">
-    <value>A tantárgy sikeresen elmentve!</value>
+    <value>Tantárgy sikeresen mentve!</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Siker</value>
   </data>
   <data name="TaskCompleted" xml:space="preserve">
-    <value>A feladatot megjelölted befejezettnek. Gratulálunk!</value>
+    <value>Feladat befejezve! Gratulálunk!</value>
   </data>
   <data name="TaskErrorWhileDeleting" xml:space="preserve">
     <value>Hiba történt a feladat törlése során!</value>
@@ -307,7 +433,7 @@
     <value>Hiba történt a feladat mentése során!</value>
   </data>
   <data name="TaskListCountIsZero" xml:space="preserve">
-    <value>Legalább egy tantárgynak kell lennie ahhoz, hogy új feladatot hozz létre!</value>
+    <value>Legalább egy tantárgynak kell lennie, hogy feladatot hozhass létre!</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>Feladatok</value>
@@ -316,22 +442,46 @@
     <value>Feladatok</value>
   </data>
   <data name="TaskSuccessfullyDeleted" xml:space="preserve">
-    <value>A feladat sikeresen törölve!</value>
+    <value>Feladat sikeresen törölve!</value>
   </data>
   <data name="TaskSuccessfullyRenamed" xml:space="preserve">
     <value>Feladat sikeresen átnevezve!</value>
   </data>
   <data name="TaskSuccessfullySaved" xml:space="preserve">
-    <value>A feladat sikeresen mentve!</value>
+    <value>Feladat sikeresen mentve!</value>
   </data>
   <data name="TaskUncompleted" xml:space="preserve">
-    <value>A feladatot befejezetlennek jelölted.</value>
+    <value>Befejezetlennek jelölted a feladatot!</value>
+  </data>
+  <data name="TimerAtLeast1Min" xml:space="preserve">
+    <value>Legalább egy percnek kell lennie az időmérőben, hogy rögzítsd az adatokat!</value>
+  </data>
+  <data name="TimerHasStartedNotification" xml:space="preserve">
+    <value>Az időmérő elindult!</value>
+  </data>
+  <data name="TimerSpent" xml:space="preserve">
+    <value>Eltöltött idő:</value>
+  </data>
+  <data name="TimerStarted" xml:space="preserve">
+    <value>Az időmérő elindult!</value>
+  </data>
+  <data name="TimerSuccessfullySaved" xml:space="preserve">
+    <value>Adatok sikeresen elmentve!</value>
+  </data>
+  <data name="TimerTask" xml:space="preserve">
+    <value>Feladat:</value>
   </data>
   <data name="Uncompleted" xml:space="preserve">
     <value>Befejezetlen</value>
   </data>
+  <data name="UndefinedSubject" xml:space="preserve">
+    <value>Feladat nélküli</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>Verzió:</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Figyelmeztetés</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Kérlek válaszd ki a megfelelő nyelvet!</value>

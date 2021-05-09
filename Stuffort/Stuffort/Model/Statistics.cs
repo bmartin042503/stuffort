@@ -23,5 +23,6 @@ namespace Stuffort.Model
 
         [Ignore]
         public string TemporaryName { get; set; }
+
     }
 }

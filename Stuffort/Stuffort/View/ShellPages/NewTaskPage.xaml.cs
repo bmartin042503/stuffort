@@ -32,6 +32,7 @@ namespace Stuffort.View.ShellPages
             chooseSubjectlbl.Text = AppResources.ResourceManager.GetString("ChooseSubject");
             deadLinelbl.Text = AppResources.ResourceManager.GetString("Deadline");
             subjectPicker.Title = AppResources.ResourceManager.GetString("ChooseSubjectImproved");
+            saveBtn.Text = AppResources.ResourceManager.GetString("Save");
         }
     }
 }

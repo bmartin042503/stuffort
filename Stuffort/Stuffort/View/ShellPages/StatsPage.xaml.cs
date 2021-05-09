@@ -30,6 +30,8 @@ namespace Stuffort.View.ShellPages
         {
             base.OnAppearing();
             this.Title = AppResources.ResourceManager.GetString("StatsPage");
+            longestSessionLbl.Text = AppResources.ResourceManager.GetString("LongestSession");
+            timerSpentLbl.Text = AppResources.ResourceManager.GetString("TimerSpent");
             var stats = await StatisticsServices.GetStatistics();
             if(stats == null || stats.Count() == 0)
             {
@@ -52,12 +54,12 @@ namespace Stuffort.View.ShellPages
                 var timeSum = item.Sum(x => x.Time.TotalSeconds);
                 string itemName = item.Key == "UNDEFINED" ? AppResources.ResourceManager.GetString("UndefinedSubject") : item.Key;
                 itemName = LocalLongnameConverter(itemName); 
-                SKColor color = item.Key == "UNDEFINED" ? SKColor.Parse("#2e4f78") : SKColor.Parse("#528fdb");
+                SKColor color = item.Key == "UNDEFINED" ? SKColor.Parse("#000000") : SKColor.Parse("#528fdb");
                 string converted = ConvertToHourMinSec((long)timeSum);
                 EntryList1.Add(new ChartEntry((float)timeSum / 100) { Label=itemName, ValueLabel=converted, Color = color });
             }
-            statsViewSubjects.Chart = new PointChart{ Entries = EntryList1, LabelTextSize = 40, IsAnimated=true, AnimationProgress = 1.5f, 
-               PointMode=PointMode.Circle, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty, LabelColor=SKColor.Parse("#528fdb")};
+            statsViewSubjects.Chart = new PointChart{ Entries = EntryList1, LabelTextSize = 40, IsAnimated=true, AnimationProgress = 1.5f,
+               PointMode=PointMode.Circle, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty, LabelColor=SKColor.Parse("#000000")};
             List<ChartEntry> EntryList2 = new List<ChartEntry>();
             var ydata = from stat in stats
                         where stat.Finished.Year == DateTime.Now.Year
@@ -95,10 +97,10 @@ namespace Stuffort.View.ShellPages
             int uppers = 0;
             for (int i = 0; i < val.Length; ++i)
                 if (Char.IsUpper(val[i])) uppers++;
-            if (val.Length > 11 && uppers > 3)
-                return $"{val.Substring(0, 11)}..";
-            if (val.Length > 14)
-                return $"{val.Substring(0, 14)}..";
+            if (val.Length > 6 && uppers > 3)
+                return $"{val.Substring(0, 6)}..";
+            if (val.Length > 10)
+                return $"{val.Substring(0, 10)}..";
             return val;
         }
 
