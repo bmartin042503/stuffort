@@ -19,7 +19,6 @@ namespace Stuffort.ViewModel
 {
     public class TasksViewModel : INotifyPropertyChanged
     {
-        public Label NoTaskLabel { get; set; }
         private bool isrefreshing;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -40,19 +39,36 @@ namespace Stuffort.ViewModel
                 OnPropertyChanged(nameof(IsRefreshing));
             }
         }
+        private Label NoTaskLabel;
+        private SearchBar SearchBarTasks;
         public AsyncCommand TaskCommand { get; set; }
         public AsyncCommand TaskRefreshCommand { get; set; }
+        public Command TapCommand { get; set; }
         public Command TaskRemoveCommand { get; set; }
         public Command TaskRenameCommand { get; set; }
         public Command TaskDoneCommand { get; set; }
+        public Command TaskSortCommand { get; set; }
+        public Command TaskSearchCommand { get; set; }
 
         public int SubjectListCount { get; set; }
-        public ObservableCollection<Tuple<STask, STask>> TaskList { get; set; }
+        private List<STask> Tasks;
 
-        public Command TapCommand { get; set; }
-        public TasksViewModel(Label lbl)
+        private ObservableCollection<STask> tasklist;
+        public ObservableCollection<STask> TaskList
+        {
+            get { return tasklist; }
+            set
+            {
+                tasklist = value;
+                OnPropertyChanged(nameof(TaskList));
+            }
+        }
+
+        public TasksViewModel(Label lbl, SearchBar scb)
         {
             NoTaskLabel = lbl;
+            SearchBarTasks = scb;
+            TaskList = new ObservableCollection<STask>();
             SubjectListCount = 0;
             TaskCommand = new AsyncCommand(NavigateToNewTask);
             TapCommand = new Command(TapItem);
@@ -60,7 +76,32 @@ namespace Stuffort.ViewModel
             TaskRenameCommand = new Command(TaskRename);
             TaskRefreshCommand = new AsyncCommand(Refresh);
             TaskDoneCommand = new Command(TaskDone);
-            TaskList = new ObservableCollection<Tuple<STask, STask>>();
+            TaskSortCommand = new Command(TaskSort);
+            TaskSearchCommand = new Command(TaskSearch);
+        }
+
+        public void TaskSearch(object value)
+        {
+            string searching = value as string;
+            searching = searching.ToLowerInvariant();
+            TaskList.Clear();
+            foreach(var item in Tasks)
+            {
+                if (item.Name.ToLowerInvariant().Contains(searching))
+                    TaskList.Add(item);
+            }
+        }
+
+        public async void TaskSort()
+        {
+            string sorttype = await App.Current.MainPage.DisplayActionSheet(AppResources.ResourceManager.GetString("Sorting"),
+                AppResources.ResourceManager.GetString("Cancel"), "Ok", AppResources.ResourceManager.GetString("SortByOldest"),
+                AppResources.ResourceManager.GetString("SortByNewest"), AppResources.ResourceManager.GetString("SortByCompleted"),
+                AppResources.ResourceManager.GetString("SortByUncompleted"));
+            if (sorttype == AppResources.ResourceManager.GetString("SortByOldest")) TaskList = new ObservableCollection<STask>(TaskList.OrderBy(x => x.AddedTime));
+            else if (sorttype == AppResources.ResourceManager.GetString("SortByNewest")) TaskList = new ObservableCollection<STask>(TaskList.OrderByDescending(x => x.AddedTime)); 
+            else if (sorttype == AppResources.ResourceManager.GetString("SortByCompleted")) TaskList = new ObservableCollection<STask>(TaskList.OrderByDescending(x => x.IsDone));
+            else if (sorttype == AppResources.ResourceManager.GetString("SortByUncompleted")) TaskList = new ObservableCollection<STask>(TaskList.OrderBy(x => x.IsDone));
         }
 
         public async void TaskRename(object parameter)
@@ -69,13 +110,6 @@ namespace Stuffort.ViewModel
             string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingTask"), 
                 AppResources.ResourceManager.GetString("RenameTask"), 
                 "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
-            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName))
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
-                return;
-            }
-
             if (newName.Length > 120 || newName.Length < 3)
             {
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
@@ -86,7 +120,7 @@ namespace Stuffort.ViewModel
             await STaskServices.UpdateTask(selectedItem);
             await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                 AppResources.ResourceManager.GetString("TaskSuccessfullyRenamed"), "Ok");
-            await Refresh();
+            await UpdateTasks();
         }
 
         public async void TaskDone(object parameter)
@@ -100,10 +134,11 @@ namespace Stuffort.ViewModel
                 if (!setDone)
                 {
                     selectedItem.IsDone = true;
+                    selectedItem.Finished = DateTime.Now;
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                         AppResources.ResourceManager.GetString("TaskCompleted"), "Ok");
                     await STaskServices.UpdateTask(selectedItem);
-                    await Refresh();
+                    await UpdateTasks();
                 }
             }
             else
@@ -117,7 +152,7 @@ namespace Stuffort.ViewModel
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                         AppResources.ResourceManager.GetString("TaskUncompleted"), "Ok");
                     await STaskServices.UpdateTask(selectedItem);
-                    await Refresh();
+                    await UpdateTasks();
                 }
             }
         }
@@ -137,7 +172,7 @@ namespace Stuffort.ViewModel
                 else
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         $"{AppResources.ResourceManager.GetString("TaskErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
-                await Refresh();
+                await UpdateTasks();
             }
         }
 
@@ -150,6 +185,7 @@ namespace Stuffort.ViewModel
         public async Task Refresh()
         {
             IsRefreshing = true;
+            await Task.Delay(1000);
             await UpdateTasks();
             IsRefreshing = false;
         }
@@ -161,15 +197,21 @@ namespace Stuffort.ViewModel
             var subjects = await SubjectServices.GetSubjects();
             foreach(var task in tasks)
             {
-                TaskList.Add(new Tuple<STask, STask>(task, task));
+                TaskList.Add(task);
             }
             SubjectListCount = (subjects as List<Subject>).Count;
-            if (TaskList.Count == 0)
+            if(TaskList.Count == 0)
             {
-                NoTaskLabel.IsVisible = true;
                 NoTaskLabel.Text = AppResources.ResourceManager.GetString("NoTasks");
+                NoTaskLabel.IsVisible = true;
+                SearchBarTasks.IsVisible = false;
             }
-            else NoTaskLabel.IsVisible = false;
+            else
+            {
+                NoTaskLabel.IsVisible = false;
+                SearchBarTasks.IsVisible = true;
+            }
+            Tasks = (List<STask>)tasks;
         }
 
         public async Task NavigateToNewTask()

@@ -18,7 +18,7 @@ namespace Stuffort.View.ShellPages
         public SubjectsPage()
         {
             InitializeComponent();
-            SubjectsViewModel = new SubjectsViewModel(noSubjectLabel);
+            SubjectsViewModel = new SubjectsViewModel(noSubjectLbl);
             BindingContext = SubjectsViewModel;
         }
 

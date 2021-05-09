@@ -8,6 +8,8 @@
              xmlns:converters="clr-namespace:Stuffort.ViewModel.Converters"
              x:Name="tasksPage">
     <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_sort.png"
+                     Command="{Binding TaskSortCommand}"/>
         <ToolbarItem IconImageSource="ic_action_add.png"
                      Command="{Binding TaskCommand}"
                      CommandParameter="{Binding SubjectListCount}"/>
@@ -21,14 +23,21 @@
             <converters:LongNameConverter x:Key="lnConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <AbsoluteLayout Margin="15, 17.5, 15, 0">
-        <Label x:Name="noTaskLabel" HorizontalOptions="Center" IsVisible="False"/>
-        <ListView x:Name="taskListView" ItemsSource="{Binding TaskList}" IsPullToRefreshEnabled="True"
-                  HasUnevenRows="True"
-                  RefreshCommand="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+    <StackLayout Margin="15, 17.5, 15, 17.5">
+        <Label x:Name="noTaskLbl" HorizontalOptions="Center" FontSize="20"
+                               Margin="0,5,0,0"/>
+        <RefreshView Command="{Binding TaskRefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="{StaticResource stuffortBlue}">
+            <CollectionView x:Name="taskCollectionView" SelectionMode="None" ItemsSource="{Binding TaskList}">
+                <CollectionView.Header>
+                    <SearchBar x:Name="searchBarTasks" SearchCommand="{Binding Path=BindingContext.TaskSearchCommand, Source={x:Reference tasksPage}}"
+                               CancelButtonColor="{StaticResource stuffortBlue}" SearchCommandParameter="{Binding Path=Text, Source={x:Reference searchBarTasks}}"/>
+                </CollectionView.Header>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
                         <Frame Margin="0,0,0,15">
                             <StackLayout Orientation="Horizontal">
                                 <Grid Margin="-10,0,0,0" Padding="-5" Grid.Column="0">
@@ -44,35 +53,35 @@
                                         <ColumnDefinition Width="1*"/>
                                     </Grid.ColumnDefinitions>
                                     <Button TextColor="{StaticResource stuffortWhite}" 
-                                        Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" 
-                                        Text="{Binding Path=Item2, Converter={StaticResource idicConverter}}"
-                                        Style="{StaticResource fontButton}" Margin="-5,0,-7,0" FontSize="52.75"
-                                        Command="{Binding Path=BindingContext.TaskDoneCommand, Source={x:Reference tasksPage}}" 
-                                        CommandParameter="{Binding Item1}"/>
-                                    <Label Margin="-3,0,0,0" Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" Text="{Binding Item1.Name, Converter={StaticResource lnConverter}}">
+                                            Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" 
+                                            Text="{Binding Path=Instance, Converter={StaticResource idicConverter}}"
+                                            Style="{StaticResource fontButton}" Margin="-5,0,-7,0" FontSize="52.75"
+                                            Command="{Binding Path=BindingContext.TaskDoneCommand, Source={x:Reference tasksPage}}" 
+                                            CommandParameter="{Binding .}"/>
+                                    <Label Margin="-3,0,0,0" Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="White" Text="{Binding Name, Converter={StaticResource lnConverter}}">
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.TapCommand, Source={x:Reference tasksPage}}" CommandParameter="{Binding Item1.Name}"/>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.TapCommand, Source={x:Reference tasksPage}}" CommandParameter="{Binding Name}"/>
                                         </Label.GestureRecognizers>
                                     </Label>
-                                    <Label Margin="-3,-5,0,0" Grid.Row="1" Grid.Column="1" FontSize="15" TextColor="White" Text="{Binding Item1.SubjectName, Converter={StaticResource lnConverter}}"/>
-                                    <Label Margin="-3,-10,0,0" Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Item1, Converter={StaticResource dlConverter}}"/>
-                                    <Label Margin="-3,-2.5,0,0" Grid.Row="3" Grid.Column="1" TextColor="LightGray" FontSize="12" Text="{Binding Item1.AddedTime, Converter={StaticResource dtConverter}}"/>
+                                    <Label Margin="-3,-5,0,0" Grid.Row="1" Grid.Column="1" FontSize="15" TextColor="White" Text="{Binding SubjectName, Converter={StaticResource lnConverter}}"/>
+                                    <Label Margin="-3,-10,0,0" Grid.Row="2" Grid.Column="1" TextColor="White" Text="{Binding Path=Instance , Converter={StaticResource dlConverter}}"/>
+                                    <Label Margin="-3,-2.5,0,0" Grid.Row="3" Grid.Column="1" TextColor="LightGray" FontSize="12" Text="{Binding AddedTime, Converter={StaticResource dtConverter}}"/>
                                 </Grid>
                                 <FlexLayout JustifyContent="SpaceBetween" Margin="-60,0,-35,0" Direction="Column">
                                     <Button Margin="0,-5,0,0" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec55;"
-                                        Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"
-                                        Command="{Binding Path=BindingContext.TaskRenameCommand, Source={x:Reference tasksPage}}"
-                                        CommandParameter="{Binding Item1}"/>
+                                            Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20"
+                                            Command="{Binding Path=BindingContext.TaskRenameCommand, Source={x:Reference tasksPage}}"
+                                            CommandParameter="{Binding .}"/>
                                     <Button Margin="0,0,0,-5" Style="{StaticResource fontButton}" TextColor="White" Text="&#xec53;"
-                                            Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20" 
-                                            Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
-                                            CommandParameter="{Binding Item1}"/>
+                                                Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" FontSize="20" 
+                                                Command="{Binding Path=BindingContext.TaskRemoveCommand, Source={x:Reference tasksPage}}"
+                                                CommandParameter="{Binding .}"/>
                                 </FlexLayout>
                             </StackLayout>
                         </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </AbsoluteLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

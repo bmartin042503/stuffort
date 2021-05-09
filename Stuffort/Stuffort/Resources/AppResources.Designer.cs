@@ -601,6 +601,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        internal static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to November.
         /// </summary>
         internal static string November {
@@ -691,6 +700,15 @@ namespace Stuffort.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search...
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to seconds ago.
         /// </summary>
         internal static string SecondsAgo {
@@ -750,6 +768,51 @@ namespace Stuffort.Resources {
         internal static string Soon {
             get {
                 return ResourceManager.GetString("Soon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting by completed.
+        /// </summary>
+        internal static string SortByCompleted {
+            get {
+                return ResourceManager.GetString("SortByCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting by newest.
+        /// </summary>
+        internal static string SortByNewest {
+            get {
+                return ResourceManager.GetString("SortByNewest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting by oldest.
+        /// </summary>
+        internal static string SortByOldest {
+            get {
+                return ResourceManager.GetString("SortByOldest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting by uncompleted.
+        /// </summary>
+        internal static string SortByUncompleted {
+            get {
+                return ResourceManager.GetString("SortByUncompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorting.
+        /// </summary>
+        internal static string Sorting {
+            get {
+                return ResourceManager.GetString("Sorting", resourceCulture);
             }
         }
         

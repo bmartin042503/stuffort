@@ -297,6 +297,9 @@
   <data name="NoTasks" xml:space="preserve">
     <value>You don't have any tasks</value>
   </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
   <data name="November" xml:space="preserve">
     <value>November</value>
   </data>
@@ -327,6 +330,9 @@
   <data name="SavingTimer" xml:space="preserve">
     <value>Saving timer</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search..</value>
+  </data>
   <data name="SecondsAgo" xml:space="preserve">
     <value>seconds ago</value>
   </data>
@@ -347,6 +353,21 @@
   </data>
   <data name="Soon" xml:space="preserve">
     <value>Soon</value>
+  </data>
+  <data name="SortByCompleted" xml:space="preserve">
+    <value>Sorting by completed</value>
+  </data>
+  <data name="SortByNewest" xml:space="preserve">
+    <value>Sorting by newest</value>
+  </data>
+  <data name="SortByOldest" xml:space="preserve">
+    <value>Sorting by oldest</value>
+  </data>
+  <data name="SortByUncompleted" xml:space="preserve">
+    <value>Sorting by uncompleted</value>
+  </data>
+  <data name="Sorting" xml:space="preserve">
+    <value>Sorting</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>Start</value>

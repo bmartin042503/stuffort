@@ -238,6 +238,7 @@ namespace Stuffort.ViewModel
                 {
                     STask selectedTask = TaskPicker.SelectedItem as STask;
                     selectedTask.IsDone = true;
+                    selectedTask.Finished = DateTime.Now;
                     taskName = selectedTask.Name;
                     await STaskServices.UpdateTask(selectedTask);
                 }

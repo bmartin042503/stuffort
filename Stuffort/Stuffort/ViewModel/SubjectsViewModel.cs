@@ -91,7 +91,7 @@ namespace Stuffort.ViewModel
             await SubjectServices.RenameSubject(selectedItem, newName);
             await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                 AppResources.ResourceManager.GetString("SubjectSuccessfullyRenamed"), "Ok");
-            await Refresh();
+            await UpdateSubjects();
         }
 
         public async void RemovingSubject(object parameter)

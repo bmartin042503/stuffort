@@ -56,8 +56,8 @@ namespace Stuffort.View.ShellPages
                 string converted = ConvertToHourMinSec((long)timeSum);
                 EntryList1.Add(new ChartEntry((float)timeSum / 100) { Label=itemName, ValueLabel=converted, Color = color });
             }
-            statsViewSubjects.Chart = new PointChart{ Entries = EntryList1, LabelTextSize = 40, IsAnimated=true, AnimationProgress = 1.5f,
-               PointMode=PointMode.Circle, ValueLabelOrientation = Orientation.Horizontal};
+            statsViewSubjects.Chart = new PointChart{ Entries = EntryList1, LabelTextSize = 40, IsAnimated=true, AnimationProgress = 1.5f, 
+               PointMode=PointMode.Circle, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty, LabelColor=SKColor.Parse("#528fdb")};
             List<ChartEntry> EntryList2 = new List<ChartEntry>();
             var ydata = from stat in stats
                         where stat.Finished.Year == DateTime.Now.Year
@@ -87,7 +87,7 @@ namespace Stuffort.View.ShellPages
                 EntryList2.Add(new ChartEntry((float)timeSum / 100) { Label=monthName, ValueLabel=converted, Color = SKColor.Parse("#528fdb") });
             }
             statsViewYear.Chart = new BarChart { Entries = EntryList2, LabelTextSize = 40, IsAnimated = true, AnimationProgress=1.5f, ValueLabelOrientation = Orientation.Horizontal,
-            LabelOrientation = Orientation.Horizontal};
+            LabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty};
         }
 
         public string LocalLongnameConverter(string val)

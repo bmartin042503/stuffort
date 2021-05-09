@@ -19,7 +19,7 @@ namespace Stuffort.View.ShellPages
         public TasksPage()
         {
             InitializeComponent();
-            TasksViewModel = new TasksViewModel(noTaskLabel);
+            TasksViewModel = new TasksViewModel(noTaskLbl, searchBarTasks);
             BindingContext = TasksViewModel;
         }
 
@@ -27,6 +27,7 @@ namespace Stuffort.View.ShellPages
         {
             base.OnAppearing();
             this.Title = AppResources.ResourceManager.GetString("TasksPage");
+            searchBarTasks.Placeholder = AppResources.ResourceManager.GetString("Search");
             await TasksViewModel.UpdateTasks();
         }
     }

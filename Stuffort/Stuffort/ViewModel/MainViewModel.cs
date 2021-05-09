@@ -28,7 +28,7 @@ namespace Stuffort.ViewModel
         public Command MainPageCommand { get; set; }
 
         public ConfigurationType ConfType { get; set; }
-        public MainViewModel(ConfigurationType ct, Picker picker, string name)
+        public MainViewModel(ConfigurationType ct, Picker picker)
         {
             List<string> Languages = new List<string>()
             {
