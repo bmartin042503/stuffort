@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using Acr.UserDialogs;
 using Stuffort.Configuration;
+using System.Windows.Input;
 
 namespace Stuffort.ViewModel
 {
@@ -90,11 +91,11 @@ namespace Stuffort.ViewModel
             }
         }
 
-        public Command TimerHandler { get; set; }
-        public Command TimerSave { get; set; }
-        public Command TimerClear { get; set; }
-        public Command RefreshStatsCommand { get; set; }
-        public Command StatsRemoveCommand { get; set; }
+        public ICommand TimerHandler { get; set; }
+        public ICommand TimerSave { get; set; }
+        public ICommand TimerClear { get; set; }
+        public ICommand RefreshStatsCommand { get; set; }
+        public ICommand StatsRemoveCommand { get; set; }
 
         private Statistics currentstats;
         public Statistics CurrentStats
@@ -134,207 +135,257 @@ namespace Stuffort.ViewModel
 
         public async void RemoveStat(object value)
         {
-            if (value == null) return;
-            Statistics stat = value as Statistics;
-            bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDeleteStat"),
-                AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
-            if(!delete)
+            try
             {
-                if (stat.ID == CurrentStats.ID) ResetData("true");
-                else await StatisticsServices.DeleteStatistics(stat);
-                await ImportStats();
+                if (value == null) return;
+                Statistics stat = value as Statistics;
+                bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDeleteStat"),
+                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                if (!delete)
+                {
+                    if (stat.ID == CurrentStats.ID) ResetData("true");
+                    else await StatisticsServices.DeleteStatistics(stat);
+                    await ImportStats();
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
         public async void ResetData(object value)
         {
-            string val = value as string;
-            bool skipit = bool.Parse(val);
-            bool delete = true;
-            if (skipit == false)
+            try
             {
-                delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("ResetTimer"),
-                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                string val = value as string;
+                bool skipit = bool.Parse(val);
+                bool delete = true;
+                if (skipit == false)
+                {
+                    delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("ResetTimer"),
+                        AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                }
+                if (!delete || skipit == true)
+                {
+                    Running = false;
+                    await StatisticsServices.DeleteStatistics(CurrentStats);
+                    StudyTime = new TimeSpan();
+                    CurrentStats = new Statistics();
+                    TaskName = string.Empty;
+                    SubjectName = string.Empty;
+                    TaskNameVisible = false;
+                    if (TaskList.Count != 0)
+                    {
+                        TaskPicker.IsEnabled = true;
+                        TaskSwitch.IsEnabled = true;
+                    }
+                    else
+                    {
+                        TaskPicker.IsEnabled = false;
+                        TaskSwitch.IsEnabled = false;
+                        CurrentStats.TaskDisconnection = true;
+                    }
+                    TimerHandlerButton.Text = "\uec74";
+                }
             }
-            if (!delete || skipit == true)
+            catch (Exception ex)
             {
-                Running = false;
-                await StatisticsServices.DeleteStatistics(CurrentStats);
-                StudyTime = new TimeSpan();
-                CurrentStats = new Statistics();
-                TaskName = string.Empty;
-                SubjectName = string.Empty;
-                TaskNameVisible = false;
-                if (TaskList.Count != 0)
-                {
-                    TaskPicker.IsEnabled = true;
-                    TaskSwitch.IsEnabled = true;
-                }
-                else
-                {
-                    TaskPicker.IsEnabled = false;
-                    TaskSwitch.IsEnabled = false;
-                    CurrentStats.TaskDisconnection = true;
-                }
-                TimerHandlerButton.Text = "\uec74";
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
 
         }
 
         public void SwitchRefresh()
         {
-            TimerHandlerButton.IsEnabled = false;
-            UserDialogs.Instance.ShowLoading(AppResources.ResourceManager.GetString("Loading"), new MaskType());
-            Task.Run(async () => {
-                await Task.Delay(1250);
-                UserDialogs.Instance.HideLoading();
-            });
-            TimerHandlerButton.IsEnabled = true;
+            try
+            {
+                TimerHandlerButton.IsEnabled = false;
+                UserDialogs.Instance.ShowLoading(AppResources.ResourceManager.GetString("Loading"), new MaskType());
+                Task.Run(async () =>
+                {
+                    await Task.Delay(1250);
+                    UserDialogs.Instance.HideLoading();
+                });
+                TimerHandlerButton.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
         public async void TimerSwitch()
         {
-            SwitchRefresh();
-            if(Running == false)
+            try
             {
-                if(StudyTime.TotalSeconds == 0)
+                SwitchRefresh();
+                if (Running == false)
                 {
-                    if(CurrentStats.TaskDisconnection == false)
+                    if (StudyTime.TotalSeconds == 0)
                     {
-                        STask selectedTask = TaskPicker.SelectedItem as STask;
-                        CurrentStats.TaskID = selectedTask.ID;
-                        CurrentStats.SubjectID = selectedTask.SubjectID;
-                        TaskName = selectedTask.Name;
-                        SubjectName = selectedTask.SubjectName;
-                        CurrentStats.SubjectName = selectedTask.SubjectName;
-                        TaskNameVisible = true;
+                        if (CurrentStats.TaskDisconnection == false)
+                        {
+                            STask selectedTask = TaskPicker.SelectedItem as STask;
+                            CurrentStats.TaskID = selectedTask.ID;
+                            CurrentStats.SubjectID = selectedTask.SubjectID;
+                            TaskName = selectedTask.Name;
+                            SubjectName = selectedTask.SubjectName;
+                            CurrentStats.SubjectName = selectedTask.SubjectName;
+                            TaskNameVisible = true;
+                        }
+                        else
+                        {
+                            CurrentStats.TaskID = -1;
+                            CurrentStats.SubjectID = -1;
+                            CurrentStats.SubjectName = "UNDEFINED";
+                            TaskNameVisible = false;
+                        }
+                        CurrentStats.Started = DateTime.Now;
+                        await StatisticsServices.AddStatistics(CurrentStats);
+                        await ImportStats();
                     }
                     else
                     {
-                        CurrentStats.TaskID = -1;
-                        CurrentStats.SubjectID = -1;
-                        CurrentStats.SubjectName = "UNDEFINED";
-                        TaskNameVisible = false;
+                        if (CurrentStats.TaskDisconnection == false)
+                        {
+                            STask selectedTask = TaskPicker.SelectedItem as STask;
+                            TaskName = selectedTask.Name;
+                            SubjectName = selectedTask.SubjectName;
+                            TaskNameVisible = true;
+                        }
+                        else TaskNameVisible = false;
                     }
-                    CurrentStats.Started = DateTime.Now;
-                    await StatisticsServices.AddStatistics(CurrentStats);
-                    await ImportStats();
+                    ConfigurationType ct = ConfigurationServices.GetConfigurationData();
+                    if (ct.NotificationEnabled == true)
+                    {
+                        notificationManager.SendNotification(AppResources.ResourceManager.GetString("StudyTimerPage"),
+                            AppResources.ResourceManager.GetString("TimerHasStartedNotification"), DateTime.Now);
+                    }
+                    Running = true;
+                    TaskPicker.IsEnabled = false;
+                    TaskSwitch.IsEnabled = false;
+                    TimerHandlerButton.Text = "\uec72";
+                    int count = 0;
+                    Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                    {
+                        if (Running)
+                        {
+                            Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                if (count == 45)
+                                {
+                                    await StatisticsServices.UpdateStatistics(CurrentStats);
+                                    count = 0;
+                                }
+                            });
+                            StudyTime = StudyTime.Add(TimeSpan.FromSeconds(1));
+                            count++;
+                        }
+                        return Running;
+                    });
                 }
                 else
                 {
-                    if (CurrentStats.TaskDisconnection == false)
-                    {
-                        STask selectedTask = TaskPicker.SelectedItem as STask;
-                        TaskName = selectedTask.Name;
-                        SubjectName = selectedTask.SubjectName;
-                        TaskNameVisible = true;
-                    }
-                    else TaskNameVisible = false;
+                    TimerHandlerButton.Text = "\uec74";
+                    Running = false;
+                    await StatisticsServices.UpdateStatistics(CurrentStats);
                 }
-                ConfigurationType ct = ConfigurationServices.GetConfigurationData();
-                if (ct.NotificationEnabled == true)
-                {
-                    notificationManager.SendNotification(AppResources.ResourceManager.GetString("StudyTimerPage"),
-                        AppResources.ResourceManager.GetString("TimerHasStartedNotification"), DateTime.Now);
-                }
-                Running = true;
-                TaskPicker.IsEnabled = false;
-                TaskSwitch.IsEnabled = false;
-                TimerHandlerButton.Text = "\uec72";
-                int count = 0;
-                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-                {
-                    if (Running)
-                    {
-                        Device.BeginInvokeOnMainThread(async() => { 
-                            if(count == 45)
-                            {
-                                await StatisticsServices.UpdateStatistics(CurrentStats);
-                                count = 0;
-                            }
-                        });
-                        StudyTime = StudyTime.Add(TimeSpan.FromSeconds(1));
-                        count++;
-                    }
-                    return Running;
-                });
             }
-            else
+            catch (Exception ex)
             {
-                TimerHandlerButton.Text = "\uec74";
-                Running = false;
-                await StatisticsServices.UpdateStatistics(CurrentStats);
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
         public async void SaveData()
         {
-            if(StudyTime.TotalSeconds < 60)
+            try
             {
-                TimerHandlerButton.Text = "\uec74";
-                Running = false;
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("TimerAtLeast1Min"), "Ok");
-                await StatisticsServices.UpdateStatistics(CurrentStats);
-                return;
-            }
-            Running = false;
-            string taskName = string.Empty;
-            if(CurrentStats.TaskDisconnection == false)
-            {
-                bool completed = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDoneTask"),
-                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
-                if (!completed)
+                if (StudyTime.TotalSeconds < 60)
                 {
-                    STask selectedTask = TaskPicker.SelectedItem as STask;
-                    selectedTask.IsDone = true;
-                    selectedTask.Finished = DateTime.Now;
-                    taskName = selectedTask.Name;
-                    await STaskServices.UpdateTask(selectedTask);
+                    TimerHandlerButton.Text = "\uec74";
+                    Running = false;
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("TimerAtLeast1Min"), "Ok");
+                    await StatisticsServices.UpdateStatistics(CurrentStats);
+                    return;
                 }
-                CurrentStats.IsDone = true;
+                Running = false;
+                string taskName = string.Empty;
+                if (CurrentStats.TaskDisconnection == false)
+                {
+                    bool completed = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDoneTask"),
+                        AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                    if (!completed)
+                    {
+                        STask selectedTask = TaskPicker.SelectedItem as STask;
+                        selectedTask.IsDone = true;
+                        selectedTask.Finished = DateTime.Now;
+                        taskName = selectedTask.Name;
+                        await STaskServices.UpdateTask(selectedTask);
+                    }
+                    CurrentStats.IsDone = true;
+                }
+                else
+                {
+                    taskName = "-";
+                    CurrentStats.IsDone = true;
+                }
+                CurrentStats.Finished = DateTime.Now;
+                TimerHandlerButton.Text = "\uec74";
+                await StatisticsServices.UpdateStatistics(CurrentStats);
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
+                        $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimeSpent")} {CurrentStats.Time:t}\n{AppResources.ResourceManager.GetString("TimerTask")} {taskName}", "Ok");
+                CurrentStats = new Statistics();
+                StudyTime = new TimeSpan();
+                CurrentStats.TaskDisconnection = true;
+                TaskNameVisible = false;
+                TaskSwitch.IsToggled = true;
+                await ImportTasks();
+                await ImportStats();
             }
-            else
+            catch (Exception ex)
             {
-                taskName = "-";
-                CurrentStats.IsDone = true;
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
-            CurrentStats.Finished = DateTime.Now;
-            TimerHandlerButton.Text = "\uec74";
-            await StatisticsServices.UpdateStatistics(CurrentStats);
-            await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
-                    $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimeSpent")} {CurrentStats.Time:t}\n{AppResources.ResourceManager.GetString("TimerTask")} {taskName}", "Ok");
-            CurrentStats = new Statistics();
-            StudyTime = new TimeSpan();
-            CurrentStats.TaskDisconnection = true;
-            TaskNameVisible = false;
-            TaskSwitch.IsToggled = true;
-            await ImportTasks();
-            await ImportStats();
         }
 
         public async Task ImportTasks()
         {
-            if (Running == false)
+            try
             {
-                TaskList.Clear();
-                var tasks = await STaskServices.GetTasks();
-                foreach (var task in tasks)
+                if (Running == false)
                 {
-                    if (task.IsDone == false)
-                        TaskList.Add(task);
+                    TaskList.Clear();
+                    var tasks = await STaskServices.GetTasks();
+                    foreach (var task in tasks)
+                    {
+                        if (task.IsDone == false)
+                            TaskList.Add(task);
+                    }
+                    if (TaskList.Count == 0)
+                    {
+                        TaskPicker.IsEnabled = false;
+                        TaskSwitch.IsEnabled = false;
+                    }
+                    else
+                    {
+                        TaskPicker.IsEnabled = true;
+                        TaskSwitch.IsEnabled = true;
+                        TaskPicker.SelectedItem = TaskList[0];
+                    }
                 }
-                if (TaskList.Count == 0)
-                {
-                    TaskPicker.IsEnabled = false;
-                    TaskSwitch.IsEnabled = false;
-                }
-                else
-                {
-                    TaskPicker.IsEnabled = true;
-                    TaskSwitch.IsEnabled = true;
-                    TaskPicker.SelectedItem = TaskList[0];
-                }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
@@ -348,19 +399,27 @@ namespace Stuffort.ViewModel
 
         public async Task ImportStats()
         {
-            StatsList.Clear();
-            var stats = await StatisticsServices.GetStatistics();
-            if(stats != null && stats.Count() != 0)
+            try
             {
-                var orderedstats = from stat in stats
-                                   orderby stat.ID descending
-                                   select stat;
-                foreach(var stat in orderedstats)
+                StatsList.Clear();
+                var stats = await StatisticsServices.GetStatistics();
+                if (stats != null && stats.Count() != 0)
                 {
-                    if (stat.SubjectName == "UNDEFINED") stat.TemporaryName = AppResources.ResourceManager.GetString("FreeTimerTitle");
-                    else stat.TemporaryName = SubjectName;
-                    StatsList.Add(stat);
+                    var orderedstats = from stat in stats
+                                       orderby stat.ID descending
+                                       select stat;
+                    foreach (var stat in orderedstats)
+                    {
+                        if (stat.SubjectName == "UNDEFINED") stat.TemporaryName = AppResources.ResourceManager.GetString("FreeTimerTitle");
+                        else stat.TemporaryName = SubjectName;
+                        StatsList.Add(stat);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 

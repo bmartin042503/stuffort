@@ -43,12 +43,12 @@ namespace Stuffort.ViewModel
         private SearchBar SearchBarTasks;
         public AsyncCommand TaskCommand { get; set; }
         public AsyncCommand TaskRefreshCommand { get; set; }
-        public Command TapCommand { get; set; }
-        public Command TaskRemoveCommand { get; set; }
-        public Command TaskRenameCommand { get; set; }
-        public Command TaskDoneCommand { get; set; }
-        public Command TaskSortCommand { get; set; }
-        public Command TaskSearchCommand { get; set; }
+        public ICommand TapCommand { get; set; }
+        public ICommand TaskRemoveCommand { get; set; }
+        public ICommand TaskRenameCommand { get; set; }
+        public ICommand TaskDoneCommand { get; set; }
+        public ICommand TaskSortCommand { get; set; }
+        public ICommand TaskSearchCommand { get; set; }
 
         public int SubjectListCount { get; set; }
         private List<STask> Tasks;
@@ -82,97 +82,137 @@ namespace Stuffort.ViewModel
 
         public void TaskSearch(object value)
         {
-            string searching = value as string;
-            searching = searching.ToLowerInvariant();
-            TaskList.Clear();
-            foreach(var item in Tasks)
+            try
             {
-                if (item.Name.ToLowerInvariant().Contains(searching))
-                    TaskList.Add(item);
+                string searching = value as string;
+                searching = searching.ToLowerInvariant();
+                TaskList.Clear();
+                foreach (var item in Tasks)
+                {
+                    if (item.Name.ToLowerInvariant().Contains(searching))
+                        TaskList.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                    $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
         public async void TaskSort()
         {
-            string sorttype = await App.Current.MainPage.DisplayActionSheet(AppResources.ResourceManager.GetString("Sorting"),
-                AppResources.ResourceManager.GetString("Cancel"), "Ok", AppResources.ResourceManager.GetString("SortByOldest"),
-                AppResources.ResourceManager.GetString("SortByNewest"), AppResources.ResourceManager.GetString("SortByCompleted"),
-                AppResources.ResourceManager.GetString("SortByUncompleted"));
-            if (sorttype == AppResources.ResourceManager.GetString("SortByOldest")) TaskList = new ObservableCollection<STask>(TaskList.OrderBy(x => x.AddedTime));
-            else if (sorttype == AppResources.ResourceManager.GetString("SortByNewest")) TaskList = new ObservableCollection<STask>(TaskList.OrderByDescending(x => x.AddedTime)); 
-            else if (sorttype == AppResources.ResourceManager.GetString("SortByCompleted")) TaskList = new ObservableCollection<STask>(TaskList.OrderByDescending(x => x.IsDone));
-            else if (sorttype == AppResources.ResourceManager.GetString("SortByUncompleted")) TaskList = new ObservableCollection<STask>(TaskList.OrderBy(x => x.IsDone));
+            try
+            {
+                string sorttype = await App.Current.MainPage.DisplayActionSheet(AppResources.ResourceManager.GetString("Sorting"),
+                    AppResources.ResourceManager.GetString("Cancel"), "Ok", AppResources.ResourceManager.GetString("SortByOldest"),
+                    AppResources.ResourceManager.GetString("SortByNewest"), AppResources.ResourceManager.GetString("SortByCompleted"),
+                    AppResources.ResourceManager.GetString("SortByUncompleted"));
+                if (sorttype == AppResources.ResourceManager.GetString("SortByOldest")) TaskList = new ObservableCollection<STask>(TaskList.OrderBy(x => x.AddedTime));
+                else if (sorttype == AppResources.ResourceManager.GetString("SortByNewest")) TaskList = new ObservableCollection<STask>(TaskList.OrderByDescending(x => x.AddedTime));
+                else if (sorttype == AppResources.ResourceManager.GetString("SortByCompleted")) TaskList = new ObservableCollection<STask>(TaskList.OrderByDescending(x => x.IsDone));
+                else if (sorttype == AppResources.ResourceManager.GetString("SortByUncompleted")) TaskList = new ObservableCollection<STask>(TaskList.OrderBy(x => x.IsDone));
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
         public async void TaskRename(object parameter)
         {
-            STask selectedItem = parameter as STask;
-            string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingTask"), 
-                AppResources.ResourceManager.GetString("RenameTask"), 
-                "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
-            if (newName.Length > 120 || newName.Length < 3)
+            try
+            {
+                STask selectedItem = parameter as STask;
+                string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingTask"),
+                    AppResources.ResourceManager.GetString("RenameTask"),
+                    "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
+                if (newName.Length > 120 || newName.Length < 3)
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                    return;
+                }
+                selectedItem.Name = newName;
+                await STaskServices.UpdateTask(selectedItem);
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                    AppResources.ResourceManager.GetString("TaskSuccessfullyRenamed"), "Ok");
+                await UpdateTasks();
+            }
+            catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
-                return;
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
-            selectedItem.Name = newName;
-            await STaskServices.UpdateTask(selectedItem);
-            await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                AppResources.ResourceManager.GetString("TaskSuccessfullyRenamed"), "Ok");
-            await UpdateTasks();
         }
 
         public async void TaskDone(object parameter)
         {
-            STask selectedItem = parameter as STask;
-            if (selectedItem.IsDone == false)
+            try
             {
-                bool setDone = await App.Current.MainPage.DisplayAlert("",
-                $"{AppResources.ResourceManager.GetString("AreYouSureDoneTask")} ({selectedItem.Name})",
-                AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Yes"));
-                if (!setDone)
+                STask selectedItem = parameter as STask;
+                if (selectedItem.IsDone == false)
                 {
-                    selectedItem.IsDone = true;
-                    selectedItem.Finished = DateTime.Now;
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                        AppResources.ResourceManager.GetString("TaskCompleted"), "Ok");
-                    await STaskServices.UpdateTask(selectedItem);
-                    await UpdateTasks();
+                    bool setDone = await App.Current.MainPage.DisplayAlert("",
+                    $"{AppResources.ResourceManager.GetString("AreYouSureDoneTask")} ({selectedItem.Name})",
+                    AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Yes"));
+                    if (!setDone)
+                    {
+                        selectedItem.IsDone = true;
+                        selectedItem.Finished = DateTime.Now;
+                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                            AppResources.ResourceManager.GetString("TaskCompleted"), "Ok");
+                        await STaskServices.UpdateTask(selectedItem);
+                        await UpdateTasks();
+                    }
+                }
+                else
+                {
+                    bool setUndone = await App.Current.MainPage.DisplayAlert("",
+                    $"{AppResources.ResourceManager.GetString("AreYouSureUndoneTask")} ({selectedItem.Name})",
+                    AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Yes"));
+                    if (!setUndone)
+                    {
+                        selectedItem.IsDone = false;
+                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                            AppResources.ResourceManager.GetString("TaskUncompleted"), "Ok");
+                        await STaskServices.UpdateTask(selectedItem);
+                        await UpdateTasks();
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                bool setUndone = await App.Current.MainPage.DisplayAlert("",
-                $"{AppResources.ResourceManager.GetString("AreYouSureUndoneTask")} ({selectedItem.Name})",
-                AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Yes"));
-                if (!setUndone)
-                {
-                    selectedItem.IsDone = false;
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                        AppResources.ResourceManager.GetString("TaskUncompleted"), "Ok");
-                    await STaskServices.UpdateTask(selectedItem);
-                    await UpdateTasks();
-                }
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
         public async void TaskRemove(object value)
         {
-            STask selectedItem = value as STask;
-            bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Delete"),
-                $"{AppResources.ResourceManager.GetString("AreYouSureDeleteTask")} ({selectedItem.Name})", 
-                AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Delete"));
-            if (!delete)
+            try
             {
-                int rows = await STaskServices.RemoveTask(selectedItem);
-                if (rows > 0)
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                        $"{AppResources.ResourceManager.GetString("TaskSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
-                else
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        $"{AppResources.ResourceManager.GetString("TaskErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
-                await UpdateTasks();
+                STask selectedItem = value as STask;
+                bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Delete"),
+                    $"{AppResources.ResourceManager.GetString("AreYouSureDeleteTask")} ({selectedItem.Name})",
+                    AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Delete"));
+                if (!delete)
+                {
+                    int rows = await STaskServices.RemoveTask(selectedItem);
+                    if (rows > 0)
+                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                            $"{AppResources.ResourceManager.GetString("TaskSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
+                    else
+                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                            $"{AppResources.ResourceManager.GetString("TaskErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
+                    await UpdateTasks();
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
@@ -184,46 +224,70 @@ namespace Stuffort.ViewModel
 
         public async Task Refresh()
         {
-            IsRefreshing = true;
-            await Task.Delay(750);
-            await UpdateTasks();
-            IsRefreshing = false;
+            try
+            {
+                IsRefreshing = true;
+                await Task.Delay(750);
+                await UpdateTasks();
+                IsRefreshing = false;
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
         public async Task UpdateTasks()
         {
-            TaskList.Clear();
-            var tasks = await STaskServices.GetTasks();
-            var subjects = await SubjectServices.GetSubjects();
-            foreach(var task in tasks)
+            try
             {
-                TaskList.Add(task);
+                TaskList.Clear();
+                var tasks = await STaskServices.GetTasks();
+                var subjects = await SubjectServices.GetSubjects();
+                foreach (var task in tasks)
+                {
+                    TaskList.Add(task);
+                }
+                SubjectListCount = (subjects as List<Subject>).Count;
+                if (TaskList.Count == 0)
+                {
+                    NoTaskLabel.Text = AppResources.ResourceManager.GetString("NoTasks");
+                    NoTaskLabel.IsVisible = true;
+                    SearchBarTasks.IsVisible = false;
+                }
+                else
+                {
+                    NoTaskLabel.IsVisible = false;
+                    SearchBarTasks.IsVisible = true;
+                }
+                Tasks = (List<STask>)tasks;
             }
-            SubjectListCount = (subjects as List<Subject>).Count;
-            if(TaskList.Count == 0)
+            catch (Exception ex)
             {
-                NoTaskLabel.Text = AppResources.ResourceManager.GetString("NoTasks");
-                NoTaskLabel.IsVisible = true;
-                SearchBarTasks.IsVisible = false;
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
-            else
-            {
-                NoTaskLabel.IsVisible = false;
-                SearchBarTasks.IsVisible = true;
-            }
-            Tasks = (List<STask>)tasks;
         }
 
         public async Task NavigateToNewTask()
         {
-            if (SubjectListCount == 0)
+            try
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"), 
-                    AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
-                return;
-            }
+                if (SubjectListCount == 0)
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("TaskListCountIsZero"), "Ok");
+                    return;
+                }
 
-            await Shell.Current.GoToAsync($"{nameof(NewTaskPage)}");
+                await Shell.Current.GoToAsync($"{nameof(NewTaskPage)}");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
     }

@@ -47,8 +47,16 @@ namespace Stuffort.ViewModel
         }
         public async void TapItem(object value)
         {
-            string name = value as string;
-            if (name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
+            try
+            {
+                string name = value as string;
+                if (name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
         public async Task Refresh()
@@ -70,46 +78,62 @@ namespace Stuffort.ViewModel
 
         public async void SubjectRename(object parameter)
         {
-            Subject selectedItem = parameter as Subject;
-            string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingSubject"),
-                AppResources.ResourceManager.GetString("RenameSubject"),
-                "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
-            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName))
+            try
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
-                return;
-            }
+                Subject selectedItem = parameter as Subject;
+                string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingSubject"),
+                    AppResources.ResourceManager.GetString("RenameSubject"),
+                    "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
+                if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName))
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
+                    return;
+                }
 
-            if (newName.Length > 120 || newName.Length < 3)
+                if (newName.Length > 120 || newName.Length < 3)
+                {
+                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                        AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                    return;
+                }
+                selectedItem.Name = newName;
+                await SubjectServices.RenameSubject(selectedItem, newName);
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                    AppResources.ResourceManager.GetString("SubjectSuccessfullyRenamed"), "Ok");
+                await UpdateSubjects();
+            }
+            catch (Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                    AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
-                return;
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
-            selectedItem.Name = newName;
-            await SubjectServices.RenameSubject(selectedItem, newName);
-            await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                AppResources.ResourceManager.GetString("SubjectSuccessfullyRenamed"), "Ok");
-            await UpdateSubjects();
         }
 
         public async void RemovingSubject(object parameter)
         {
-            Subject selectedItem = parameter as Subject;
-            bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Delete"),
-                $"{AppResources.ResourceManager.GetString("AreYouSureDeleteSubject")} ({selectedItem.Name})",
-                AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Delete"));
-            if (!delete)
+            try
             {
-                int rows = await SubjectServices.RemoveSubject(selectedItem);
-                if (rows > 0)
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                        $"{AppResources.ResourceManager.GetString("SubjectSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
-                else
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        $"{AppResources.ResourceManager.GetString("SubjectErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
-                await UpdateSubjects();
+                Subject selectedItem = parameter as Subject;
+                bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Delete"),
+                    $"{AppResources.ResourceManager.GetString("AreYouSureDeleteSubject")} ({selectedItem.Name})",
+                    AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Delete"));
+                if (!delete)
+                {
+                    int rows = await SubjectServices.RemoveSubject(selectedItem);
+                    if (rows > 0)
+                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                            $"{AppResources.ResourceManager.GetString("SubjectSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
+                    else
+                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+                            $"{AppResources.ResourceManager.GetString("SubjectErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
+                    await UpdateSubjects();
+                }
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
         async Task NavigateToNewSubject()
@@ -119,20 +143,28 @@ namespace Stuffort.ViewModel
 
         public async Task UpdateSubjects()
         {
-            SubjectList.Clear();
-            var subjectList = await SubjectServices.GetSubjects();
-            var tasksList = await STaskServices.GetTasks();
-            foreach (var subject in subjectList)
+            try
             {
-                var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectID == subject.ID).Count()}");
-                SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
+                SubjectList.Clear();
+                var subjectList = await SubjectServices.GetSubjects();
+                var tasksList = await STaskServices.GetTasks();
+                foreach (var subject in subjectList)
+                {
+                    var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectID == subject.ID).Count()}");
+                    SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
+                }
+                if (SubjectList.Count == 0)
+                {
+                    NoSubjectLabel.IsVisible = true;
+                    NoSubjectLabel.Text = AppResources.ResourceManager.GetString("NoSubjects");
+                }
+                else NoSubjectLabel.IsVisible = false;
             }
-            if (SubjectList.Count == 0)
+            catch (Exception ex)
             {
-                NoSubjectLabel.IsVisible = true;
-                NoSubjectLabel.Text = AppResources.ResourceManager.GetString("NoSubjects");
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
-            else NoSubjectLabel.IsVisible = false;
         }
     }
 }

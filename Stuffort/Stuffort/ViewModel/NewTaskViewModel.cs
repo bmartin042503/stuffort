@@ -111,10 +111,18 @@ namespace Stuffort.ViewModel
 
         public async void InitializeSubjectList()
         {
-            SubjectList.Clear();
-            var subjects = await SubjectServices.GetSubjects();
-            foreach (var subject in subjects)
-                SubjectList.Add(subject);
+            try
+            {
+                SubjectList.Clear();
+                var subjects = await SubjectServices.GetSubjects();
+                foreach (var subject in subjects)
+                    SubjectList.Add(subject);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
+$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+            }
         }
 
         public async Task SaveTask()

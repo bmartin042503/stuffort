@@ -16,6 +16,7 @@ namespace Stuffort.Droid
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
             string fullPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),"data.db");
