@@ -25,11 +25,8 @@ namespace Stuffort.View.ShellPages
         public MainViewModel MainViewModel;
         public LoginPage()
         {
-            InitializeComponent();
-            //File.Delete(ConfigurationServices.FilePath);
-            //File.Delete(App.DatabaseLocation);
-            //StatisticsServices.DeleteAll();
-            loginPageVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
+            InitializeComponent(); 
+            loginPageVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentVersion}";
             ConfType = ConfigurationServices.GetConfigurationData();
             MainViewModel = new MainViewModel(ConfType, languagePicker);
             languageSelectionStackLayout.BindingContext = MainViewModel;

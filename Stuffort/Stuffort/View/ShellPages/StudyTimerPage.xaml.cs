@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,6 +27,15 @@ namespace Stuffort.View.ShellPages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            var deviceInfo = DeviceDisplay.MainDisplayInfo;
+            var width = deviceInfo.Width;
+            if (width <= 500)
+            {
+                timerLbl.FontSize = 55;
+                timerHandlerBtn.FontSize = 15;
+                saveBtn.FontSize = 15;
+                resetBtn.FontSize = 15;
+            }
             await this.StudyTimerViewModel.ImportTasks();
             await this.StudyTimerViewModel.InitializeStats();
             await this.StudyTimerViewModel.ImportStats();

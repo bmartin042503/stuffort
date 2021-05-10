@@ -26,8 +26,6 @@ namespace Stuffort.Configuration
             }
             catch (Exception ex)
             {
-                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
 
         }
@@ -53,8 +51,6 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             } 
             catch (Exception ex)
             {
-                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
             return null;
         }

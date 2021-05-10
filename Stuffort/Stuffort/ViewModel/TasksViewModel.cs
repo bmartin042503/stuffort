@@ -128,12 +128,14 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingTask"),
                     AppResources.ResourceManager.GetString("RenameTask"),
                     "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
+                if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
                 if (newName.Length > 120 || newName.Length < 3)
                 {
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
                     return;
                 }
+                if (selectedItem.Name == newName) return;
                 selectedItem.Name = newName;
                 await STaskServices.UpdateTask(selectedItem);
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),

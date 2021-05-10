@@ -171,6 +171,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 {
                     Running = false;
                     await StatisticsServices.DeleteStatistics(CurrentStats);
+                    await ImportStats();
                     StudyTime = new TimeSpan();
                     CurrentStats = new Statistics();
                     TaskName = string.Empty;
@@ -235,6 +236,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                             TaskName = selectedTask.Name;
                             SubjectName = selectedTask.SubjectName;
                             CurrentStats.SubjectName = selectedTask.SubjectName;
+                            CurrentStats.TaskName = selectedTask.Name;
                             TaskNameVisible = true;
                         }
                         else
@@ -242,6 +244,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                             CurrentStats.TaskID = -1;
                             CurrentStats.SubjectID = -1;
                             CurrentStats.SubjectName = "UNDEFINED";
+                            CurrentStats.TaskName = "UNDEFINED";
                             TaskNameVisible = false;
                         }
                         CurrentStats.Started = DateTime.Now;
@@ -410,8 +413,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                                        select stat;
                     foreach (var stat in orderedstats)
                     {
-                        if (stat.SubjectName == "UNDEFINED") stat.TemporaryName = AppResources.ResourceManager.GetString("FreeTimerTitle");
-                        else stat.TemporaryName = SubjectName;
+                        if (stat.SubjectID == -1 || stat.TaskID == -1) stat.TemporaryName = AppResources.ResourceManager.GetString("FreeTimerTitle");
+                        else stat.TemporaryName = stat.TaskName;
                         StatsList.Add(stat);
                     }
                 }
@@ -464,6 +467,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                     }
                 }
                 CurrentStats = new Statistics();
+                TaskPicker.IsEnabled = false;
                 CurrentStats.TaskDisconnection = true;
                 StudyTime = new TimeSpan();
             }

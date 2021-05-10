@@ -3,6 +3,7 @@ using Stuffort.Resources;
 using Stuffort.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,12 +32,14 @@ namespace Stuffort.View.ShellPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            CultureInfo cultureInfo = AppResources.Culture;
             this.Title = AppResources.ResourceManager.GetString("SettingsPage");
             saveBtn.Text = AppResources.ResourceManager.GetString("Save");
             languageLbl.Text = AppResources.ResourceManager.GetString("Language");
             deleteBtn.Text = AppResources.ResourceManager.GetString("DeleteEverything");
             notificationLbl.Text = AppResources.ResourceManager.GetString("Notifications");
             this.SettingsViewModel.SetNotification();
+            this.SettingsViewModel.SetLanguage();
         }
     }
 }

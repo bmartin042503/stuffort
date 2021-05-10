@@ -68,7 +68,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             try
             {
                 await Init();
-                rows = await db.ExecuteAsync($"DELETE FROM [STask] WHERE [ID] = {s.ID}");
+                rows += await db.ExecuteAsync($"DELETE FROM [STask] WHERE [ID] = {s.ID}");
+                rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [TaskName] = 'UNDEFINED' WHERE [TaskID] = {s.ID}");
                 await db.CloseAsync();
             }
             catch (Exception ex)

@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.OS;
 using AndroidX.AppCompat.App;
 using Acr.UserDialogs;
+using Stuffort.View;
 
 namespace Stuffort.Droid
 {

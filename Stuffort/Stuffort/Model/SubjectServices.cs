@@ -87,6 +87,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 int tasksToRemoveID = s.ID;
                 rows += await db.ExecuteAsync($"DELETE FROM [Subject] WHERE [ID] = {s.ID}");
                 rows += await db.ExecuteAsync($"DELETE FROM [STask] WHERE [SubjectID] = {s.ID}");
+                rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [TaskName] = 'UNDEFINED' WHERE [SubjectID] = {s.ID}");
+                rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [SubjectName] = 'UNDEFINED' WHERE [SubjectID] = {s.ID}");
                 rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [TaskID] = -1 WHERE [SubjectID] = {s.ID}");
                 rows += await db.ExecuteAsync($"UPDATE [Statistics] SET [SubjectID] = -1 WHERE [SubjectID] = {s.ID}");
                 await db.CloseAsync();

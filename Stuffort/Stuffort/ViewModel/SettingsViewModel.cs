@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Stuffort.ViewModel
@@ -59,7 +60,11 @@ namespace Stuffort.ViewModel
             };
             LanguagePicker = picker;
             LanguagePicker.ItemsSource = Languages;
-            LanguagePicker.SelectedIndex = ct.Language == "pl" ? 2 : ct.Language == "hu" ? 1 : 0;
+        }
+
+        public void SetLanguage()
+        {
+            LanguagePicker.SelectedIndex = ConfType.Language == "pl" ? 2 : ConfType.Language == "hu" ? 1 : 0;
         }
 
         public async void DeleteEverything()
@@ -75,7 +80,7 @@ namespace Stuffort.ViewModel
                     await STaskServices.DeleteAll();
                     await StatisticsServices.DeleteAll();
                     await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("DataDeleted"), "Ok");
-                    NavigateToHomepage();
+                    await NavigateToHomepage ();
                 }
             }
             catch (Exception ex)
@@ -85,7 +90,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
-        public void SaveSettings(object parameter)
+        public async void SaveSettings(object parameter)
         {
             try
             {
@@ -103,20 +108,19 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                         continue;
                     item.Title = AppResources.ResourceManager.GetString(item.Route);
                 }
-                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
                     AppResources.ResourceManager.GetString("SettingsSaved"), "Ok");
-                NavigateToHomepage();
+                await NavigateToHomepage();
             }
             catch (Exception ex)
             {
-                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),  $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
         }
 
-        public void NavigateToHomepage()
+        public async Task NavigateToHomepage()
         {
-            Shell.Current.GoToAsync($"//{nameof(SubjectsPage)}");
+            await Shell .Current.GoToAsync($"//{nameof(SubjectsPage)}");
         }
     }
 }

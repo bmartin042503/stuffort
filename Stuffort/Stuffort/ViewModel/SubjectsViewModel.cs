@@ -84,19 +84,14 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingSubject"),
                     AppResources.ResourceManager.GetString("RenameSubject"),
                     "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
-                if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName))
-                {
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
-                    return;
-                }
-
+                if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
                 if (newName.Length > 120 || newName.Length < 3)
                 {
                     await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
                         AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
                     return;
                 }
+                if (selectedItem.Name == newName) return;
                 selectedItem.Name = newName;
                 await SubjectServices.RenameSubject(selectedItem, newName);
                 await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
