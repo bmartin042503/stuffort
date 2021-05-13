@@ -139,8 +139,8 @@ namespace Stuffort.ViewModel
             {
                 if (value == null) return;
                 Statistics stat = value as Statistics;
-                bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDeleteStat"),
-                    AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                bool delete = await App.Current.MainPage.DisplayAlert("", AppResources.AreYouSureDeleteStat,
+                    AppResources.Cancel, AppResources.Yes);
                 if (!delete)
                 {
                     if (stat.ID == CurrentStats.ID) ResetData("true");
@@ -150,73 +150,57 @@ namespace Stuffort.ViewModel
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 
         public async void ResetData(object value)
         {
-            try
+            string val = value as string;
+            bool skipit = bool.Parse(val);
+            bool delete = true;
+            if (skipit == false)
             {
-                string val = value as string;
-                bool skipit = bool.Parse(val);
-                bool delete = true;
-                if (skipit == false)
-                {
-                    delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("ResetTimer"),
-                        AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
-                }
-                if (!delete || skipit == true)
-                {
-                    Running = false;
-                    await StatisticsServices.DeleteStatistics(CurrentStats);
-                    await ImportStats();
-                    StudyTime = new TimeSpan();
-                    CurrentStats = new Statistics();
-                    TaskName = string.Empty;
-                    SubjectName = string.Empty;
-                    TaskNameVisible = false;
-                    if (TaskList.Count != 0)
-                    {
-                        TaskPicker.IsEnabled = true;
-                        TaskSwitch.IsEnabled = true;
-                    }
-                    else
-                    {
-                        TaskPicker.IsEnabled = false;
-                        TaskSwitch.IsEnabled = false;
-                        CurrentStats.TaskDisconnection = true;
-                    }
-                    TimerHandlerButton.Text = "\uec74";
-                }
+                delete = await App.Current.MainPage.DisplayAlert("", AppResources.ResetTimer,
+                    AppResources.Cancel, AppResources.Yes);
             }
-            catch (Exception ex)
+            if (!delete || skipit == true)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                Running = false;
+                await StatisticsServices.DeleteStatistics(CurrentStats);
+                await ImportStats();
+                StudyTime = new TimeSpan();
+                CurrentStats = new Statistics();
+                TaskName = string.Empty;
+                SubjectName = string.Empty;
+                TaskNameVisible = false;
+                if (TaskList.Count != 0)
+                {
+                    TaskPicker.IsEnabled = true;
+                    TaskSwitch.IsEnabled = true;
+                }
+                else
+                {
+                    TaskPicker.IsEnabled = false;
+                    TaskSwitch.IsEnabled = false;
+                    CurrentStats.TaskDisconnection = true;
+                }
+                TimerHandlerButton.Text = "\uec74";
             }
 
         }
 
         public void SwitchRefresh()
         {
-            try
+            TimerHandlerButton.IsEnabled = false;
+            UserDialogs.Instance.ShowLoading(AppResources.Loading, new MaskType());
+            Task.Run(async () =>
             {
-                TimerHandlerButton.IsEnabled = false;
-                UserDialogs.Instance.ShowLoading(AppResources.ResourceManager.GetString("Loading"), new MaskType());
-                Task.Run(async () =>
-                {
-                    await Task.Delay(1250);
-                    UserDialogs.Instance.HideLoading();
-                });
-                TimerHandlerButton.IsEnabled = true;
-            }
-            catch (Exception ex)
-            {
-                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+                await Task.Delay(1250);
+                UserDialogs.Instance.HideLoading();
+            });
+            TimerHandlerButton.IsEnabled = true;
         }
 
         public async void TimerSwitch()
@@ -265,8 +249,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                     ConfigurationType ct = ConfigurationServices.GetConfigurationData();
                     if (ct.NotificationEnabled == true)
                     {
-                        notificationManager.SendNotification(AppResources.ResourceManager.GetString("StudyTimerPage"),
-                            AppResources.ResourceManager.GetString("TimerHasStartedNotification"), DateTime.Now);
+                        notificationManager.SendNotification(AppResources.StudyTimerPage,
+                            AppResources.TimerHasStartedNotification, DateTime.Now);
                     }
                     Running = true;
                     TaskPicker.IsEnabled = false;
@@ -300,8 +284,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 
@@ -313,8 +297,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 {
                     TimerHandlerButton.Text = "\uec74";
                     Running = false;
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("TimerAtLeast1Min"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.TimerAtLeast1Min, "Ok");
                     await StatisticsServices.UpdateStatistics(CurrentStats);
                     return;
                 }
@@ -322,8 +306,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 string taskName = string.Empty;
                 if (CurrentStats.TaskDisconnection == false)
                 {
-                    bool completed = await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("AreYouSureDoneTask"),
-                        AppResources.ResourceManager.GetString("Cancel"), AppResources.ResourceManager.GetString("Yes"));
+                    bool completed = await App.Current.MainPage.DisplayAlert("", AppResources.AreYouSureDoneTask,
+                        AppResources.Cancel, AppResources.Yes);
                     if (!completed)
                     {
                         STask selectedTask = TaskPicker.SelectedItem as STask;
@@ -342,8 +326,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 CurrentStats.Finished = DateTime.Now;
                 TimerHandlerButton.Text = "\uec74";
                 await StatisticsServices.UpdateStatistics(CurrentStats);
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Congratulations"),
-                        $"{AppResources.ResourceManager.GetString("TimerSuccessfullySaved")}\n{AppResources.ResourceManager.GetString("TimeSpent")} {CurrentStats.Time:t}\n{AppResources.ResourceManager.GetString("TimerTask")} {taskName}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Congratulations,
+                        $"{AppResources.TimerSuccessfullySaved}\n{AppResources.TimerSpent} {CurrentStats.Time:t}\n{AppResources.TimerTask} {taskName}", "Ok");
                 CurrentStats = new Statistics();
                 StudyTime = new TimeSpan();
                 CurrentStats.TaskDisconnection = true;
@@ -354,8 +338,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 
@@ -387,8 +371,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 
@@ -413,7 +397,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                                        select stat;
                     foreach (var stat in orderedstats)
                     {
-                        if (stat.SubjectID == -1 || stat.TaskID == -1) stat.TemporaryName = AppResources.ResourceManager.GetString("FreeTimerTitle");
+                        if (stat.SubjectID == -1 || stat.TaskID == -1) stat.TemporaryName = AppResources.FreeTimerTitle;
                         else stat.TemporaryName = stat.TaskName;
                         StatsList.Add(stat);
                     }
@@ -421,8 +405,8 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 

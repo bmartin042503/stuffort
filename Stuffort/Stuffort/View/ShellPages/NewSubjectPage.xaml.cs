@@ -24,10 +24,10 @@ namespace Stuffort.View.ShellPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            CurrentTitle.Text = AppResources.ResourceManager.GetString("NewSubjectPage");
-            this.Title = AppResources.ResourceManager.GetString("NewSubjectPage");
-            subjectNameEntry.Placeholder = AppResources.ResourceManager.GetString("Name");
-            saveBtn.Text = AppResources.ResourceManager.GetString("Save");
+            CurrentTitle.Text = AppResources.NewSubjectPage;
+            this.Title = AppResources.NewSubjectPage;
+            subjectNameEntry.Placeholder = AppResources.Name;
+            saveBtn.Text = AppResources.Save;
         }
     }
 }

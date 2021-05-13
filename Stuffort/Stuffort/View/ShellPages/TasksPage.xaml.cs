@@ -26,8 +26,8 @@ namespace Stuffort.View.ShellPages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            this.Title = AppResources.ResourceManager.GetString("TasksPage");
-            searchBarTasks.Placeholder = AppResources.ResourceManager.GetString("Search");
+            this.Title = AppResources.TasksPage;
+            searchBarTasks.Placeholder = AppResources.Search;
             await TasksViewModel.UpdateTasks();
         }
     }

@@ -26,7 +26,7 @@ namespace Stuffort.View.ShellPages
         public LoginPage()
         {
             InitializeComponent(); 
-            loginPageVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentVersion}";
+            loginPageVersion.Text = $"{AppResources.Version} {VersionTracking.CurrentVersion}";
             ConfType = ConfigurationServices.GetConfigurationData();
             MainViewModel = new MainViewModel(ConfType, languagePicker);
             languageSelectionStackLayout.BindingContext = MainViewModel;

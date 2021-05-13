@@ -39,9 +39,9 @@ namespace Stuffort.View.ShellPages
             await this.StudyTimerViewModel.ImportTasks();
             await this.StudyTimerViewModel.InitializeStats();
             await this.StudyTimerViewModel.ImportStats();
-            freeTimerLbl.Text = AppResources.ResourceManager.GetString("FreeTimer");
-            historyLbl.Text = AppResources.ResourceManager.GetString("History");
-            this.Title = AppResources.ResourceManager.GetString("StudyTimerPage");
+            freeTimerLbl.Text = AppResources.FreeTimer;
+            historyLbl.Text = AppResources.History;
+            this.Title = AppResources.StudyTimerPage;
         }
 
         private void switchTimer_Toggled(object sender, ToggledEventArgs e)

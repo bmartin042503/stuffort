@@ -29,13 +29,13 @@ namespace Stuffort.View.ShellPages
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            this.Title = AppResources.ResourceManager.GetString("StatsPage");
-            longestSessionLbl.Text = AppResources.ResourceManager.GetString("LongestSession");
-            timerSpentLbl.Text = AppResources.ResourceManager.GetString("TimerSpent");
+            this.Title = AppResources.StatsPage;
+            longestSessionLbl.Text = AppResources.LongestSession;
+            timerSpentLbl.Text = AppResources.TimerSpent;
             var stats = await StatisticsServices.GetStatistics();
             if(stats == null || stats.Count() == 0)
             {
-                await DisplayAlert(AppResources.ResourceManager.GetString("Error"), AppResources.ResourceManager.GetString("NoStats"), "Ok");
+                await DisplayAlert(AppResources.Error, AppResources.NoStats, "Ok");
                 await Shell.Current.GoToAsync($"//{nameof(SubjectsPage)}");
                 return;
             }
@@ -52,15 +52,15 @@ namespace Stuffort.View.ShellPages
             foreach(var item in data)
             {
                 var timeSum = item.Sum(x => x.Time.TotalSeconds);
-                string itemName = item.Key == "UNDEFINED" ? AppResources.ResourceManager.GetString("UndefinedSubject") : item.Key;
+                string itemName = item.Key == "UNDEFINED" ? AppResources.UndefinedSubject : item.Key;
                 itemName = LocalLongnameConverter(itemName); 
                 SKColor color = item.Key == "UNDEFINED" ? SKColor.Parse("#000000") : SKColor.Parse("#528fdb");
                 string converted = ConvertToHourMinSec((long)timeSum);
                 EntryList1.Add(new ChartEntry((float)timeSum / 100) { Label=itemName, ValueLabel=converted, Color = color });
             }
-            statsViewSubjects.Chart = new PointChart{ Entries = EntryList1, LabelTextSize = 40, IsAnimated=true, AnimationProgress = 1.5f,
-               PointMode=PointMode.Circle, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty, LabelColor=SKColor.Parse("#000000")};
-            List<ChartEntry> EntryList2 = new List<ChartEntry>();
+            statsViewSubjects.Chart = new PointChart{ Entries = EntryList1, LabelTextSize = 30, IsAnimated=true, AnimationProgress = 1.5f,
+               PointMode=PointMode.Circle, ValueLabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty};
+            List <ChartEntry> EntryList2 = new List<ChartEntry>();
             var ydata = from stat in stats
                         where stat.Finished.Year == DateTime.Now.Year
                         group stat by stat.Finished.Month
@@ -71,24 +71,24 @@ namespace Stuffort.View.ShellPages
             {
                 switch(item.Key)
                 {
-                    case 1: monthName = AppResources.ResourceManager.GetString("January"); break;
-                    case 2: monthName = AppResources.ResourceManager.GetString("February"); break;
-                    case 3: monthName = AppResources.ResourceManager.GetString("March"); break;
-                    case 4: monthName = AppResources.ResourceManager.GetString("April"); break;
-                    case 5: monthName = AppResources.ResourceManager.GetString("May"); break;
-                    case 6: monthName = AppResources.ResourceManager.GetString("June"); break;
-                    case 7: monthName = AppResources.ResourceManager.GetString("July"); break;
-                    case 8: monthName = AppResources.ResourceManager.GetString("August"); break;
-                    case 9: monthName = AppResources.ResourceManager.GetString("September"); break;
-                    case 10: monthName = AppResources.ResourceManager.GetString("October"); break;
-                    case 11: monthName = AppResources.ResourceManager.GetString("November"); break;
-                    case 12: monthName = AppResources.ResourceManager.GetString("December"); break;
+                    case 1: monthName = AppResources.January; break;
+                    case 2: monthName = AppResources.February; break;
+                    case 3: monthName = AppResources.March; break;
+                    case 4: monthName = AppResources.April; break;
+                    case 5: monthName = AppResources.May; break;
+                    case 6: monthName = AppResources.June; break;
+                    case 7: monthName = AppResources.July; break;
+                    case 8: monthName = AppResources.August; break;
+                    case 9: monthName = AppResources.September; break;
+                    case 10: monthName = AppResources.October; break;
+                    case 11: monthName = AppResources.November; break;
+                    case 12: monthName = AppResources.December; break;
                 }
                 var timeSum = item.Sum(x => x.Time.TotalSeconds);
                 string converted = ConvertToHourMinSec((long)timeSum);
                 EntryList2.Add(new ChartEntry((float)timeSum / 100) { Label=monthName, ValueLabel=converted, Color = SKColor.Parse("#528fdb") });
             }
-            statsViewYear.Chart = new BarChart { Entries = EntryList2, LabelTextSize = 40, IsAnimated = true, AnimationProgress=1.5f, ValueLabelOrientation = Orientation.Horizontal,
+            statsViewYear.Chart = new BarChart { Entries = EntryList2, LabelTextSize = 30, IsAnimated = true, AnimationProgress=1.5f, ValueLabelOrientation = Orientation.Horizontal,
             LabelOrientation = Orientation.Horizontal, BackgroundColor=SKColor.Empty};
         }
 
@@ -117,9 +117,9 @@ namespace Stuffort.View.ShellPages
                 hour = (int)min / 60;
                 min = (int)min % 60;
             }
-            if (hour >= 1 && hour < 24) return $"{hour}{AppResources.ResourceManager.GetString("Hours")} {min}{AppResources.ResourceManager.GetString("Minutes")}";
-            else if(hour >= 24) return $"{hour}{AppResources.ResourceManager.GetString("Hours")}";
-            else return $"{min}{AppResources.ResourceManager.GetString("Minutes")}";
+            if (hour >= 1 && hour < 24) return $"{hour}{AppResources.Hours} {min}{AppResources.Minutes}";
+            else if(hour >= 24) return $"{hour}{AppResources.Hours}";
+            else return $"{min}{AppResources.Minutes}";
         }
     }
 }

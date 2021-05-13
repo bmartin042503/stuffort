@@ -72,109 +72,69 @@ namespace Stuffort.ViewModel
         }
         public async void NumberOf_Subjects()
         {
-            try
-            {
-                var subjects = await SubjectServices.GetSubjects();
-                if (subjects == null)
-                    NumberOfSubjects = $"{AppResources.ResourceManager.GetString("CountOfSubjects")} 0";
-                else
-                    NumberOfSubjects = $"{AppResources.ResourceManager.GetString("CountOfSubjects")} {subjects.Count()}";
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+            var subjects = await SubjectServices.GetSubjects();
+            if (subjects == null)
+                NumberOfSubjects = $"{AppResources.CountOfSubjects} 0";
+            else
+                NumberOfSubjects = $"{AppResources.CountOfSubjects} {subjects.Count()}";
         }
 
         public async void Completed_Tasks()
         {
-            try
+            var tasks = await STaskServices.GetTasks();
+            if (tasks == null) CompletedTasks = $"{AppResources.CompletedTasks} 0";
+            else
             {
-                var tasks = await STaskServices.GetTasks();
-                if (tasks == null) CompletedTasks = $"{AppResources.ResourceManager.GetString("CompletedTasks")} 0";
-                else
-                {
-                    var completed = from task in tasks
-                                    where task.IsDone == true
-                                    select task;
-                    CompletedTasks = $"{AppResources.ResourceManager.GetString("CompletedTasks")} {completed.Count()}/{tasks.Count()}";
-                }
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                var completed = from task in tasks
+                                where task.IsDone == true
+                                select task;
+                CompletedTasks = $"{AppResources.CompletedTasks} {completed.Count()}/{tasks.Count()}";
             }
         }
 
         public async void CountOf_Sessions()
         {
-            try
-            {
-                var stats = await StatisticsServices.GetStatistics();
-                if (stats == null)
-                    CountOfSessions = $"{AppResources.ResourceManager.GetString("CountOfSessions")} 0";
-                else
-                    CountOfSessions = $"{AppResources.ResourceManager.GetString("CountOfSessions")} {stats.Count()}";
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+            var stats = await StatisticsServices.GetStatistics();
+            if (stats == null)
+                CountOfSessions = $"{AppResources.CountOfSessions} 0";
+            else
+                CountOfSessions = $"{AppResources.CountOfSessions} {stats.Count()}";
         }
 
         public async void Longest_Session()
         {
-            try
+            var stats = await StatisticsServices.GetStatistics();
+            if (stats == null) LongestSession = "--";
+            else
             {
-                var stats = await StatisticsServices.GetStatistics();
-                if (stats == null) LongestSession = "--";
-                else
-                {
-                    var orderedstats = from stat in stats
-                                       orderby stat.Time descending
-                                       select stat;
-                    var selected = orderedstats.First();
-                    LongestSession = $"{selected.Time.Hours} {AppResources.ResourceManager.GetString("HoursL")} {selected.Time.Minutes} {AppResources.ResourceManager.GetString("MinutesL")} {selected.Time.Seconds} {AppResources.ResourceManager.GetString("SecondsL")}";
-                }
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                var orderedstats = from stat in stats
+                                    orderby stat.Time descending
+                                    select stat;
+                var selected = orderedstats.First();
+                LongestSession = $"{selected.Time.Hours} {AppResources.HoursL} {selected.Time.Minutes} {AppResources.MinutesL} {selected.Time.Seconds} {AppResources.SecondsL}";
             }
         }
 
         public async void AllSessions_Time()
         {
-            try
+            var stats = await StatisticsServices.GetStatistics();
+            if (stats == null) AllSessionsTime = "--";
+            else
             {
-                var stats = await StatisticsServices.GetStatistics();
-                if (stats == null) AllSessionsTime = "--";
-                else
+                var totaltime = stats.Sum(x => x.Time.TotalSeconds);
+                long seconds = (long)totaltime;
+                int hour = 0, min = 0, sec = 0;
+                if (seconds > 60)
                 {
-                    var totaltime = stats.Sum(x => x.Time.TotalSeconds);
-                    long seconds = (long)totaltime;
-                    int hour = 0, min = 0, sec = 0;
-                    if (seconds > 60)
-                    {
-                        min = (int)seconds / 60;
-                        sec = (int)seconds % 60;
-                    }
-                    if (min > 60)
-                    {
-                        hour = (int)min / 60;
-                        min = (int)min % 60;
-                    }
-                    AllSessionsTime = $"{hour} {AppResources.ResourceManager.GetString("HoursL")} {min} {AppResources.ResourceManager.GetString("MinutesL")} {sec} {AppResources.ResourceManager.GetString("SecondsL")}";
+                    min = (int)seconds / 60;
+                    sec = (int)seconds % 60;
                 }
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                if (min > 60)
+                {
+                    hour = (int)min / 60;
+                    min = (int)min % 60;
+                }
+                AllSessionsTime = $"{hour} {AppResources.HoursL} {min} {AppResources.MinutesL} {sec} {AppResources.SecondsL}";
             }
         }
 

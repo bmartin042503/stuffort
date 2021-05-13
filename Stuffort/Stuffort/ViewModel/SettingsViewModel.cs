@@ -71,22 +71,22 @@ namespace Stuffort.ViewModel
         {
             try
             {
-                bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Warning"),
-                    AppResources.ResourceManager.GetString("AreYouSureDeleteEverything"), AppResources.ResourceManager.GetString("Cancel"),
-                    AppResources.ResourceManager.GetString("Yes"));
+                bool delete = await App.Current.MainPage.DisplayAlert(AppResources.Warning,
+                    AppResources.AreYouSureDeleteEverything, AppResources.Cancel,
+                    AppResources.Yes);
                 if (!delete)
                 {
                     await SubjectServices.DeleteAll();
                     await STaskServices.DeleteAll();
                     await StatisticsServices.DeleteAll();
-                    await App.Current.MainPage.DisplayAlert("", AppResources.ResourceManager.GetString("DataDeleted"), "Ok");
+                    await App.Current.MainPage.DisplayAlert("", AppResources.DataDeleted, "Ok");
                     await NavigateToHomepage ();
                 }
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 
@@ -95,7 +95,7 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             try
             {
                 var picker = parameter as Picker;
-                CultureInfo language = new CultureInfo(picker.SelectedIndex == 0 ? "" : picker.SelectedIndex == 1 ? "hu" : "pl");
+                CultureInfo language = new CultureInfo(picker.SelectedIndex == 0 ? "en" : picker.SelectedIndex == 1 ? "hu" : "pl");
                 Thread.CurrentThread.CurrentUICulture = language;
                 AppResources.Culture = language;
                 ConfType.Language = language.ToString();
@@ -108,13 +108,13 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                         continue;
                     item.Title = AppResources.ResourceManager.GetString(item.Route);
                 }
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                    AppResources.ResourceManager.GetString("SettingsSaved"), "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Success,
+                    AppResources.SettingsSaved, "Ok");
                 await NavigateToHomepage();
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),  $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,  $"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 

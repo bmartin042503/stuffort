@@ -21,12 +21,12 @@ namespace Stuffort.View.ShellPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            this.Title = AppResources.ResourceManager.GetString("ContactPage");
-            labelVersion.Text = $"{AppResources.ResourceManager.GetString("Version")} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
+            this.Title = AppResources.ContactPage;
+            labelVersion.Text = $"{AppResources.Version} {VersionTracking.CurrentBuild} ({VersionTracking.CurrentVersion})";
             if (VersionTracking.IsFirstLaunchForCurrentBuild)
-                labelVersion.Text = $"{AppResources.ResourceManager.GetString("NewVersion")}: {labelVersion.Text}";
-            allRightsReserved.Text = AppResources.ResourceManager.GetString("AllRightsReserved");
-            labelDeveloper.Text = AppResources.ResourceManager.GetString("Developer");
+                labelVersion.Text = $"{AppResources.NewVersion}: {labelVersion.Text}";
+            allRightsReserved.Text = AppResources.AllRightsReserved;
+            labelDeveloper.Text = AppResources.Developer;
         }
     }
 }

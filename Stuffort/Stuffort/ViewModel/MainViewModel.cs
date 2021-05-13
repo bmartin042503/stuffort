@@ -42,29 +42,21 @@ namespace Stuffort.ViewModel
 
         public void LanguageSetting(object value)
         {
-            try
+            var picker = value as Picker;
+            CultureInfo language = new CultureInfo(picker.SelectedIndex == 0 ? "en" : picker.SelectedIndex == 1 ? "hu" : "pl");
+            Thread.CurrentThread.CurrentUICulture = language;
+            AppResources.Culture = language;
+            ConfType.Language = language.ToString();
+            ConfType.NotificationEnabled = true;
+            ConfigurationServices.SaveConfigurationFile(ConfType);
+            var items = Shell.Current.Items;
+            foreach (var item in items)
             {
-                var picker = value as Picker;
-                CultureInfo language = new CultureInfo(picker.SelectedIndex == 0 ? "" : picker.SelectedIndex == 1 ? "hu" : "pl");
-                Thread.CurrentThread.CurrentUICulture = language;
-                AppResources.Culture = language;
-                ConfType.Language = language.ToString();
-                ConfType.NotificationEnabled = true;
-                ConfigurationServices.SaveConfigurationFile(ConfType);
-                var items = Shell.Current.Items;
-                foreach (var item in items)
-                {
-                    if (item.Route == "LoginPage")
-                        continue;
-                    item.Title = AppResources.ResourceManager.GetString(item.Route);
-                }
-                NavigateToHomepage();
+                if (item.Route == "LoginPage")
+                    continue;
+                item.Title = AppResources.ResourceManager.GetString(item.Route);
             }
-            catch (Exception ex)
-            {
-                App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+            NavigateToHomepage();
         }
 
         public async void NavigateToHomepage()

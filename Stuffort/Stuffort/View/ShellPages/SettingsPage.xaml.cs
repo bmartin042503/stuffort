@@ -33,11 +33,11 @@ namespace Stuffort.View.ShellPages
         {
             base.OnAppearing();
             CultureInfo cultureInfo = AppResources.Culture;
-            this.Title = AppResources.ResourceManager.GetString("SettingsPage");
-            saveBtn.Text = AppResources.ResourceManager.GetString("Save");
-            languageLbl.Text = AppResources.ResourceManager.GetString("Language");
-            deleteBtn.Text = AppResources.ResourceManager.GetString("DeleteEverything");
-            notificationLbl.Text = AppResources.ResourceManager.GetString("Notifications");
+            this.Title = AppResources.SettingsPage;
+            saveBtn.Text = AppResources.Save;
+            languageLbl.Text = AppResources.Language;
+            deleteBtn.Text = AppResources.DeleteEverything;
+            notificationLbl.Text = AppResources.Notifications;
             this.SettingsViewModel.SetNotification();
             this.SettingsViewModel.SetLanguage();
         }

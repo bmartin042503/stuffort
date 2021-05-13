@@ -27,12 +27,12 @@ namespace Stuffort.View.ShellPages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            CurrentTitle.Text = AppResources.ResourceManager.GetString("NewTaskPage");
-            this.Title = AppResources.ResourceManager.GetString("NewTaskPage");
-            chooseSubjectlbl.Text = AppResources.ResourceManager.GetString("ChooseSubject");
-            deadLinelbl.Text = AppResources.ResourceManager.GetString("Deadline");
-            subjectPicker.Title = AppResources.ResourceManager.GetString("ChooseSubjectImproved");
-            saveBtn.Text = AppResources.ResourceManager.GetString("Save");
+            CurrentTitle.Text = AppResources.NewTaskPage;
+            this.Title = AppResources.NewTaskPage;
+            chooseSubjectlbl.Text = AppResources.ChooseSubject;
+            deadLinelbl.Text = AppResources.Deadline;
+            subjectPicker.Title = AppResources.ChooseSubjectImproved;
+            saveBtn.Text = AppResources.Save;
         }
     }
 }

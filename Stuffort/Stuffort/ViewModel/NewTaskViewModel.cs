@@ -111,18 +111,10 @@ namespace Stuffort.ViewModel
 
         public async void InitializeSubjectList()
         {
-            try
-            {
-                SubjectList.Clear();
-                var subjects = await SubjectServices.GetSubjects();
-                foreach (var subject in subjects)
-                    SubjectList.Add(subject);
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+            SubjectList.Clear();
+            var subjects = await SubjectServices.GetSubjects();
+            foreach (var subject in subjects)
+                SubjectList.Add(subject);
         }
 
         public async Task SaveTask()
@@ -131,32 +123,33 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             {
                 if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrEmpty(Name))
                 {
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("NameIsEmpty"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.NameIsEmpty, "Ok");
                     return;
                 }
 
                 if (Name.Length > 120 || Name.Length < 3)
                 {
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.NameLengthOverFlow, "Ok");
                     return;
                 }
 
                 if(SubjectList[Index] == null)
                 {
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("InvalidSelectedSubject"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.InvalidSelectedSubject, "Ok");
                     return;
                 }
                 DateTime x = new DateTime(Date.Year, Date.Month, Date.Day, DateTimeSpan.Hours, DateTimeSpan.Minutes, DateTimeSpan.Seconds);
                 DateTime y = DateTime.Now;
                 if (y.Ticks > x.Ticks && IsDeadline == true)
                 {
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("InvalidDate"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.InvalidDate, "Ok");
                     return;
                 }
+                Name = RemoveSpaces(Name);
                 STask Stask = new STask()
                 {
                     Name = Name,
@@ -172,18 +165,42 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
                 int rows;
                 rows = await STaskServices.AddTask(Stask);
                 if (rows > 0)
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                        $"{AppResources.ResourceManager.GetString("TaskSuccessfullySaved")}", "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Success,
+                        $"{AppResources.TaskSuccessfullySaved}", "Ok");
                 else
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("TaskErrorWhileSaving"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.TaskErrorWhileSaving, "Ok");
                 await Shell.Current.GoToAsync("..");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        $"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
+        }
+        public static string RemoveSpaces(string name)
+        {
+            if (name.StartsWith(" "))
+            {
+                int count = 0;
+                for (int i = 0; i < name.Length; ++i)
+                {
+                    if (name[i] == ' ') count++;
+                    else if (name[i] != ' ' && count >= 1)
+                    { name = name.Substring(count); break; }
+                }
+            }
+            if (name.EndsWith(" "))
+            {
+                int count = 0;
+                for (int i = name.Length - 1; i >= 0; --i)
+                {
+                    if (name[i] == ' ') count++;
+                    else if (name[i] != ' ' && count >= 1)
+                    { name = name.Substring(0, name.Length - count); break; }
+                }
+            }
+            return name;
         }
     }
 }

@@ -24,8 +24,8 @@ namespace Stuffort
         public App(string location)
         {
             InitializeComponent();
-            File.Delete(ConfigurationServices.FilePath);
-            File.Delete(location);
+            //File.Delete(ConfigurationServices.FilePath);
+            //File.Delete(location);
             //StatisticsServices.DeleteAll();
             DatabaseLocation = location;
             Xamarin.Essentials.VersionTracking.Track();
@@ -51,6 +51,7 @@ namespace Stuffort
 
         protected override void OnSleep()
         {
+
         }
 
         protected override void OnResume()

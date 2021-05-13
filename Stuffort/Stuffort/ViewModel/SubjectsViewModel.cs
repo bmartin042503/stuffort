@@ -47,16 +47,8 @@ namespace Stuffort.ViewModel
         }
         public async void TapItem(object value)
         {
-            try
-            {
-                string name = value as string;
-                if (name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
-            }
+            string name = value as string;
+            if (name.Length > 14) await App.Current.MainPage.DisplayAlert("", name, "Ok");
         }
 
         public async Task Refresh()
@@ -81,27 +73,27 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             try
             {
                 Subject selectedItem = parameter as Subject;
-                string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.ResourceManager.GetString("RenamingSubject"),
-                    AppResources.ResourceManager.GetString("RenameSubject"),
-                    "Ok", AppResources.ResourceManager.GetString("Cancel"), initialValue: selectedItem.Name);
+                string newName = await App.Current.MainPage.DisplayPromptAsync(AppResources.RenamingSubject,
+                    AppResources.RenameSubject,
+                    "Ok", AppResources.Cancel, initialValue: selectedItem.Name);
                 if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrEmpty(newName)) return;
                 if (newName.Length > 120 || newName.Length < 3)
                 {
-                    await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                        AppResources.ResourceManager.GetString("NameLengthOverFlow"), "Ok");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                        AppResources.NameLengthOverFlow, "Ok");
                     return;
                 }
                 if (selectedItem.Name == newName) return;
                 selectedItem.Name = newName;
                 await SubjectServices.RenameSubject(selectedItem, newName);
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                    AppResources.ResourceManager.GetString("SubjectSuccessfullyRenamed"), "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Success,
+                    AppResources.SubjectSuccessfullyRenamed, "Ok");
                 await UpdateSubjects();
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
 
@@ -110,25 +102,25 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
             try
             {
                 Subject selectedItem = parameter as Subject;
-                bool delete = await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Delete"),
-                    $"{AppResources.ResourceManager.GetString("AreYouSureDeleteSubject")} ({selectedItem.Name})",
-                    AppResources.ResourceManager.GetString("No"), AppResources.ResourceManager.GetString("Delete"));
+                bool delete = await App.Current.MainPage.DisplayAlert(AppResources.Delete,
+                    $"{AppResources.AreYouSureDeleteSubject} ({selectedItem.Name})",
+                    AppResources.No, AppResources.Delete);
                 if (!delete)
                 {
                     int rows = await SubjectServices.RemoveSubject(selectedItem);
                     if (rows > 0)
-                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Success"),
-                            $"{AppResources.ResourceManager.GetString("SubjectSuccessfullyDeleted")} ({selectedItem.Name})", "Ok");
+                        await App.Current.MainPage.DisplayAlert(AppResources.Success,
+                            $"{AppResources.SubjectSuccessfullyDeleted} ({selectedItem.Name})", "Ok");
                     else
-                        await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-                            $"{AppResources.ResourceManager.GetString("SubjectErrorWhileDeleting")} ({selectedItem.Name})", "Ok");
+                        await App.Current.MainPage.DisplayAlert(AppResources.Error,
+                            $"{AppResources.SubjectErrorWhileDeleting} ({selectedItem.Name})", "Ok");
                     await UpdateSubjects();
                 }
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                await App.Current.MainPage.DisplayAlert(AppResources.Error,
+$"{AppResources.ErrorMessage} {ex.Message}", "Ok");
             }
         }
         async Task NavigateToNewSubject()
@@ -138,28 +130,20 @@ $"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
 
         public async Task UpdateSubjects()
         {
-            try
+            SubjectList.Clear();
+            var subjectList = await SubjectServices.GetSubjects();
+            var tasksList = await STaskServices.GetTasks();
+            foreach (var subject in subjectList)
             {
-                SubjectList.Clear();
-                var subjectList = await SubjectServices.GetSubjects();
-                var tasksList = await STaskServices.GetTasks();
-                foreach (var subject in subjectList)
-                {
-                    var countOfTasks = string.Format($"{AppResources.ResourceManager.GetString("CountOfTasks")} {tasksList.Where(x => x.SubjectID == subject.ID).Count()}");
-                    SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
-                }
-                if (SubjectList.Count == 0)
-                {
-                    NoSubjectLabel.IsVisible = true;
-                    NoSubjectLabel.Text = AppResources.ResourceManager.GetString("NoSubjects");
-                }
-                else NoSubjectLabel.IsVisible = false;
+                var countOfTasks = string.Format($"{AppResources.CountOfTasks} {tasksList.Where(x => x.SubjectID == subject.ID).Count()}");
+                SubjectList.Add(new Tuple<Subject, string>(subject, countOfTasks));
             }
-            catch (Exception ex)
+            if (SubjectList.Count == 0)
             {
-                await App.Current.MainPage.DisplayAlert(AppResources.ResourceManager.GetString("Error"),
-$"{AppResources.ResourceManager.GetString("ErrorMessage")} {ex.Message}", "Ok");
+                NoSubjectLabel.IsVisible = true;
+                NoSubjectLabel.Text = AppResources.NoSubjects;
             }
+            else NoSubjectLabel.IsVisible = false;
         }
     }
 }
