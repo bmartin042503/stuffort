@@ -13,9 +13,9 @@ namespace Stuffort.ViewModel.Converters
         {
             bool isDone = (bool)value;
             if (isDone == false)
-                return $"{AppResources.ResourceManager.GetString("Status")} {AppResources.ResourceManager.GetString("Uncompleted")}";
+                return $"{AppResources.Status} {AppResources.Uncompleted}";
             else
-                return $"{AppResources.ResourceManager.GetString("Status")} {AppResources.ResourceManager.GetString("Completed")}";
+                return $"{AppResources.Status} {AppResources.Completed}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

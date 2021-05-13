@@ -16,9 +16,9 @@ namespace Stuffort.ViewModel.Converters
             if (task.IsDeadline)
             {
                 DateTimeOffset dTime = task.DeadLine;
-                return $"{AppResources.ResourceManager.GetString("Deadline")}\n{dTime:g}";
+                return $"{AppResources.Deadline}\n{dTime:g}";
             }
-            else return AppResources.ResourceManager.GetString("NoDeadline");
+            else return AppResources.NoDeadline;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
